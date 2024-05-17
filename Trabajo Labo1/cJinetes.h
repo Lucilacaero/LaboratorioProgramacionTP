@@ -1,6 +1,5 @@
 #ifndef CJINETES_H
 #define CJINETES_H
-/*
 
 #include <string>
 #include <iostream>
@@ -20,24 +19,19 @@ private:
 	sCaract Descripcion;
 	string Resultado;
 	string NombreDragon;
-	friend cDragones *dragonAsignado;//preguntar a sol
 public:
-	
+	cJinetes();
+	~cJinetes();
 	bool incorporar_dragon(cDragones* dragon);
-	void setdragon_asignado();
-	int getresultado();
-	cJinetes() {
-	}
-	void setFechadeNacimiento(string fecha_nac) {
-		Fecha_nac = fecha_nac;
-	}
+	
+	string getresultado();
+	
+	void setFechadeNacimiento(string fecha_nac);
 
-	void setApodo(string apodo) {
-		this->Apodo = apodo;
-	}
+	void setApodo(string apodo);
 
 
 };
-*/
+
 
 #endif // CJINETES_H

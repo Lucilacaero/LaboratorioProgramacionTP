@@ -4,13 +4,12 @@
 
 cDragones::cDragones() {
 	Nombre= " ";
-	sDescripcion Ficha;
 	Estado= false; // domado o no
 	
 	Entrenado=0;
 	PuntosDomado=0;
 	Muerte= false;
-	vida= 100;
+	vida= 10;
 	Ficha.color=" ";
 	Ficha.peso= 0;
 	//enum edad;
@@ -19,7 +18,7 @@ cDragones::cDragones() {
 };
 
 bool cDragones::Domado() {
-	if (Entrenado >= 100) {
+	if (Entrenado >= 10) {
 		return true;
 	}
 }
@@ -36,12 +35,12 @@ bool cDragones::Baja() {
 		Muerte = true;
 		return Muerte;
 }
+cDragones::~cDragones() {
+	DragonesVivos--;
+	DragonesMuertos++;
+}
+void cDragones::Altanombre(string NombreDragon) {
+	if (Estado == true)//cambiar estos if por try/catch 
+		this->Nombre = NombreDragon;
 
-/*string Nombre;
-sDescripcion Ficha;
-bool Estado; // domado o no
-enum FormaAtaque* Ataque;
-int Entrenado;
-int PuntosDomado;
-bool Muerte;
-*/
+}
