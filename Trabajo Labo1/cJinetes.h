@@ -1,10 +1,12 @@
 #ifndef CJINETES_H
 #define CJINETES_H
 
+#include <stdlib.h>
 #include <string>
+#include <stdio.h>
 #include <iostream>
+#include "cDragones.h"
 using namespace std;
-class cDragones;
 struct {
 	int peso;
 	int altura; 
@@ -19,8 +21,10 @@ private:
 	sCaract Descripcion;
 	string Resultado;
 	string NombreDragon;
+	cDragones* dragones;
 public:
-	cJinetes();
+	cJinetes(string Apodo, string Fecha_nac, sCaract Descripcion, string Resultado,
+		string NombreDragon, cDragones* dragones);
 	~cJinetes();
 	bool incorporar_dragon(cDragones* dragon);
 	

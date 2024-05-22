@@ -1,6 +1,4 @@
-﻿  cDragones.cpp
-  cJinetes.cpp
-C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.h(29,20): error C2433: 'dragonAsignado': 'friend' no se permite en las declaraciones de datos
-  (compilando archivo de origen "cDragones.cpp")
-  
+﻿  cVickingos.cpp
+  Trabajo Labo1.cpp
   Generando código...
+  Trabajo Labo1.vcxproj -> C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\x64\Debug\Trabajo Labo1.exe

@@ -1,19 +1,24 @@
+
+#pragma once
+
 #include <string>
+
 #include <iostream>
 using namespace std;
-struct {
-	string color;
-	int peso;
-	int edad;
-	enum FormaAtaque Ataque;
-
-} typedef sDescripcion;
 
 enum FormaAtaque { Notiene, Respirarfuego, Proyectiles, Garrasycolmillos, Cargasaereas, Ataquesfisicos };
 
+typedef struct {
+	string color;
+	int peso;
+	int edad;
+	FormaAtaque Ataque;
 
-class cDragones
-{
+} sDescripcion;
+
+
+
+class cDragones{
 private:
 	string Nombre; 
 	sDescripcion Ficha;
@@ -29,14 +34,13 @@ public:
 	
 	cDragones();
 	~cDragones();
-	friend cDragones* dragonAsignado;
-	friend int Dragonesmuertos(bool Muerte);//suma un dragon muerto a vikingos
-	friend bool incorporar_dragon(cDragones* dragon);
+	//friend cDragones* dragonAsignado;
 	void Altanombre(string NombreDragon);
 	
 	bool Domado();
 	int Entrenar();
 	int PuntosDomados();
 	bool Baja();
+	int Dragonesmuertos();
 	
 };

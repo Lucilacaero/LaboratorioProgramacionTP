@@ -1,10 +1,10 @@
 // Trabajo Labo1.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
 //
-#include <iostream>
-#include "cDragones.cpp"
-#include "cJinetes.cpp"
-#include "cVickingos.cpp"
-using namespace std; 
+
+#include "cDragones.h"
+
+
+
 
 int main()
 {/*
