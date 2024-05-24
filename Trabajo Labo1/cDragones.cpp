@@ -1,4 +1,5 @@
 #include "cDragones.h"
+#include <cstdlib> // Para rand() y srand()
 int cDragones::DragonesVivos = 0;
 int cDragones::DragonesMuertos = 0;
 
@@ -25,7 +26,7 @@ bool cDragones::Domado() {
 	return false;
 }
 int cDragones::Entrenar() {
-	Entrenado++;
+	Entrenado = rand()%MaxEntrenamiento;
 	return Entrenado;
 
 }
@@ -81,4 +82,12 @@ int cDragones::Dragonesmuertos()
 
 	}
 	return 0;
+}
+
+bool cDragones::getEstado()
+{
+	if (Estado == true)
+		return true;
+	else
+		return false;
 }

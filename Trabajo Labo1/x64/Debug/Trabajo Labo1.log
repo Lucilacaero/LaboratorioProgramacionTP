@@ -1,4 +1,6 @@
-﻿  cVickingos.cpp
-  Trabajo Labo1.cpp
+﻿  Trabajo Labo1.cpp
+  cDragones.cpp
+  cJinetes.cpp
+  cVickingos.cpp
   Generando código...
-  Trabajo Labo1.vcxproj -> C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\x64\Debug\Trabajo Labo1.exe
+LINK : fatal error LNK1104: no se puede abrir el archivo 'C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\x64\Debug\Trabajo Labo1.exe'

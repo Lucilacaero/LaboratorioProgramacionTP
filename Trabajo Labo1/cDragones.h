@@ -1,6 +1,6 @@
 
 #pragma once
-
+const int MaxEntrenamiento = 500;
 #include <string>
 
 #include <iostream>
@@ -42,5 +42,6 @@ public:
 	int PuntosDomados();
 	bool Baja();
 	int Dragonesmuertos();
+	bool getEstado();
 	
 };

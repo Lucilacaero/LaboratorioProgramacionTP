@@ -6,7 +6,7 @@
 using namespace std;
 enum Posicion { Entrenador, Guerrero, Agricultor, pescador, Herreros, Jinetes };
 class cVikingos
-{
+{ 
 	string Nombre;
 	string Apellido;
 	Posicion trabajo;
@@ -26,5 +26,5 @@ public:
 	int Salud();// si llega a 0 muere
 	
 
-};
+}; 
 

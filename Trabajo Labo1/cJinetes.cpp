@@ -24,7 +24,13 @@ bool cJinetes::incorporar_dragon(cDragones* dragon) {
 	/* Para incorporar un dragon el resultado tiene que ser 
 	= aprobbado
 	y el dragoninc no tiene que ser nulo y el estado del dragon tiene que ser true*/
-	return true;
+	if (dragon->getEstado() && Resultado == "Aprobado") {
+
+		dragon->Altanombre(NombreDragon);
+
+		return true;
+	}
+	return false;
 }
 string cJinetes::getresultado() {
 	return Resultado;
