@@ -33,6 +33,10 @@ int cDragones::Entrenar() {
 int cDragones::PuntosDomados() {
 	return PuntosDomado++;
 }
+void cDragones::Puntosvida()
+{
+	vida = vida - rand() % 10;
+}
 bool cDragones::Baja() {
 	if (vida <= 0)
 		Muerte = true;
@@ -48,36 +52,12 @@ void cDragones::Altanombre(string NombreDragon) {
 
 }
 
-// PORQUE MIERDA NO ANDAAAAAAAAA
+
 
 int cDragones::Dragonesmuertos()
 {
 	if (Muerte = true) {
-		/* vector<cDragones*> listaDragones;
-
-    // Agregar algunos dragones para la demostración
-    for (int i = 0; i < 5; ++i) {
-        listaDragones.push_back(new cDragones());
-    }
-
-    // Marcar algunos dragones como muertos
-    listaDragones[1]->Morir();
-    listaDragones[3]->Morir();
-
-    // Contar los dragones muertos
-    for (cDragones* dragon : listaDragones) {
-        if (dragon->Muerte) {
-            contador++;
-        }
-    }
-
-    // Liberar la memoria de los dragones restantes
-    for (cDragones* dragon : listaDragones) {
-        delete dragon;
-    }
-
-    return contador;
-}*/
+	
 		return cDragones::DragonesMuertos;
 
 	}
@@ -90,4 +70,9 @@ bool cDragones::getEstado()
 		return true;
 	else
 		return false;
+}
+
+bool cDragones::getMuerte()
+{
+	return Muerte;
 }

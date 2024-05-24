@@ -40,8 +40,10 @@ public:
 	bool Domado();
 	int Entrenar();
 	int PuntosDomados();
+	void Puntosvida();
 	bool Baja();
 	int Dragonesmuertos();
 	bool getEstado();
+	bool getMuerte();
 	
 };
