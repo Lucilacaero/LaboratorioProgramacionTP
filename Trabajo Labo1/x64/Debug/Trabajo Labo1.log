@@ -1,6 +1,1 @@
-﻿  Trabajo Labo1.cpp
-  cDragones.cpp
-  cJinetes.cpp
-  cVickingos.cpp
-  Generando código...
-C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cVickingos.cpp(43,39): error C3867: 'cDragones::getMuerte': sintaxis no estándar; utilice '&' para crear un puntero al miembro
+﻿  Trabajo Labo1.vcxproj -> C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\x64\Debug\Trabajo Labo1.exe

@@ -1,7 +1,7 @@
 #include "cVickingos.h"
 #include "cDragones.h"
 //enum Trabajar;
-
+using namespace std;
 
 
 cVikingos::cVikingos(string Nombre, string Apellido,Posicion trabajo, int Dragon_Muerto, int vida, cDragones* dragon)
@@ -37,10 +37,11 @@ void cVikingos::Atacar_dragones(cDragones&_dragon){
 	//aca manda un cout y que genere como una "batalla" 
 	//en la que aleatoriamente se infrinja da;o al dragon y al vikingo
 	//Dragonesmuertos();
-	
+	cout << "Vikingos ataquemos";
+
 	dragon->Puntosvida();
 	if (dragon->Baja() == true) {
-		Dragonesmuertos(cDragones::getMuerte);
+		Dragonesmuertos(dragon->getMuerte());
 	}
 	else
 	vida = vida - rand() % 10;

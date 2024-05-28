@@ -12,7 +12,7 @@ string NombreDragon,cDragones* dragones)
 	this->Descripcion.color_pelo = Descripcion.color_pelo;
 	this->Descripcion.contextura = Descripcion.contextura;
 	this->Resultado= Resultado;
-	this->NombreDragon= NombreDragon;
+	this->NombreDragon= NombreDragon;// no existe hasta que este domado 
 	this->dragones= dragones;
 } 
 
@@ -26,7 +26,7 @@ bool cJinetes::incorporar_dragon(cDragones* dragon) {
 	y el dragoninc no tiene que ser nulo y el estado del dragon tiene que ser true*/
 	if (dragon->getEstado() && Resultado == "Aprobado") {
 
-		dragon->Altanombre(NombreDragon);
+		dragon->Altanombre(NombreDragon);//usar el tipo de dragon 
 
 		return true;
 	}

@@ -45,5 +45,6 @@ public:
 	int Dragonesmuertos();
 	bool getEstado();
 	bool getMuerte();
+	//que el metodo del jinete llama a setter
 	
 };

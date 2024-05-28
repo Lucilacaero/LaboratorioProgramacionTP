@@ -26,7 +26,7 @@ bool cDragones::Domado() {
 	return false;
 }
 int cDragones::Entrenar() {
-	Entrenado = rand()%MaxEntrenamiento;
+	Entrenado = rand()%MaxEntrenamiento + Entrenado; // usar lo del resultado, si es aprobado sumar mas sino menos etc.
 	return Entrenado;
 
 }
