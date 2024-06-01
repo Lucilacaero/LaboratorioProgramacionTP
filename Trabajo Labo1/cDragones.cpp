@@ -1,78 +1,35 @@
-#include "cDragones.h"
+
+/*#include "cDragones.h"
 #include <cstdlib> // Para rand() y srand()
 int cDragones::DragonesVivos = 0;
 int cDragones::DragonesMuertos = 0;
-
-cDragones::cDragones() {
-	Nombre= " ";
-	Estado= false; // domado o no
-	
-	Entrenado=0;
-	PuntosDomado=0;
-	Muerte= false;
-	vida= 10;
-	Ficha.color=" ";
-	Ficha.peso= 0;
-	//enum edad;
-	Ficha.Ataque= FormaAtaque::Notiene;
-
-};
-
-
-bool cDragones::Domado() {
-	if (Entrenado >= 10) 
-		return true;
-	else
-	return false;
-}
-int cDragones::Entrenar() {
-	Entrenado = rand()%MaxEntrenamiento + Entrenado; // usar lo del resultado, si es aprobado sumar mas sino menos etc.
-	return Entrenado;
-
-}
-int cDragones::PuntosDomados() {
-	return PuntosDomado++;
-}
-void cDragones::Puntosvida()
+cDragones::cDragones(string nombre, string fecha_nac, string fuerza, int vida, bool muerto, string Ataque, bool Estado, int Entrenado, int PuntosDomado):cPersona(nombre, fecha_nac, fuerza, vida, muerto)
 {
-	vida = vida - rand() % 10;
+	this->Ataque = Ataque;
+	this->Estado = Estado;
+	this->Entrenado = Entrenado; 
+	this->PuntosDomado = PuntosDomado; 
 }
-bool cDragones::Baja() {
-	if (vida <= 0)
-		Muerte = true;
-		return Muerte;
-}
-cDragones::~cDragones() {
+
+cDragones::~cDragones()
+{
 	DragonesVivos--;
 	DragonesMuertos++;
 }
-void cDragones::Altanombre(string NombreDragon) {
-	if (Estado == true)//cambiar estos if por try/catch 
-		this->Nombre = NombreDragon;
+*/
+#include "cDragones.h"
+#include <cstdlib> // Para rand() y srand()
 
+int cDragones::DragonesVivos = 0;
+int cDragones::DragonesMuertos = 0;
+int cDragones::domados = 0;
+
+cDragones::cDragones(string nombre, string fecha_nac, string fuerza, int vida, bool muerto, string ataque, bool estado, int entrenado, int puntosDomado)
+	: cPersona(nombre, fecha_nac, fuerza, vida, muerto), Ataque(ataque), Estado(estado), Entrenado(entrenado), PuntosDomado(puntosDomado) {
+	DragonesVivos++;
 }
 
-
-
-int cDragones::Dragonesmuertos()
-{
-	if (Muerte = true) {
-	
-		return cDragones::DragonesMuertos;
-
-	}
-	return 0;
-}
-
-bool cDragones::getEstado()
-{
-	if (Estado == true)
-		return true;
-	else
-		return false;
-}
-
-bool cDragones::getMuerte()
-{
-	return Muerte;
+cDragones::~cDragones() {
+	DragonesVivos--;
+	DragonesMuertos++;
 }

@@ -1,41 +1,31 @@
+/*
 #ifndef CJINETES_H
 #define CJINETES_H
 
-#include <stdlib.h>
-#include <string>
-#include <stdio.h>
-#include <iostream>
-#include "cDragones.h"
-using namespace std;
-struct {
-	int peso;
-	int altura; 
-	string color_pelo;
-	string contextura;
-}typedef sCaract;
-class cJinetes
+#include "cPersona.h"
+
+class cJinetes : protected cVikingos
 {
 private:
-	string Apodo;
-	string Fecha_nac;
-	sCaract Descripcion;
+
 	string Resultado;
 	string NombreDragon;
-	cDragones* dragones;
 public:
-	cJinetes(string Apodo, string Fecha_nac, sCaract Descripcion, string Resultado,
-		string NombreDragon, cDragones* dragones);
-	~cJinetes();
-	bool incorporar_dragon(cDragones* dragon);
-	
-	string getresultado();
-	
-	void setFechadeNacimiento(string fecha_nac);
-
-	void setApodo(string apodo);
-
-
+	cJinetes(string nombre, string fecha_nac, string fuerza, int vida, bool muerto, Posicion trabajo, cDragones* dragon, int dragon_muerto, string resultado, string nombredragon);
 };
 
-
 #endif // CJINETES_H
+
+*/
+#pragma once
+#include "cVickingos.h"
+
+class cJinetes : protected cVikingos {
+private:
+    string Resultado;
+    string NombreDragon;
+
+public:
+    cJinetes(string nombre, string fecha_nac, string fuerza, int vida, bool muerto, Posicion trabajo, cDragones* dragon, int dragon_muerto, string resultado, string nombredragon);
+    friend void Altanombre(cJinetes& asignado, string nuevoNombre); // Declaración de función friend
+};
