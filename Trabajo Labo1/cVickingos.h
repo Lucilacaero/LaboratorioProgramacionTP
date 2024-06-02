@@ -20,14 +20,14 @@ public:
 
 enum Posicion { Entrenador, Guerrero, Agricultor, Pescador, Herrero, Jinete };
 
-class cDragones; // Forward declaration
+class cDragones; 
 
 class cVikingos : protected cPersona {
 protected:
 	Posicion Trabajo;
 	cDragones* Dragon;
 	int Dragon_Muerto;
-
+	
 public:
 	cVikingos(string nombre, string fecha_nac, string fuerza, int vida, bool muerto, Posicion trabajo, cDragones* dragon, int dragon_muerto);
 	~cVikingos();

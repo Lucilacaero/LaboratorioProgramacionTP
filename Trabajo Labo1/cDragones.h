@@ -52,6 +52,11 @@ private:
 	static int domados;
 
 public:
-	cDragones(string nombre, string fecha_nac, string fuerza, int vida, bool muerto, string ataque, bool estado, int entrenado, int puntosDomado);
+
+	cDragones(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, string ataque, bool estado, int entrenado, int puntosDomado);
 	~cDragones();
+	void setEstado();
+	void mostrarnombre();
+	int Entrenar();
+
 };

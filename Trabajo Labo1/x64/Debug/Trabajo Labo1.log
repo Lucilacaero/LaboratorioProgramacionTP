@@ -1,4 +1,59 @@
-﻿  cJinetes.cpp
+﻿  cDragones.cpp
+  cJinetes.cpp
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.cpp(10,12): error C2665: 'cPersona::cPersona':ninguna función sobrecargada pudo convertir todos los tipos de argumento
+  C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cPersona.h(15,5):
+  puede ser 'cPersona::cPersona(std::string,std::string,std::string,int,bool)'
+  	C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.cpp(10,12):
+  	'cPersona::cPersona(std::string,std::string,std::string,int,bool)': el argumento 3 no puede convertirse de 'unsigned int' a 'std::string'
+  		C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.cpp(10,32):
+  		'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string':ninguna función sobrecargada pudo convertir todos los tipos de argumento
+  			C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\xstring(2556,5):
+  			puede ser 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string(const _Elem *const )'
+          with
+          [
+              _Elem=char
+          ]
+  				C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.cpp(10,32):
+  				'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string(const _Elem *const )': el argumento 1 no puede convertirse de 'unsigned int' a 'const _Elem *const '
+          with
+          [
+              _Elem=char
+          ]
+  					C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.cpp(10,32):
+  					La conversión de un tipo entero a un tipo de puntero requiere reinterpret_cast, conversión de estilo de C o conversión de estilo de función entre paréntesis
+  			C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\xstring(3134,5):
+  			o       'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string(std::initializer_list<_Elem>,const _Alloc &)'
+          with
+          [
+              _Elem=char,
+              _Alloc=std::allocator<char>
+          ]
+  				C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.cpp(10,32):
+  				'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string(std::initializer_list<_Elem>,const _Alloc &)': el argumento 1 no puede convertirse de 'unsigned int' a 'std::initializer_list<_Elem>'
+          with
+          [
+              _Elem=char,
+              _Alloc=std::allocator<char>
+          ]
+          and
+          [
+              _Elem=char
+          ]
+  					C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.cpp(10,32):
+  					La conversión requiere un segundo operador de conversión definido por el usuario o constructor
+  			C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\xstring(2586,5):
+  			o       'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string(_Iter,_Iter,const _Alloc &)'
+          with
+          [
+              _Alloc=std::allocator<char>
+          ]
+  			C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.cpp(10,32):
+  			al hacer coincidir la lista de argumentos '(unsigned int)'
+  C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.cpp(10,12):
+  al hacer coincidir la lista de argumentos '(std::string, std::string, unsigned int, int, bool)'
+  
+  cPersona.cpp
   cVickingos.cpp
+  Trabajo Labo1.cpp
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\Trabajo Labo1.cpp(8,10): error C1083: No se puede abrir el archivo incluir: 'cVikingos.h': No such file or directory
   Generando código...
-  Trabajo Labo1.vcxproj -> C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\x64\Debug\Trabajo Labo1.exe
