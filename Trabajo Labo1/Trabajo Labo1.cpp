@@ -6,12 +6,13 @@
 #include "cPersona.h"
 #include "cDragones.h"
 #include "cVikingos.h"
+#include "cJinetes.h"
 #include <iostream>
 #include <stdio.h>
 using namespace std;
 
 // Función para cargar datos desde un archivo CSV
-
+/*
 void cargarlistaDragones(const string& nombreArchivo, list<cDragones*>& dragones) {
     ifstream archivo(nombreArchivo);
     if (!archivo.is_open()) {
@@ -47,7 +48,7 @@ void cargarlistaDragones(const string& nombreArchivo, list<cDragones*>& dragones
 
     archivo.close();
 }
-
+*/
 
  
 int main(){
@@ -63,7 +64,7 @@ int main(){
 
 
     // Cargar datos desde un archivo CSV
-    cargarlistaDragones("dragones.csv", dragones);
+    //cargarlistaDragones("dragones.csv", dragones);
 
     // Mostrar los nombres de los dragones cargados
     for (cDragones* dragon : dragones) {
@@ -95,9 +96,9 @@ int main(){
             }
         cout <<endl;
         for (int value : myList) {
-            std::cout << value << " ";
+            cout << value << " ";
         }
-        std::cout << std::endl;
+        cout << endl;
 
        // Insertar y Eliminar en Posiciones Específicas
        //     Insertar :

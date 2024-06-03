@@ -38,13 +38,14 @@ public:
 
 */
 
+
 #pragma once
 #include "cPersona.h"
 
 class cDragones : protected cPersona {
 private:
-	string Ataque; // Vamos a convertir el enum en un string
-	bool Estado; // Domado o no
+	string Ataque;
+	bool Estado;
 	int Entrenado;
 	int PuntosDomado;
 	static int DragonesVivos;
@@ -52,11 +53,9 @@ private:
 	static int domados;
 
 public:
-
 	cDragones(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, string ataque, bool estado, int entrenado, int puntosDomado);
 	~cDragones();
 	void setEstado();
 	void mostrarnombre();
 	int Entrenar();
-
 };
