@@ -1,4 +1,5 @@
 #include "cPersona.h"
+//la clase cPersona es mas que nada abstracta 
 cPersona::cPersona(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto)
 {
 	Nombre = nombre;
@@ -10,7 +11,14 @@ cPersona::cPersona(string nombre, string fecha_nac, unsigned int fuerza, int vid
 
 
 
+void cPersona::setNombre(const string& nombre) {
+	Nombre = nombre;
+}
 cPersona::~cPersona() {}
 
 
 
+void cPersona::atacar() {
+	// Implementación de la función atacar
+	cout << Nombre << " está atacando!" << endl;
+}

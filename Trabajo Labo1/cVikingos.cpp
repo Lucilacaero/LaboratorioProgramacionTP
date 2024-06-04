@@ -22,3 +22,8 @@ cVikingos::cVikingos(string nombre, string fecha_nac, unsigned int fuerza, int v
 }
 
 cVikingos::~cVikingos() {}
+
+void cVikingos::atacar()
+{
+	cout << "el vikingo ataca";
+}

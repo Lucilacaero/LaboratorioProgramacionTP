@@ -1,7 +1,7 @@
-/*
+
 #pragma once
 #include "cPersona.h"
-
+#include "cJinetes.h"
 
 const int MaxEntrenamiento = 3200;
 
@@ -15,38 +15,15 @@ const int MaxEntrenamiento = 3200;
 enum FormaAtaque { Notiene, Garrasycolmillos, Ataquesfisicos, Respirarfuego, Cargasaereas, Proyectiles };
 // Dependiendo de la FormadeAtaque que tenga el dragon, inflinge mas daño y va a ser mas dificil de domarlo
 // ¿Cómo obtiene su forma de ataque? para empezar puede tenerla o no, pero si se lo esta entrenando va a ir subiendo de nivel y adquiriendo una nueva forma de ataque
-// Se considera que esta domado una vez que este en 100 puntos de entrenamiento.
+// Se considera que esta domado una vez que este en 100 puntos de domado.
 // Que tenga una forma de ataque definida no significa que tenga puntos de entrenamiento, a menos que así sea.
 
-
-
-
-class cDragones : protected cPersona {
-private:
-
-	string Ataque;// vamos a convertir el enum en un string
-	bool Estado; // domado o no
-	int Entrenado;
-	int PuntosDomado;
-	static int DragonesVivos;
-	static int DragonesMuertos;
-	static int domados;
-public:
-	cDragones(string nombre, string fecha_nac, string fuerza, int vida, bool muerto, string Ataque, bool Estado, int Entrenado, int PuntosDomado);
-	~cDragones();
-};
-
-*/
-
-
-#pragma once
-#include "cPersona.h"
 
 class cDragones : protected cPersona {
 private:
 	string Ataque;
-	bool Estado;
-	int Entrenado;
+	bool Estado;// domado o no
+	int Entrenado;// para saber si esta domado y su forma de ataque
 	int PuntosDomado;
 	static int DragonesVivos;
 	static int DragonesMuertos;
@@ -55,7 +32,12 @@ private:
 public:
 	cDragones(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, string ataque, bool estado, int entrenado, int puntosDomado);
 	~cDragones();
-	void setEstado();
+	friend void asignarnombre(cJinetes& jinete, cDragones& dragon);
+	void Domado();
+
 	void mostrarnombre();
-	int Entrenar();
+	friend void Entrenar(cJinetes& jinete, cDragones& dragon);
+	void formaDeAtaque();
+	void atacar();
+	void modificarDragonSegunJinete(cJinetes& jinete);
 };
