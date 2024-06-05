@@ -11,9 +11,11 @@ int cDragones::Entrenar()
 #include "cDragones.h"
 #include "cJinetes.h"
 #include <iostream>
+#include <random>
 using namespace std;
 int cDragones::DragonesVivos = 0;
 int cDragones::DragonesMuertos = 0;
+int cDragones::domados = 0;
 // void cDragones::operator=() {
 
 //}
@@ -68,19 +70,112 @@ void cDragones::Domado() {
 void cDragones::mostrarnombre() {
 	cout << Nombre << endl;
 }
+int cDragones::danio() {
+	
+	//para calcular el danio que puede causar un dragon voy a tomar en cuenta la fueerza del dragon y su tipo de ataque
+	/* si su fuerza es alta (de 1500 a 1000 puntos) 
+	si su ataque es el 1 y 2 danio es de 900 a 1000 puntos
+	si su ataque es el 3 y 4 danio es de 1000 a 1250 puntos
+	si su ataque es el 5 y 6 danio es de 1250 a 1500 puntos
+	
+	si su fuerza es media (de 1000 a 500 puntos) 
+	si su ataque es el 1 y 2 danio es de 500 a 750 puntos
+	si su ataque es el 3 y 4 danio es de 750 a 900 puntos
+	si su ataque es el 5 y 6 danio es de 900 a 1000 puntos
 
-void cDragones::atacar()
+	si su fuerza es media (de 1000 a 500 puntos)
+	si su ataque es el 1 y 2 danio es de 0 a 250 puntos
+	si su ataque es el 3 y 4 danio es de 250 a 500 puntos
+	si su ataque es el 5 y 6 danio es de 750 a 500 puntos */
+	int daniio = 0;
+	int max;
+	int min;
+	if (Fuerza < 1500 && Fuerza > 1000) {
+
+		//Notiene, Garrasycolmillos, Ataquesfisicos, Respirarfuego, Cargasaereas, Proyectiles
+		if (Ataque == "No tiene" || Ataque == "Garras y colmillos") {
+			min = 900;
+			max = 1000;
+		}
+		else if (Ataque == "Ataques fisicos" || Ataque == "Respirar fuego") {
+			min = 750;
+			max = 9000;
+		}
+		else if (Ataque == "Cargas aereas" || Ataque == "Proyectiles") {
+			min = 900;
+			max = 1000;
+		}
+		else {
+			cout << "error, hacer algo con trycatch";
+		}
+	}
+
+	else if (Fuerza < 1000 && Fuerza > 500) {
+
+		//Notiene, Garrasycolmillos, Ataquesfisicos, Respirarfuego, Cargasaereas, Proyectiles
+		if (Ataque == "No tiene" || Ataque == "Garras y colmillos") {
+			min = 500;
+			max = 750;
+		}
+		else if (Ataque == "Ataques fisicos" || Ataque == "Respirar fuego") {
+			min = 750;
+			max = 900;
+		}
+		else if (Ataque == "Cargas aereas" || Ataque == "Proyectiles") {
+			min = 900;
+			max = 1000;
+		}
+		else
+			cout << "error, hacer algo con trycatch";
+
+	
+	}
+	
+	else if (Fuerza < 500 && Fuerza > 0) {
+
+		//Notiene, Garrasycolmillos, Ataquesfisicos, Respirarfuego, Cargasaereas, Proyectiles
+		if (Ataque == "No tiene" || Ataque == "Garras y colmillos") {
+			min = 0;
+			max = 250;
+		}
+		else if (Ataque == "Ataques fisicos" || Ataque == "Respirar fuego") {
+			min = 250;
+			max = 500;
+		}
+		else if (Ataque == "Cargas aereas" || Ataque == "Proyectiles") {
+			min = 500;
+			max = 750;
+		}
+		else
+			cout << "error, hacer algo con trycatch";
+
+	}
+	
+
+		random_device rndm; // Genera una semilla aleatoria
+		mt19937 generador(rndm()); // Generador de números aleatorios basado en la semilla
+
+		// Define el rango de distribución
+		uniform_int_distribution<int> distribucion(min, max);
+
+		// Genera y devuelve un número aleatorio dentro del rango
+		daniio = distribucion(generador);
+		return daniio;
+		
+}
+
+int cDragones::atacar()
 {
 	if (Ataque == "no tiene") {
 		cout << "no se pero que pase algo";
 	}
-
-
 	cout << "el dragon ataca";
+	int danio = 0;
+	return danio;
+	
 }
 // esta funcion trae problemas.
 
-//te odiooooooooooooooooooo
 void cDragones::modificarDragonSegunJinete(cJinetes& jinete) {
 	jinete.evaluarResultado();
 	unsigned int *auxfuerza = new unsigned int;
@@ -91,30 +186,31 @@ void cDragones::modificarDragonSegunJinete(cJinetes& jinete) {
 void Entrenar(cJinetes& jinete, cDragones& dragon)
 {
 	if (dragon.Fuerza > jinete.Fuerza && dragon.Fuerza + jinete.Fuerza > 100) {
-		jinete.Vida =jinete.Vida- rand()/10;
-		dragon.Entrenado = dragon.Entrenado + rand() / 5;
-		dragon.PuntosDomado= dragon.PuntosDomado + rand() / 5;
+		jinete.Vida =jinete.Vida- rand()%10;
+		dragon.Entrenado = dragon.Entrenado + rand() % 5;
+		dragon.PuntosDomado= dragon.PuntosDomado + rand() % 5;
 	}
 	else if (dragon.Fuerza > jinete.Fuerza && dragon.Fuerza + jinete.Fuerza > 200) {
-		jinete.Vida = jinete.Vida - rand() / 20;
-		dragon.Entrenado = dragon.Entrenado + rand() / 5;
-		dragon.PuntosDomado = dragon.PuntosDomado + rand() / 5;
+		jinete.Vida = jinete.Vida - rand() % 20;
+		dragon.Entrenado = dragon.Entrenado + rand() % 5;
+		dragon.PuntosDomado = dragon.PuntosDomado + rand() % 5;
 	}
 	else if (dragon.Fuerza > jinete.Fuerza && dragon.Fuerza + jinete.Fuerza > 300) {
-		jinete.Vida = jinete.Vida - rand() / 30;
-		dragon.Entrenado = dragon.Entrenado + rand() / 5;
-		dragon.PuntosDomado = dragon.PuntosDomado + rand() / 5;
+		jinete.Vida = jinete.Vida - rand() % 30;
+		dragon.Entrenado = dragon.Entrenado + rand() % 5;
+		dragon.PuntosDomado = dragon.PuntosDomado + rand() % 5;
 	}
 	if (dragon.Fuerza < jinete.Fuerza && dragon.Fuerza + jinete.Fuerza > 100) {
-		dragon.PuntosDomado = dragon.PuntosDomado + rand() / 5;
-		dragon.Entrenado = dragon.Entrenado + rand() / 10;
+		dragon.PuntosDomado = dragon.PuntosDomado + rand() % 5;
+		dragon.Entrenado = dragon.Entrenado + rand() % 10;
 	}
 	else if (dragon.Fuerza < jinete.Fuerza && dragon.Fuerza + jinete.Fuerza > 200) {
-		dragon.PuntosDomado = dragon.PuntosDomado + rand() / 5;
-		dragon.Entrenado = dragon.Entrenado + rand() / 20;
+		dragon.PuntosDomado = dragon.PuntosDomado + rand() % 5;
+		dragon.Entrenado = dragon.Entrenado + rand() % 20;
 	}if (dragon.Fuerza < jinete.Fuerza && dragon.Fuerza + jinete.Fuerza > 300) {
-		dragon.PuntosDomado = dragon.PuntosDomado + rand() / 5;
-		dragon.Entrenado = dragon.Entrenado + rand() / 30;
+		dragon.PuntosDomado = dragon.PuntosDomado + rand() % 5;
+		dragon.Entrenado = dragon.Entrenado + rand() % 30;
 	}
 	//agregar que pasaria si el jinete se queda sin vida en el medio del entrenamiente
+	dragon.Domado();
 }

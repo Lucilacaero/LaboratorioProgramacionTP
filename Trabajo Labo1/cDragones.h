@@ -29,15 +29,17 @@ private:
 	static int DragonesMuertos;
 	static int domados;
 
+
 public:
 	cDragones(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, string ataque, bool estado, int entrenado, int puntosDomado);
 	~cDragones();
 	friend void asignarnombre(cJinetes& jinete, cDragones& dragon);
 	void Domado();
+	int danio();
 
 	void mostrarnombre();
 	friend void Entrenar(cJinetes& jinete, cDragones& dragon);
 	void formaDeAtaque();
-	void atacar();
+	int atacar();
 	void modificarDragonSegunJinete(cJinetes& jinete);
 };
