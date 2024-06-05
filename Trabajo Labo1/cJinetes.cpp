@@ -14,6 +14,8 @@ cJinetes::cJinetes(string nombre, string fecha_nac, unsigned int fuerza, int vid
 	Resultado = resultado;
 	NombreDragon = nombredragon;
 }
+
+/*
 void cJinetes::evaluarResultado() {
     if (Resultado == "Aprobado") {
         cout << "El jinete " << Nombre << " ha ganado. Su dragón recibirá un entrenamiento especial." << endl;
@@ -21,11 +23,11 @@ void cJinetes::evaluarResultado() {
         // dragon.Entrenar();
     }
     else if (Resultado == "Aprobado") {
-        std::cout << "El jinete " << Nombre << " ha perdido. Su dragón no recibirá entrenamiento." <<endl;
+        cout << "El jinete " << Nombre << " ha perdido. Su dragón no recibirá entrenamiento." <<endl;
     }
     else {
         cout << "Resultado desconocido para el jinete " << Nombre << "." << endl;
     }
 }
-
+*/
 

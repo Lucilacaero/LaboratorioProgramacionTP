@@ -1,15 +1,137 @@
 // Trabajo Labo1.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
 //
-
-
 #include <list>
+#include <iterator>
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "cPersona.h"
 #include "cDragones.h"
 #include "cVikingos.h"
 #include "cJinetes.h"
-#include <iostream>
-#include <stdio.h>
+
 using namespace std;
+
+template<typename T>
+void borrarLista(list<T>& myList, size_t position) {
+    try {
+        if (position >= myList.size()) {
+            throw out_of_range("Posición fuera de rango");
+        }
+
+        typename list<T>::iterator it = myList.begin();
+        advance(it, position); // Avanzar el iterador a la posición deseada
+        myList.erase(it);
+    }
+    catch (const out_of_range& e) {
+        cout << e.what() << endl;
+    }
+}
+
+template<typename T>
+T seleccionarElementoAleatorio(const list<T>& myList) {
+    if (myList.empty()) {
+        throw out_of_range("La lista está vacía");
+    }
+    auto it = myList.begin();
+    advance(it, rand() % myList.size());
+    return *it;
+}
+
+template<typename T>
+size_t encontrarPosicion(const list<T>& myList, const T& value) {
+    size_t position = 0;
+    for (auto it = myList.begin(); it != myList.end(); ++it, ++position) {
+        if (*it == value) {
+            return position;
+        }
+    }
+    throw out_of_range("Elemento no encontrado en la lista");
+}
+
+int main() {
+    srand(time(0)); // Inicializar la semilla para los números aleatorios
+
+    list<cDragones*> dragones;
+
+    // Prueba de inserción de dragones
+    cDragones* dragoncito1 = new cDragones("chimuelo", "15102004", 100, 1000, false, "no tiene", false, 50);
+    dragones.push_front(dragoncito1);
+    cDragones* dragoncito2 = new cDragones("gaga", "15102004", 100, 1000, false, "no tiene", false, 50);
+    dragones.push_front(dragoncito2);
+    dragoncito2->mostrarnombre();
+
+    // Mostrar los nombres de los dragones cargados
+    for (cDragones* dragon : dragones) {
+        dragon->mostrarnombre();
+    }
+
+    list<cVikingos*> vikingos;
+    Posicion pos = Posicion::Guerrero;
+    cVikingos* viking1 = new cVikingos("chimuelo", "15102004", 1000, 100, false, pos, dragoncito1, 0);
+    vikingos.push_front(viking1);
+    cVikingos* viking2 = new cVikingos("viking2", "15102005", 800, 200, false, pos, dragoncito2, 0);
+    vikingos.push_front(viking2);
+
+    int option = rand() % 3;
+
+    switch (option) {
+    case 1:
+        while (!vikingos.empty() && !dragones.empty()) {
+            cVikingos* viking = seleccionarElementoAleatorio(vikingos);
+            cDragones* dragon = seleccionarElementoAleatorio(dragones);
+
+            int attackOption = rand() % 2;
+            switch (attackOption) {
+            case 0:
+                dragon->atacar();
+                if (viking->getvida() <= 0) {
+                    try {
+                        size_t pos = encontrarPosicion(vikingos, viking);
+                        borrarLista(vikingos, pos);
+                    }
+                    catch (const out_of_range& e) {
+                        cout << e.what() << endl;
+                    }
+                }
+                break;
+
+            case 1:
+                viking->atacar();
+               
+                if (dragon->getvida() <= 0) {
+                    try {
+                        size_t pos = encontrarPosicion(dragones, dragon);
+                        borrarLista(dragones, pos);
+                    }
+                    catch (const out_of_range& e) {
+                        cout << e.what() << endl;
+                    }
+                }
+                break;
+            }
+        }
+        break;
+
+    case 2:
+
+
+        // Entrenar(dragon, jinete);
+        //  Necesito definir la función Entrenar y jinete
+        break;
+    }
+
+    // Liberar memoria
+    for (cDragones* dragon : dragones) {
+        delete dragon;
+    }
+    for (cVikingos* viking : vikingos) {
+        delete viking;
+    }
+
+    return 0;
+}
+
 
 // Función para cargar datos desde un archivo CSV
 /*
@@ -50,70 +172,8 @@ void cargarlistaDragones(const string& nombreArchivo, list<cDragones*>& dragones
 }
 */
 
- 
-int main(){
-    list <cDragones*> dragones;
-    //nada importante, solo una prueba
-    cDragones * dragoncito = new cDragones("chimuelo", "15102004", 100, 1000, false, "no tiene", false, 50, 5);
-    dragones.push_front(dragoncito);
-    cDragones* dragoncito2 = new cDragones("gaga", "15102004", 100, 1000, false, "no tiene", false, 50, 5);
-    dragones.push_front(dragoncito2);
-    dragoncito2->mostrarnombre();
-    // fin de la prueba
 
 
-
-    // Cargar datos desde un archivo CSV
-    //cargarlistaDragones("dragones.csv", dragones);
-
-    // Mostrar los nombres de los dragones cargados
-    for (cDragones* dragon : dragones) {
-        dragon->mostrarnombre();
-    }
-
-    // Falta liberar memoria
-    
-
-    return 0;
-}
-/*
-
-    list<int> myList;
-  //  Añadir Elementos al final de la lista :
-
-        myList.push_back(10);
-        // Añadir al principio
-        myList.push_front(5);
-       // Eliminar Elementos del final de la lista :
-        myList.pop_back();
-     //  Eliminar del principio de la lista :
-        myList.pop_front();
-
-       // Iterar sobre la Lista: usar iteradores para recorrer la lista :
-
-            for (list<int>::iterator it = myList.begin(); it != myList.end(); ++it) {
-                cout << *it << " ";
-            }
-        cout <<endl;
-        for (int value : myList) {
-            cout << value << " ";
-        }
-        cout << endl;
-
-       // Insertar y Eliminar en Posiciones Específicas
-       //     Insertar :
-
-            list<int>::iterator it = myList.begin();
-        advance(it, 1); // Avanzar el iterador a la segunda posición
-        myList.insert(it, 15);
-        // Eliminar:
-
-
-            it = myList.begin();
-       advance(it, 1); // Avanzar el iterador a la segunda posición
-        myList.erase(it);
-    cout << "hola";
-    */
 
 /*
 * en el uml no va el friend 

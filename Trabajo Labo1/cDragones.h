@@ -1,8 +1,9 @@
 
 #pragma once
 #include "cPersona.h"
-#include "cJinetes.h"
-
+#include<string>
+using namespace std;
+class cJinetes;
 const int MaxEntrenamiento = 3200;
 
 // Entrenamiento de 0 a 100 para que adquiera el 1er
@@ -12,7 +13,6 @@ const int MaxEntrenamiento = 3200;
 // Entrenamiento de 800 a 1600 para que adquiera el 5to
 // Entrenamiento de 1600 a 3200 para que adquiera el 6to
 
-enum FormaAtaque { Notiene, Garrasycolmillos, Ataquesfisicos, Respirarfuego, Cargasaereas, Proyectiles };
 // Dependiendo de la FormadeAtaque que tenga el dragon, inflinge mas daño y va a ser mas dificil de domarlo
 // ¿Cómo obtiene su forma de ataque? para empezar puede tenerla o no, pero si se lo esta entrenando va a ir subiendo de nivel y adquiriendo una nueva forma de ataque
 // Se considera que esta domado una vez que este en 100 puntos de domado.
@@ -24,22 +24,24 @@ private:
 	string Ataque;
 	bool Estado;// domado o no
 	int Entrenado;// para saber si esta domado y su forma de ataque
-	int PuntosDomado;
+	
 	static int DragonesVivos;
 	static int DragonesMuertos;
 	static int domados;
 
 
 public:
-	cDragones(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, string ataque, bool estado, int entrenado, int puntosDomado);
+	cDragones(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, string ataque, bool estado, int entrenado);
 	~cDragones();
-	friend void asignarnombre(cJinetes& jinete, cDragones& dragon);
-	void Domado();
+	//friend void asignarnombre(cJinetes& jinete, cDragones& dragon);
+	bool Domado();
 	int danio();
-
 	void mostrarnombre();
-	friend void Entrenar(cJinetes& jinete, cDragones& dragon);
+
 	void formaDeAtaque();
 	int atacar();
-	void modificarDragonSegunJinete(cJinetes& jinete);
+	void vida(int danio);
+	int getvida();
+	friend void Entrenar(cJinetes& jinete, cDragones& dragon);
+	//void modificarDragonSegunJinete(cJinetes& jinete);
 };
