@@ -29,8 +29,9 @@ int cPersona::atacar() {
 	return 0;
 }
 */
+/*
 int cPersona::getvida() {
 	return Vida;
 }
-
+*/
 

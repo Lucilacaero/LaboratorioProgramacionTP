@@ -1,9 +1,2 @@
 ﻿  cDragones.cpp
-  cJinetes.cpp
-  cVikingos.cpp
-  Trabajo Labo1.cpp
-C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\Trabajo Labo1.cpp(53,15): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
-  Generando código...
-Trabajo Labo1.obj : error LNK2019: símbolo externo "public: int __cdecl cDragones::getvida(void)" (?getvida@cDragones@@QEAAHXZ) sin resolver al que se hace referencia en la función main
-Trabajo Labo1.obj : error LNK2019: símbolo externo "public: int __cdecl cVikingos::getvida(void)" (?getvida@cVikingos@@QEAAHXZ) sin resolver al que se hace referencia en la función main
-C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\x64\Debug\Trabajo Labo1.exe : fatal error LNK1120: 2 externos sin resolver
+  Trabajo Labo1.vcxproj -> C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\x64\Debug\Trabajo Labo1.exe

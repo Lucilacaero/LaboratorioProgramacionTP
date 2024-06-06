@@ -224,7 +224,7 @@ void Entrenar(cJinetes& jinete, cDragones& dragon)
 	//agregar que pasaria si el jinete se queda sin vida en el medio del entrenamiente
 	dragon.Domado();
 }
-/*
+
 int cDragones::getvida() {
 	return Vida;
-}*/
+}

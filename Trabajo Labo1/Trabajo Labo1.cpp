@@ -81,8 +81,8 @@ int main() {
             cVikingos* viking = seleccionarElementoAleatorio(vikingos);
             cDragones* dragon = seleccionarElementoAleatorio(dragones);
 
-            int attackOption = rand() % 2;
-            switch (attackOption) {
+            int Option2 = rand() % 2;
+            switch (Option2) {
             case 0:
                 dragon->atacar();
                 if (viking->getvida() <= 0) {

@@ -32,16 +32,19 @@ int cVikingos::atacar()
 void cVikingos::vida(int danio)
 {
 	Vida = Vida - danio;
-	if(Vida < 0 || Vida ==0)
-		cout<< "El vikingo murio"<< endl;
+	if (Vida < 0 || Vida == 0) {
+		cout << "El vikingo murio" << endl;
+		Muerto = true;
+	}
+		
 	//sacarlo de la lista
 }
-/*
+
 int cVikingos::getvida()
 {
 	return Vida;
 }
-*/
+
 void cVikingos::asignarDragon(cDragones* dragon) {
 	if (dragon != nullptr && dragon->Domado()) {
 		this->Dragon = dragon;
