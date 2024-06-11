@@ -38,13 +38,14 @@ public:
 	bool Domado();
 	int danio();
 	void mostrarnombre();
-
+	void setEntrenado(int entrenado);
 	void formaDeAtaque();
 	int atacar();
 	void vida(int danio);
 	int getvida();
 	unsigned int getfuerza();
-	friend void cJinetes::entrenarDragon();
+	int getEntrenado();
+	
 	//friend void Entrenar(cJinetes& jinete);
 	//void modificarDragonSegunJinete(cJinetes& jinete);
 };

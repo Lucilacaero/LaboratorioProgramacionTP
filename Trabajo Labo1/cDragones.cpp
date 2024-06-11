@@ -46,6 +46,11 @@ void cDragones::mostrarnombre() {
 	cout << Nombre << endl;
 }
 
+void cDragones::setEntrenado(int entrenado)
+{
+	this->Entrenado = entrenado;
+}
+
 void cDragones::formaDeAtaque() {
 	if (Ataque == "no tiene"|| Ataque == " ") {
 		if (Entrenado < 100)
@@ -196,4 +201,9 @@ int cDragones::getvida() {
 unsigned int cDragones::getfuerza()
 {
 	return Fuerza;
+}
+
+int cDragones::getEntrenado()
+{
+	return Entrenado; 
 }

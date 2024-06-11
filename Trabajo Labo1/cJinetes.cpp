@@ -1,7 +1,9 @@
+#pragma once
 
 #include "cJinetes.h"
 #include "cDragones.h"
 #include <iostream>
+class cVikingos;
 class cDragones;
 using namespace std;
 /*
@@ -16,36 +18,45 @@ cJinetes::cJinetes(string nombre, string fecha_nac, unsigned int fuerza, int vid
 }
  void cJinetes::entrenarDragon() {
     cDragones* Dragon = this->getDragon();
+    int entrenado;
     // poner getter y setter para que deje de tirar erroes
     if (Dragon == nullptr) {
         cout << "No hay dragón asignado para entrenar." << std::endl;
         return;
     } 
-
+    // usar e
     if (Dragon->getfuerza() > this->Fuerza && (Dragon->getfuerza() - this->Fuerza) > 100) {
         this->Vida -= rand() % 10;
-        Dragon->Entrenado += rand() % 5; 
+        entrenado = rand() % 5 + Dragon-> getEntrenado();
+        Dragon->setEntrenado(entrenado);
     }
     else if (Dragon->getfuerza() > this->Fuerza && (Dragon->getfuerza() - this->Fuerza) > 200) {
         this->Vida -= rand() % 20;
-        Dragon->Entrenado += rand() % 3;
+        entrenado = rand() % 3 + Dragon->getEntrenado();
+        Dragon->setEntrenado(entrenado);
+
     }
     else if (Dragon->getfuerza() > this->Fuerza && (Dragon->getfuerza() - this->Fuerza) > 300) {
         this->Vida -= rand() % 30;
-        Dragon->Entrenado += rand() % 2;
+        entrenado = rand() % 2 + Dragon->getEntrenado();
+        Dragon->setEntrenado(entrenado);
     }
 
     if (Dragon->getfuerza() < this->Fuerza && (this->Fuerza - Dragon->getfuerza()) > 100) {
-        Dragon->Entrenado += rand() % 10;
+       
+        entrenado = rand() % 10 + Dragon->getEntrenado();
+        Dragon->setEntrenado(entrenado);
     }
     else if (Dragon->getfuerza() < this->Fuerza && (this->Fuerza - Dragon->getfuerza()) > 200) {
-        Dragon->Entrenado += rand() % 20;
+        entrenado = rand() % 20 + Dragon->getEntrenado();
+        Dragon->setEntrenado(entrenado);
     }
     else if (Dragon->getfuerza() < this->Fuerza && (this->Fuerza - Dragon->getfuerza()) > 300) {
-        Dragon->Entrenado += rand() % 30;
+        entrenado = rand() % 30 + Dragon->getEntrenado();
+        Dragon->setEntrenado(entrenado);
     }
 
-    if (Dragon->Entrenado >= MaxEntrenamiento) {
+    if (Dragon->getEntrenado() >= MaxEntrenamiento) {
         cout << "El dragón ha alcanzado el nivel máximo de entrenamiento." << std::endl;
     }
 

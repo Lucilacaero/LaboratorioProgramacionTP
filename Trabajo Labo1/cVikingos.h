@@ -16,8 +16,8 @@ protected:
 public:
 	cVikingos(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, Posicion trabajo, cDragones* dragon, int dragon_muerto);
 	~cVikingos();
-	int atacar() override;
-	void vida(int danio) override;
+	int atacar();
+	void vida(int danio);
 	void setDragon(cDragones* dragon);
 	cDragones* getDragon();
 	int getvida();

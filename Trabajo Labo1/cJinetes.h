@@ -1,8 +1,13 @@
 #pragma once
+
 #include "cVikingos.h"
+
+
+//#include "cPersona.h"
 #include <string>
 using namespace std;
-
+class cDragones;
+class cVikingos;
 class cJinetes : protected cVikingos {
 private:
     string Resultado;// aprobado, desaprobado, primero o ultimo

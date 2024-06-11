@@ -1,7 +1,7 @@
 
 #pragma once
 #include <string>
-#include "cJinetes.h"
+
 using namespace std;
 class cPersona {
 protected:

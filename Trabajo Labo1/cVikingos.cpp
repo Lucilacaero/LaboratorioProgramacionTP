@@ -1,3 +1,6 @@
+#pragma once
+
+#include "cPersona.h"
 #include "cVikingos.h"
 #include <iostream>
 #include <cstdlib>
