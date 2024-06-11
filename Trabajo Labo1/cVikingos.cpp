@@ -54,3 +54,10 @@ void cVikingos::asignarDragon(cDragones* dragon) {
 		cout << "El dragon no está disponible o no está domado." << endl;
 	}
 }
+
+cDragones* cVikingos::getDragon() {
+	return this->Dragon;
+}
+void cVikingos::setDragon(cDragones* dragon) {
+	this->Dragon = dragon;
+}

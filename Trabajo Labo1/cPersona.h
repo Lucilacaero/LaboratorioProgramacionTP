@@ -1,6 +1,7 @@
 
 #pragma once
 #include <string>
+#include "cJinetes.h"
 using namespace std;
 class cPersona {
 protected:
@@ -17,7 +18,7 @@ public:
     virtual ~cPersona();
     virtual int atacar()=0;// esta va a ser la funcion con polimorfismo
     virtual void vida(int danio) = 0;
-  
+   
 };
 // virtual int danio();
 

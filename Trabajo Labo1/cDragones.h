@@ -2,6 +2,7 @@
 #pragma once
 #include "cPersona.h"
 #include<string>
+#include "cJinetes.h"
 using namespace std;
 class cJinetes;
 const int MaxEntrenamiento = 3200;
@@ -42,6 +43,8 @@ public:
 	int atacar();
 	void vida(int danio);
 	int getvida();
-	friend void Entrenar(cJinetes& jinete, cDragones& dragon);
+	unsigned int getfuerza();
+	friend void cJinetes::entrenarDragon();
+	//friend void Entrenar(cJinetes& jinete);
 	//void modificarDragonSegunJinete(cJinetes& jinete);
 };

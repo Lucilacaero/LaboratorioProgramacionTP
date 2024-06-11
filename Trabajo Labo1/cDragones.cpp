@@ -189,42 +189,11 @@ void cDragones::modificarDragonSegunJinete(cJinetes& jinete) {
 		//Entrenado = Entrenado + 10;
 }
 */
-void Entrenar(cJinetes& jinete, cDragones& dragon)
-{
-	if (dragon.Fuerza > jinete.Fuerza && (dragon.Fuerza - jinete.Fuerza) > 100) {
-		jinete.Vida =jinete.Vida- rand()%10;
-		dragon.Entrenado = dragon.Entrenado + rand() % 5;
-		
-	}
-	else if (dragon.Fuerza > jinete.Fuerza && (dragon.Fuerza - jinete.Fuerza) > 200) {
-		jinete.Vida = jinete.Vida - rand() % 20;
-		dragon.Entrenado = dragon.Entrenado + rand() % 3;
-		
-	}
-	else if (dragon.Fuerza > jinete.Fuerza && (dragon.Fuerza - jinete.Fuerza) > 300) {
-		jinete.Vida = jinete.Vida - rand() % 30;
-		dragon.Entrenado = dragon.Entrenado + rand() % 2;
-	}
-	if (dragon.Fuerza < jinete.Fuerza && (  jinete.Fuerza - dragon.Fuerza)  > 100) {
-		
-		dragon.Entrenado = dragon.Entrenado + rand() % 10;
-	}
-	else if (dragon.Fuerza < jinete.Fuerza &&  (jinete.Fuerza - dragon.Fuerza)  > 200) {
-	
-		dragon.Entrenado = dragon.Entrenado + rand() % 20;
-
-	}if (dragon.Fuerza < jinete.Fuerza && (jinete.Fuerza - dragon.Fuerza)   > 300) {
-	
-		dragon.Entrenado = dragon.Entrenado + rand() % 30;
-	}
-
-	if (dragon.Entrenado == MaxEntrenamiento) {
-		cout << "El dragon ha alcanzado el nivel máximo de entrenamiento." << endl;
-	}
-	//agregar que pasaria si el jinete se queda sin vida en el medio del entrenamiente
-	dragon.Domado();
-}
-
 int cDragones::getvida() {
 	return Vida;
+}
+
+unsigned int cDragones::getfuerza()
+{
+	return Fuerza;
 }

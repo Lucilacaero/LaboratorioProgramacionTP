@@ -1,2 +1,106 @@
 ﻿  cDragones.cpp
-  Trabajo Labo1.vcxproj -> C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\x64\Debug\Trabajo Labo1.exe
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cVikingos.h(10,29): error C2504: 'cPersona': clase base sin definir
+  (compilando archivo de origen "cDragones.cpp")
+  
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cVikingos.h(19,6): error C3668: 'cVikingos::atacar': el método con el especificador de invalidación 'override' no invalidó ningún método de clase base
+  (compilando archivo de origen "cDragones.cpp")
+  
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cVikingos.h(20,7): error C3668: 'cVikingos::vida': el método con el especificador de invalidación 'override' no invalidó ningún método de clase base
+  (compilando archivo de origen "cDragones.cpp")
+  
+  cJinetes.cpp
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.h(47,24): error C2027: uso del tipo 'cJinetes' sin definir
+  (compilando archivo de origen "cJinetes.cpp")
+  C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.h(7,7):
+  vea la declaración de 'cJinetes'
+  
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cJinetes.cpp(27,15): error C2248: 'cDragones::Entrenado': no se puede obtener acceso al miembro private miembro declarado en la clase 'cDragones'
+  C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.h(27,6):
+  vea la declaración de 'cDragones::Entrenado'
+  C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.h(23,7):
+  vea la declaración de 'cDragones'
+  
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cJinetes.cpp(31,15): error C2248: 'cDragones::Entrenado': no se puede obtener acceso al miembro private miembro declarado en la clase 'cDragones'
+  C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.h(27,6):
+  vea la declaración de 'cDragones::Entrenado'
+  C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.h(23,7):
+  vea la declaración de 'cDragones'
+  
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cJinetes.cpp(35,15): error C2248: 'cDragones::Entrenado': no se puede obtener acceso al miembro private miembro declarado en la clase 'cDragones'
+  C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.h(27,6):
+  vea la declaración de 'cDragones::Entrenado'
+  C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.h(23,7):
+  vea la declaración de 'cDragones'
+  
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cJinetes.cpp(39,15): error C2248: 'cDragones::Entrenado': no se puede obtener acceso al miembro private miembro declarado en la clase 'cDragones'
+  C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.h(27,6):
+  vea la declaración de 'cDragones::Entrenado'
+  C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.h(23,7):
+  vea la declaración de 'cDragones'
+  
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cJinetes.cpp(42,15): error C2248: 'cDragones::Entrenado': no se puede obtener acceso al miembro private miembro declarado en la clase 'cDragones'
+  C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.h(27,6):
+  vea la declaración de 'cDragones::Entrenado'
+  C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.h(23,7):
+  vea la declaración de 'cDragones'
+  
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cJinetes.cpp(45,15): error C2248: 'cDragones::Entrenado': no se puede obtener acceso al miembro private miembro declarado en la clase 'cDragones'
+  C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.h(27,6):
+  vea la declaración de 'cDragones::Entrenado'
+  C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.h(23,7):
+  vea la declaración de 'cDragones'
+  
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cJinetes.cpp(48,15): error C2248: 'cDragones::Entrenado': no se puede obtener acceso al miembro private miembro declarado en la clase 'cDragones'
+  C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.h(27,6):
+  vea la declaración de 'cDragones::Entrenado'
+  C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.h(23,7):
+  vea la declaración de 'cDragones'
+  
+  cPersona.cpp
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.h(23,29): error C2504: 'cPersona': clase base sin definir
+  (compilando archivo de origen "cPersona.cpp")
+  
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.h(47,24): error C2027: uso del tipo 'cJinetes' sin definir
+  (compilando archivo de origen "cPersona.cpp")
+  C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.h(7,7):
+  vea la declaración de 'cJinetes'
+  
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cVikingos.h(10,29): error C2504: 'cPersona': clase base sin definir
+  (compilando archivo de origen "cPersona.cpp")
+  
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cVikingos.h(19,6): error C3668: 'cVikingos::atacar': el método con el especificador de invalidación 'override' no invalidó ningún método de clase base
+  (compilando archivo de origen "cPersona.cpp")
+  
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cVikingos.h(20,7): error C3668: 'cVikingos::vida': el método con el especificador de invalidación 'override' no invalidó ningún método de clase base
+  (compilando archivo de origen "cPersona.cpp")
+  
+  cVikingos.cpp
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cJinetes.h(6,28): error C2504: 'cVikingos': clase base sin definir
+  (compilando archivo de origen "cVikingos.cpp")
+  
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cJinetes.h(12,91): error C2061: error de sintaxis: identificador 'Posicion'
+  (compilando archivo de origen "cVikingos.cpp")
+  
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cJinetes.h(14,49): error C2061: error de sintaxis: identificador 'cDragones'
+  (compilando archivo de origen "cVikingos.cpp")
+  
+  Trabajo Labo1.cpp
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.h(23,29): error C2504: 'cPersona': clase base sin definir
+  (compilando archivo de origen "Trabajo%20Labo1.cpp")
+  
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.h(47,24): error C2027: uso del tipo 'cJinetes' sin definir
+  (compilando archivo de origen "Trabajo%20Labo1.cpp")
+  C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cDragones.h(7,7):
+  vea la declaración de 'cJinetes'
+  
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cVikingos.h(10,29): error C2504: 'cPersona': clase base sin definir
+  (compilando archivo de origen "Trabajo%20Labo1.cpp")
+  
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cVikingos.h(19,6): error C3668: 'cVikingos::atacar': el método con el especificador de invalidación 'override' no invalidó ningún método de clase base
+  (compilando archivo de origen "Trabajo%20Labo1.cpp")
+  
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cVikingos.h(20,7): error C3668: 'cVikingos::vida': el método con el especificador de invalidación 'override' no invalidó ningún método de clase base
+  (compilando archivo de origen "Trabajo%20Labo1.cpp")
+  
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\Trabajo Labo1.cpp(53,15): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+  Generando código...

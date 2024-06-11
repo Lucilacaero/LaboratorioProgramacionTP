@@ -114,7 +114,7 @@ int main() {
         break;
 
     case 2:
-
+     //   jinete.entrenarDragon();
 
         // Entrenar(dragon, jinete);
         //  Necesito definir la función Entrenar y jinete
@@ -203,3 +203,6 @@ NOTA: cuando el dragon esta domado el vikingo no lo puede matar y viceversa.
  LNK1168 no se puede abrir
  C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\x64\Debug\Trabajo Labo1.exe para escritura
  */
+
+
+//nota: si devuelvo & estoy trabajando con el dato original porwue lo devuelvo por referencia, puede perder el encapsulamiwnto
