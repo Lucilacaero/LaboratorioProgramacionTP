@@ -1,36 +1,4 @@
-﻿  cDragones.cpp
-C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cJinetes.h(2,17): warning C4081: se esperaba 'cadena'; se encontró 'user-defined string literal'
-  (compilando archivo de origen "cDragones.cpp")
-  
-C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cJinetes.h(4,17): warning C4081: se esperaba 'cadena'; se encontró 'user-defined string literal'
-  (compilando archivo de origen "cDragones.cpp")
-  
-  cJinetes.cpp
-C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cJinetes.h(2,17): warning C4081: se esperaba 'cadena'; se encontró 'user-defined string literal'
-  (compilando archivo de origen "cJinetes.cpp")
-  
-C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cJinetes.h(4,17): warning C4081: se esperaba 'cadena'; se encontró 'user-defined string literal'
-  (compilando archivo de origen "cJinetes.cpp")
-  
-  cVikingos.cpp
-C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cJinetes.h(2,17): warning C4081: se esperaba 'cadena'; se encontró 'user-defined string literal'
-  (compilando archivo de origen "cVikingos.cpp")
-  
-C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cJinetes.h(4,17): warning C4081: se esperaba 'cadena'; se encontró 'user-defined string literal'
-  (compilando archivo de origen "cVikingos.cpp")
-  
-C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cJinetes.h(11,28): error C2504: 'cVikingos': clase base sin definir
-  (compilando archivo de origen "cVikingos.cpp")
-  
-C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cJinetes.h(17,91): error C2061: error de sintaxis: identificador 'Posicion'
-  (compilando archivo de origen "cVikingos.cpp")
-  
-  Trabajo Labo1.cpp
-C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cJinetes.h(2,17): warning C4081: se esperaba 'cadena'; se encontró 'user-defined string literal'
-  (compilando archivo de origen "Trabajo%20Labo1.cpp")
-  
-C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cJinetes.h(4,17): warning C4081: se esperaba 'cadena'; se encontró 'user-defined string literal'
-  (compilando archivo de origen "Trabajo%20Labo1.cpp")
-  
-C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\Trabajo Labo1.cpp(53,15): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
-  Generando código...
+﻿  cJinetes.cpp
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cJinetes.cpp(27,17): warning C4566: el carácter representado por el nombre de carácter universal '\uFFFD' no se puede representar en la página de códigos actual (1252)
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cJinetes.cpp(63,17): warning C4566: el carácter representado por el nombre de carácter universal '\uFFFD' no se puede representar en la página de códigos actual (1252)
+  Trabajo Labo1.vcxproj -> C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\x64\Debug\Trabajo Labo1.exe

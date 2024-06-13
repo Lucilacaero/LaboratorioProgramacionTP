@@ -1,8 +1,7 @@
 
 #pragma once
-#include "cPersona.h"
+#include "cVikingos.h"
 #include<string>
-#include "cJinetes.h"
 using namespace std;
 class cJinetes;
 const int MaxEntrenamiento = 3200;

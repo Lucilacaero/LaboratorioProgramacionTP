@@ -1,33 +1,36 @@
-#pragma once
-
+ï»¿#pragma once
 #include "cJinetes.h"
+
 #include "cDragones.h"
 #include <iostream>
 class cVikingos;
 class cDragones;
 using namespace std;
 /*
-void Altanombre(cJinetes& asignado, string nuevoNombre) 
+void Altanombre(cJinetes& asignado, string nuevoNombre)
 */
 
 cJinetes::cJinetes(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, Posicion trabajo, cDragones* dragon, int dragon_muerto, string resultado, string nombredragon)
-	:cVikingos(nombre, fecha_nac, fuerza, vida, muerto, trabajo, dragon, dragon_muerto){
-	
-	Resultado = resultado;
-	NombreDragon = nombredragon;
+    :cVikingos(nombre, fecha_nac, fuerza, vida, muerto, trabajo, dragon, dragon_muerto) {
+
+    Resultado = resultado;
+    NombreDragon = nombredragon;
 }
- void cJinetes::entrenarDragon() {
+cJinetes::~cJinetes()
+{
+}
+void cJinetes::entrenarDragon() {
     cDragones* Dragon = this->getDragon();
     int entrenado;
     // poner getter y setter para que deje de tirar erroes
     if (Dragon == nullptr) {
-        cout << "No hay dragón asignado para entrenar." << std::endl;
+        cout << "No hay dragï¿½n asignado para entrenar." << std::endl;
         return;
-    } 
+    }
     // usar e
     if (Dragon->getfuerza() > this->Fuerza && (Dragon->getfuerza() - this->Fuerza) > 100) {
         this->Vida -= rand() % 10;
-        entrenado = rand() % 5 + Dragon-> getEntrenado();
+        entrenado = rand() % 5 + Dragon->getEntrenado();
         Dragon->setEntrenado(entrenado);
     }
     else if (Dragon->getfuerza() > this->Fuerza && (Dragon->getfuerza() - this->Fuerza) > 200) {
@@ -43,7 +46,7 @@ cJinetes::cJinetes(string nombre, string fecha_nac, unsigned int fuerza, int vid
     }
 
     if (Dragon->getfuerza() < this->Fuerza && (this->Fuerza - Dragon->getfuerza()) > 100) {
-       
+
         entrenado = rand() % 10 + Dragon->getEntrenado();
         Dragon->setEntrenado(entrenado);
     }
@@ -57,7 +60,7 @@ cJinetes::cJinetes(string nombre, string fecha_nac, unsigned int fuerza, int vid
     }
 
     if (Dragon->getEntrenado() >= MaxEntrenamiento) {
-        cout << "El dragón ha alcanzado el nivel máximo de entrenamiento." << std::endl;
+        cout << "El dragï¿½n ha alcanzado el nivel mï¿½ximo de entrenamiento." << std::endl;
     }
 
     if (this->Vida <= 0) {
