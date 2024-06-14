@@ -1,7 +1,7 @@
 
 #include "cPersona.h"
 
-using namespace std;
+// using namespace std;
 
 //la clase cPersona es mas que nada abstracta 
 cPersona::cPersona(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto)

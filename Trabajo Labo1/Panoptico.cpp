@@ -1,17 +1,13 @@
-#pragma once
+
 #include "Panoptico.h"
-#include <list>
-#include <iostream>
-#include <stdexcept>
-#include <ctime>
-#include <cstdlib>
+
 
 
 using namespace std;
 
 
 template<typename T>
-void cPanoptico<T>::agregarElemento(T *elemento) {
+void cPanoptico<T>::agregarElemento(T* elemento) {
     myList.push_back(elemento);
 }
 
@@ -50,6 +46,10 @@ size_t cPanoptico<T>::encontrarPosicion(T* value) {
         }
     }
     throw out_of_range("Elemento no encontrado en la lista");
+}
+template<typename T>
+bool cPanoptico<T>::vacia() {
+    return myList.empty();
 }
 /*
 template<typename T>

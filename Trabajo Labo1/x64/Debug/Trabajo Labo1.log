@@ -1,13 +1,3 @@
-﻿  cDragones.cpp
-  cJinetes.cpp
-C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cJinetes.cpp(25,17): warning C4566: el carácter representado por el nombre de carácter universal '\uFFFD' no se puede representar en la página de códigos actual (1252)
-C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\cJinetes.cpp(61,17): warning C4566: el carácter representado por el nombre de carácter universal '\uFFFD' no se puede representar en la página de códigos actual (1252)
-  cPersona.cpp
-  cVikingos.cpp
-  Panoptico.cpp
-  Trabajo Labo1.cpp
-  Generando código...
-Trabajo Labo1.obj : error LNK2019: símbolo externo "public: void __cdecl cPanoptico<class cDragones>::agregarElemento(class cDragones *)" (?agregarElemento@?$cPanoptico@VcDragones@@@@QEAAXPEAVcDragones@@@Z) sin resolver al que se hace referencia en la función main
-Trabajo Labo1.obj : error LNK2019: símbolo externo "public: void __cdecl cPanoptico<class cVikingos>::agregarElemento(class cVikingos *)" (?agregarElemento@?$cPanoptico@VcVikingos@@@@QEAAXPEAVcVikingos@@@Z) sin resolver al que se hace referencia en la función main
-Trabajo Labo1.obj : error LNK2019: símbolo externo "public: void __cdecl cPanoptico<class cJinetes>::agregarElemento(class cJinetes *)" (?agregarElemento@?$cPanoptico@VcJinetes@@@@QEAAXPEAVcJinetes@@@Z) sin resolver al que se hace referencia en la función main
-C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\x64\Debug\Trabajo Labo1.exe : fatal error LNK1120: 3 externos sin resolver
+﻿  Trabajo Labo1.cpp
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\Trabajo Labo1.cpp(29,15): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+  Trabajo Labo1.vcxproj -> C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\x64\Debug\Trabajo Labo1.exe

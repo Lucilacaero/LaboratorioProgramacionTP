@@ -7,6 +7,7 @@ int cDragones::Entrenar()
 	3. 
 
 */
+
 #include "cDragones.h"
 #include "cJinetes.h"
 #include <iostream>

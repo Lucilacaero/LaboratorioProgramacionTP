@@ -22,7 +22,7 @@ void cJinetes::entrenarDragon() {
     int entrenado;
     // poner getter y setter para que deje de tirar erroes
     if (Dragon == nullptr) {
-        cout << "No hay drag�n asignado para entrenar." << std::endl;
+        cout << "No hay dragon asignado para entrenar." << endl;
         return;
     }
     // usar e
@@ -58,11 +58,11 @@ void cJinetes::entrenarDragon() {
     }
 
     if (Dragon->getEntrenado() >= MaxEntrenamiento) {
-        cout << "El drag�n ha alcanzado el nivel m�ximo de entrenamiento." << std::endl;
+        cout << "El dragon ha alcanzado el nivel m�ximo de entrenamiento." << endl;
     }
 
     if (this->Vida <= 0) {
-        cout << "El jinete ha muerto durante el entrenamiento." << std::endl;
+        cout << "El jinete ha muerto durante el entrenamiento." << endl;
     }
 
     Dragon->Domado();

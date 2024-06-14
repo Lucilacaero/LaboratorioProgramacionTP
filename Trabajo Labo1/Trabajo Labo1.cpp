@@ -3,12 +3,16 @@
 #pragma once
 #include <iterator>
 #include <iostream>
-#include <cstdlib>
 #include <ctime>
+#include <cstdlib>
+
 #include "cVikingos.h"
-#include "cDragones.h"
-#include "Panoptico.h"
 #include "cJinetes.h"
+#include "cDragones.h"
+#include "Panoptico.cpp"// no se porque cuando pongo el .h me tira el error LNK2019 y con el cpp no
+
+using namespace std;
+
 /*
 Ante cualquier error que no se pueda solucioner:
 1. reiniciar la compu,
@@ -22,107 +26,38 @@ using namespace std;
 
 
 int main() {
-
-    /*
-    // Creo una lista dragón
-    cPanoptico<cDragones*> D;
-    
-    // Crear objetos de tipo cDragones*
-    cDragones* dragon1 = new cDragones("Chimuelo", "15/10/2004", 100, 1000, false, "ninguno", false, 50);
-    cDragones* dragon2 = new cDragones("Furioso", "20/05/2005", 120, 1200, false, "fuego", true, 80);
-    cDragones* dragoncito1 = new cDragones("chimuelo", "15102004", 100, 1000, false, "no tiene", false, 50);
-    cDragones* dragoncito2 = new cDragones("gaga", "15102004", 100, 1000, false, "no tiene", false, 50);
-    // Agregar los punteros a los objetos a la lista del panóptico
-   
-
-    D.agregarElemento(&dragon1);
-    D.agregarElemento(&dragon2); 
-    D.agregarElemento(&dragoncito1); 
-    D.agregarElemento(&dragoncito2); 
-
-    cPanoptico<cVikingos> V;
-    cVikingos * vikingo1= new cVikingos("Hiccup", "25/04/1990", 75, 500, false, Entrenador, dragon1, 0);
-    V.agregarElemento(vikingo1);
-    // Crear un objeto de tipo cJinetes
-    
-    cJinetes * jinete1 = new cJinetes("Astrid", "31/08/1992", 85, 600, false, Jinete, dragon1, 0, "aprobado", "Chimuelo");
-    cPanoptico<cJinetes> J;
-    J.agregarElemento(jinete1); 
- 
-    delete dragon1;
-    delete vikingo1;
-    delete jinete1;
-    */
-    cPanoptico<cDragones> D;
+    srand(time(0)); // para los números aleatorios
+    cPanoptico<cDragones> dragones;
 
     // Crear objetos de tipo cDragones
-    cDragones* dragon1 = new cDragones("Chimuelo", "15/10/2004", 100, 1000, false, "ninguno", false, 50);
-    cDragones* dragon2 = new cDragones("Furioso", "20/05/2005", 120, 1200, false, "fuego", true, 80);
+
     cDragones* dragoncito1 = new cDragones("chimuelo", "15/10/2004", 100, 1000, false, "no tiene", false, 50);
     cDragones* dragoncito2 = new cDragones("gaga", "15/10/2004", 100, 1000, false, "no tiene", false, 50);
 
     // Agregar los punteros a los objetos a la lista del panóptico
-    D.agregarElemento(dragon1);
-    D.agregarElemento(dragon2);
-    D.agregarElemento(dragoncito1);
-    D.agregarElemento(dragoncito2);
+
+    dragones.agregarElemento(dragoncito1);
+    dragones.agregarElemento(dragoncito2);
 
     // Crear una lista vikingo
-    cPanoptico<cVikingos> V;
-    cVikingos* vikingo1 = new cVikingos("Hiccup", "25/04/1990", 75, 500, false, Entrenador, dragon1, 0);
-    V.agregarElemento(vikingo1);
+    cPanoptico<cVikingos> vikingos;
+    cVikingos* vikingo1 = new cVikingos("Hiccup", "25/04/1990", 75, 500, false, Entrenador, dragoncito1, 0);
+    vikingos.agregarElemento(vikingo1);
 
     // Crear una lista jinete
-    cJinetes* jinete1 = new cJinetes("Astrid", "31/08/1992", 85, 600, false, Jinete, dragon1, 0, "aprobado", "Chimuelo");
-    cPanoptico<cJinetes> J;
-    J.agregarElemento(jinete1);
-
-    // Aquí puedes añadir código para mostrar o manipular los objetos
-
-    // Liberar memoria
-    delete dragon1;
-    delete dragon2;
-    delete dragoncito1;
-    delete dragoncito2;
-    delete vikingo1;
-    delete jinete1;
-
-    return 0;
-
-    //Esto se deberia hacer en el csv cada vez que se leen los datos.
+    cJinetes* jinete1 = new cJinetes("Astrid", "31/08/1992", 85, 600, false, Jinete, dragoncito2, 0, "aprobado", "Chimuelo");
+    cPanoptico<cJinetes> jinetes;
+    jinetes.agregarElemento(jinete1);
 
 
-    /*
-    srand(time(0)); // Inicializar la semilla para los números aleatorios
-
-    list<cDragones*> dragones;
-
-    // Prueba de inserción de dragones
-    cDragones* dragoncito1 = new cDragones("chimuelo", "15102004", 100, 1000, false, "no tiene", false, 50);
-    dragones.push_front(dragoncito1);
-    cDragones* dragoncito2 = new cDragones("gaga", "15102004", 100, 1000, false, "no tiene", false, 50);
-    dragones.push_front(dragoncito2);
-    dragoncito2->mostrarnombre();
-
-    // Mostrar los nombres de los dragones cargados
-    for (cDragones* dragon : dragones) {
-        dragon->mostrarnombre();
-    }
-
-    list<cVikingos*> vikingos;
-    Posicion pos = Posicion::Guerrero;
-    cVikingos* viking1 = new cVikingos("chimuelo", "15102004", 1000, 100, false, pos, dragoncito1, 0);
-    vikingos.push_front(viking1);
-    cVikingos* viking2 = new cVikingos("viking2", "15102005", 800, 200, false, pos, dragoncito2, 0);
-    vikingos.push_front(viking2);
 
     int option = rand() % 3;
 
     switch (option) {
     case 1:
-        while (!vikingos.empty() && !dragones.empty()) {
-            cVikingos* viking = seleccionarElementoAleatorio(vikingos);
-            cDragones* dragon = seleccionarElementoAleatorio(dragones);
+        while (!vikingos.vacia() && !dragones.vacia()) {// no se porque no me deja acceder a los atributos de panoptico si son publicos
+            cVikingos* viking = vikingos.seleccionarElementoAleatorio();
+            cDragones* dragon = dragones.seleccionarElementoAleatorio();
 
             int Option2 = rand() % 2;
             switch (Option2) {
@@ -130,8 +65,8 @@ int main() {
                 dragon->atacar();
                 if (viking->getvida() <= 0) {
                     try {
-                        size_t pos = encontrarPosicion(vikingos, viking);
-                        borrarLista(vikingos, pos);
+                        size_t pos = vikingos.encontrarPosicion(viking);
+                        vikingos.borrarLista(pos);
                     }
                     catch (const out_of_range& e) {
                         cout << e.what() << endl;
@@ -141,11 +76,11 @@ int main() {
 
             case 1:
                 viking->atacar();
-               
+
                 if (dragon->getvida() <= 0) {
                     try {
-                        size_t pos = encontrarPosicion(dragones, dragon);
-                        borrarLista(dragones, pos);
+                        size_t pos = dragones.encontrarPosicion(dragon);
+                        dragones.borrarLista(pos);
                     }
                     catch (const out_of_range& e) {
                         cout << e.what() << endl;
@@ -157,25 +92,24 @@ int main() {
         break;
 
     case 2:
-     //   jinete.entrenarDragon();
+        //   jinete.entrenarDragon();
 
-        // Entrenar(dragon, jinete);
-        //  Necesito definir la función Entrenar y jinete
+           // Entrenar(dragon, jinete);
+           //  Necesito definir la función Entrenar y jinete
         break;
     }
-
     // Liberar memoria
-    for (cDragones* dragon : dragones) {
-        delete dragon;
-    }
-    for (cVikingos* viking : vikingos) {
-        delete viking;
-    }
+
+    delete dragoncito1;
+    delete dragoncito2;
+    delete vikingo1;
+    delete jinete1;
 
     return 0;
-    */
-}
 
+    //Esto se deberia hacer en el csv cada vez que se leen los datos.
+
+}
 
 // Función para cargar datos desde un archivo CSV
 /*

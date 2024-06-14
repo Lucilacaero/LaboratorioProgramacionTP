@@ -1,9 +1,9 @@
 
 #pragma once
-#include "cVikingos.h"
-#include<string>
-using namespace std;
-class cJinetes;
+#include "cPersona.h"
+#include <string>
+
+class cVikingos;
 const int MaxEntrenamiento = 3200;
 
 // Entrenamiento de 0 a 100 para que adquiera el 1er

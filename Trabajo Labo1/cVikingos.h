@@ -1,9 +1,8 @@
 #pragma once
 #include "cPersona.h"
 #include "cDragones.h"
-#include <string>
 
-using namespace std;
+
 enum Posicion { Entrenador, Guerrero, Agricultor, Pescador, Herrero, Jinete };
 
 class cDragones;

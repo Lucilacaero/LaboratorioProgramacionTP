@@ -3,7 +3,6 @@
 #include "cDragones.h"
 #include <string>
 
-using namespace std;
 
 
 class cJinetes : protected cVikingos {
