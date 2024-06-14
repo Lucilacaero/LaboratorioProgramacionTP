@@ -131,6 +131,7 @@
     <ClCompile Include="cJinetes.cpp" />
     <ClCompile Include="cPersona.cpp" />
     <ClCompile Include="cVikingos.cpp" />
+    <ClCompile Include="Panoptico.cpp" />
     <ClCompile Include="Trabajo Labo1.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +139,7 @@
     <ClInclude Include="cJinetes.h" />
     <ClInclude Include="cPersona.h" />
     <ClInclude Include="cVikingos.h" />
+    <ClInclude Include="Panoptico.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

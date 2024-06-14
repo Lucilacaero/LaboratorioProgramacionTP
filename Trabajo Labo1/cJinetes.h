@@ -1,6 +1,9 @@
+#pragma once
 #include "cVikingos.h"
+#include "cDragones.h"
 #include <string>
-class cDragones;
+
+using namespace std;
 
 
 class cJinetes : protected cVikingos {

@@ -2,6 +2,7 @@
 #include "cPersona.h"
 #include "cDragones.h"
 #include <string>
+
 using namespace std;
 enum Posicion { Entrenador, Guerrero, Agricultor, Pescador, Herrero, Jinete };
 
@@ -12,8 +13,10 @@ protected:
 	Posicion Trabajo;
 	cDragones* Dragon;
 	int Dragon_Muerto;
+	
 
 public:
+	cVikingos();
 	cVikingos(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, Posicion trabajo, cDragones* dragon, int dragon_muerto);
 	virtual ~cVikingos();
 	int atacar();
@@ -22,5 +25,10 @@ public:
 	cDragones* getDragon();
 	int getvida();
 	void asignarDragon(cDragones* dragon);
-};
+	void trabajar();
+	/*
+	string to_string() const override;
+	void Imprimir() const override;
+	*/
+	};
 

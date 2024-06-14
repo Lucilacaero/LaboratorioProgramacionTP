@@ -1,11 +1,14 @@
 // Trabajo Labo1.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
 //
-#include <list>
+#pragma once
 #include <iterator>
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
 #include "cVikingos.h"
+#include "cDragones.h"
+#include "Panoptico.h"
+#include "cJinetes.h"
 /*
 Ante cualquier error que no se pueda solucioner:
 1. reiniciar la compu,
@@ -17,44 +20,79 @@ y volver a escribir el codigo
 
 using namespace std;
 
-template<typename T>
-void borrarLista(list<T>& myList, size_t position) {
-    try {
-        if (position >= myList.size()) {
-            throw out_of_range("Posición fuera de rango");
-        }
-
-        typename list<T>::iterator it = myList.begin();
-        advance(it, position); // Avanzar el iterador a la posición deseada
-        myList.erase(it);
-    }
-    catch (const out_of_range& e) {
-        cout << e.what() << endl;
-    }
-}
-
-template<typename T>
-T seleccionarElementoAleatorio(const list<T>& myList) {
-    if (myList.empty()) {
-        throw out_of_range("La lista está vacía");
-    }
-    auto it = myList.begin();
-    advance(it, rand() % myList.size());
-    return *it;
-}
-
-template<typename T>
-size_t encontrarPosicion(const list<T>& myList, const T& value) {
-    size_t position = 0;
-    for (auto it = myList.begin(); it != myList.end(); ++it, ++position) {
-        if (*it == value) {
-            return position;
-        }
-    }
-    throw out_of_range("Elemento no encontrado en la lista");
-}
 
 int main() {
+
+    /*
+    // Creo una lista dragón
+    cPanoptico<cDragones*> D;
+    
+    // Crear objetos de tipo cDragones*
+    cDragones* dragon1 = new cDragones("Chimuelo", "15/10/2004", 100, 1000, false, "ninguno", false, 50);
+    cDragones* dragon2 = new cDragones("Furioso", "20/05/2005", 120, 1200, false, "fuego", true, 80);
+    cDragones* dragoncito1 = new cDragones("chimuelo", "15102004", 100, 1000, false, "no tiene", false, 50);
+    cDragones* dragoncito2 = new cDragones("gaga", "15102004", 100, 1000, false, "no tiene", false, 50);
+    // Agregar los punteros a los objetos a la lista del panóptico
+   
+
+    D.agregarElemento(&dragon1);
+    D.agregarElemento(&dragon2); 
+    D.agregarElemento(&dragoncito1); 
+    D.agregarElemento(&dragoncito2); 
+
+    cPanoptico<cVikingos> V;
+    cVikingos * vikingo1= new cVikingos("Hiccup", "25/04/1990", 75, 500, false, Entrenador, dragon1, 0);
+    V.agregarElemento(vikingo1);
+    // Crear un objeto de tipo cJinetes
+    
+    cJinetes * jinete1 = new cJinetes("Astrid", "31/08/1992", 85, 600, false, Jinete, dragon1, 0, "aprobado", "Chimuelo");
+    cPanoptico<cJinetes> J;
+    J.agregarElemento(jinete1); 
+ 
+    delete dragon1;
+    delete vikingo1;
+    delete jinete1;
+    */
+    cPanoptico<cDragones> D;
+
+    // Crear objetos de tipo cDragones
+    cDragones* dragon1 = new cDragones("Chimuelo", "15/10/2004", 100, 1000, false, "ninguno", false, 50);
+    cDragones* dragon2 = new cDragones("Furioso", "20/05/2005", 120, 1200, false, "fuego", true, 80);
+    cDragones* dragoncito1 = new cDragones("chimuelo", "15/10/2004", 100, 1000, false, "no tiene", false, 50);
+    cDragones* dragoncito2 = new cDragones("gaga", "15/10/2004", 100, 1000, false, "no tiene", false, 50);
+
+    // Agregar los punteros a los objetos a la lista del panóptico
+    D.agregarElemento(dragon1);
+    D.agregarElemento(dragon2);
+    D.agregarElemento(dragoncito1);
+    D.agregarElemento(dragoncito2);
+
+    // Crear una lista vikingo
+    cPanoptico<cVikingos> V;
+    cVikingos* vikingo1 = new cVikingos("Hiccup", "25/04/1990", 75, 500, false, Entrenador, dragon1, 0);
+    V.agregarElemento(vikingo1);
+
+    // Crear una lista jinete
+    cJinetes* jinete1 = new cJinetes("Astrid", "31/08/1992", 85, 600, false, Jinete, dragon1, 0, "aprobado", "Chimuelo");
+    cPanoptico<cJinetes> J;
+    J.agregarElemento(jinete1);
+
+    // Aquí puedes añadir código para mostrar o manipular los objetos
+
+    // Liberar memoria
+    delete dragon1;
+    delete dragon2;
+    delete dragoncito1;
+    delete dragoncito2;
+    delete vikingo1;
+    delete jinete1;
+
+    return 0;
+
+    //Esto se deberia hacer en el csv cada vez que se leen los datos.
+
+
+    /*
     srand(time(0)); // Inicializar la semilla para los números aleatorios
 
     list<cDragones*> dragones;
@@ -135,6 +173,7 @@ int main() {
     }
 
     return 0;
+    */
 }
 
 

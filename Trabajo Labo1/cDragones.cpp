@@ -168,7 +168,7 @@ void cDragones::vida(int danio)
 	Vida = Vida - danio;
 	if (Vida < 0 || Vida == 0) {
 		cout << "El dragon murio" << endl;
-
+		Muerto = true;
 	}
 		
 
@@ -179,21 +179,10 @@ int cDragones::atacar()
 {
 	int daniio = danio();
 	//deberia llamar a una funcion de cVikingo que haga que baje su vida 
-	//  
 	return daniio;
 }
 	
 
-// esta funcion trae problemas.
-/*
-void cDragones::modificarDragonSegunJinete(cJinetes& jinete) {
-	jinete.evaluarResultado();
-	unsigned int *auxfuerza = new unsigned int;
-	//&auxfuerza = getFuerza(jinete);
-	//if (Fuerza == &auxfuerza)
-		//Entrenado = Entrenado + 10;
-}
-*/
 int cDragones::getvida() {
 	return Vida;
 }

@@ -1,7 +1,5 @@
-﻿#pragma once
+﻿
 #include "cJinetes.h"
-
-#include "cDragones.h"
 #include <iostream>
 class cVikingos;
 class cDragones;

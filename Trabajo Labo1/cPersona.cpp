@@ -1,7 +1,6 @@
-#pragma once
+
 #include "cPersona.h"
-#include<string>
-#include <iostream>
+
 using namespace std;
 
 //la clase cPersona es mas que nada abstracta 
@@ -16,22 +15,20 @@ cPersona::cPersona(string nombre, string fecha_nac, unsigned int fuerza, int vid
 
 cPersona::~cPersona() {}
 
+bool cPersona::getMuerto()
+{
+	return Muerto;
+}
+
 void cPersona::setNombre(const string& nombre) {
 	Nombre = nombre;
 }
 
-
-
-/*
-int cPersona::atacar() {
-	// Implementación de la función atacar
-	cout << Nombre << " está atacando!" << endl;
-	return 0;
+cPersona::cPersona()
+{
+	Nombre = " ";
+	Fecha_nac= " ";
+	Fuerza= 100; // Cambiado a unsigned int
+	Vida= 500;
+	Muerto= false;
 }
-*/
-/*
-int cPersona::getvida() {
-	return Vida;
-}
-*/
-

@@ -44,7 +44,13 @@ public:
 	int getvida();
 	unsigned int getfuerza();
 	int getEntrenado();
+	/*
+	string to_string() const override;
+	void Imprimir() const override;
+	*/
 	
+
+	//HACER FUNCION PARA ASIGNARLE UN NOMBRE
 	//friend void Entrenar(cJinetes& jinete);
 	//void modificarDragonSegunJinete(cJinetes& jinete);
 };
