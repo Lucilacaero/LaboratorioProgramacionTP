@@ -4,6 +4,7 @@
 #include <string>
 
 class cVikingos;
+class cJinetes;
 const int MaxEntrenamiento = 3200;
 
 // Entrenamiento de 0 a 100 para que adquiera el 1er
@@ -21,6 +22,7 @@ const int MaxEntrenamiento = 3200;
 
 class cDragones : protected cPersona {
 private:
+	unsigned int Id;//para buscarlo facil en ell csv
 	string Ataque;
 	bool Estado;// domado o no
 	int Entrenado;// para saber si esta domado y su forma de ataque
@@ -31,12 +33,12 @@ private:
 
 
 public:
-	cDragones(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, string ataque, bool estado, int entrenado);
+	cDragones(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, unsigned int id, string ataque, bool estado, int entrenado);
 	~cDragones();
 	//friend void asignarnombre(cJinetes& jinete, cDragones& dragon);
 	bool Domado();
 	int danio();
-	void mostrarnombre();
+	string getnombre();
 	void setEntrenado(int entrenado);
 	void formaDeAtaque();
 	int atacar();
@@ -44,6 +46,8 @@ public:
 	int getvida();
 	unsigned int getfuerza();
 	int getEntrenado();
+	bool getMuerto();
+	void setNombre(cJinetes*& jinete);
 	/*
 	string to_string() const override;
 	void Imprimir() const override;

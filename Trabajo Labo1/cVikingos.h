@@ -25,6 +25,8 @@ public:
 	int getvida();
 	void asignarDragon(cDragones* dragon);
 	void trabajar();
+	bool getMuerto();
+	
 	/*
 	string to_string() const override;
 	void Imprimir() const override;

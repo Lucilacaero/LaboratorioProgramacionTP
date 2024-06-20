@@ -1,13 +1,3 @@
-/*
-int cDragones::Entrenar()
-{
-	//tomar en consideracion 
-	1. La fuerza del dragon y del jinete
-	2. la posicion del jinete, si termina en 1 o 2 lugar tiene ventaja, sino es normalito
-	3. 
-
-*/
-
 #include "cDragones.h"
 #include "cJinetes.h"
 #include <iostream>
@@ -19,12 +9,12 @@ int cDragones::domados = 0;
 // void cDragones::operator=() {
 
 //}
-cDragones::cDragones(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, string ataque, bool estado, int entrenado)
+cDragones::cDragones(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, unsigned int id, string ataque, bool estado, int entrenado)
 	: cPersona(nombre, fecha_nac, fuerza, vida, muerto) {
+	Id = id;
 	Ataque = ataque;
 	Estado = estado;
 	Entrenado = entrenado;
-	
 	DragonesVivos++;
 }
 
@@ -34,26 +24,73 @@ cDragones::~cDragones() {
 }
 
 
-bool cDragones::Domado() {
-	if (Entrenado >= 100) {
-		Estado = true;
-		domados++;
-	}
-	return Estado;
-		
+	//GETTERS
+
+int cDragones::getvida() {
+	return Vida;
 }
 
-void cDragones::mostrarnombre() {
-	cout << Nombre << endl;
+unsigned int cDragones::getfuerza()
+{
+	return Fuerza;
 }
+
+int cDragones::getEntrenado()
+{
+	return Entrenado; 
+}
+
+bool cDragones::getMuerto()
+{
+	return Muerto;
+}
+
+string cDragones::getnombre() {
+	return Nombre;
+}
+
+
+//SETTERS
+
+
 
 void cDragones::setEntrenado(int entrenado)
 {
 	this->Entrenado = entrenado;
 }
 
+void cDragones::setNombre(cJinetes*& jinete)
+{
+	try {
+		// el puntero jinete no debe se nulo
+		if (jinete == nullptr) {
+			throw invalid_argument("Error: jinete es un puntero nulo"); //un tipo de error definido
+		}
+		this->Nombre = jinete->NombreDragon;
+	}
+	catch (const invalid_argument& e) {
+		cerr << e.what() << endl; // cerr = cout error
+	}
+
+}
+  
+
+//Otras funciones importantes y no tanto
+
+
+
+bool cDragones::Domado() {
+	if (Entrenado >= 100) {
+		Estado = true;
+		domados++;
+	}
+	return Estado;
+
+}
+
+
 void cDragones::formaDeAtaque() {
-	if (Ataque == "no tiene"|| Ataque == " ") {
+	if (Ataque == "no tiene" || Ataque == " ") {
 		if (Entrenado < 100)
 			Ataque = "No tiene";
 		else if (Entrenado < 200 && Entrenado >100)
@@ -66,20 +103,34 @@ void cDragones::formaDeAtaque() {
 			Ataque = "Cargas aereas";
 		else if (Entrenado < 3200 && Entrenado >1600)
 			Ataque = "Proyectiles";
-		
+
 	}
 }
 
 
 int cDragones::danio() {
-	
+	return 0;
+}
+void cDragones::vida(int danio)
+{
+	Vida = Vida - danio;
+	if (Vida < 0 || Vida == 0) {
+		cout << "El dragon murio" << endl;
+		Muerto = true;
+	}
+	//sacarlo de la lista 
+}
+
+int cDragones::atacar()
+{
+
 	//para calcular el danio que puede causar un dragon voy a tomar en cuenta la fueerza del dragon y su tipo de ataque
-	/* si su fuerza es alta (de 1500 a 1000 puntos) 
+	/* si su fuerza es alta (de 1500 a 1000 puntos)
 	si su ataque es el 1 y 2 danio es de 900 a 1000 puntos
 	si su ataque es el 3 y 4 danio es de 1000 a 1250 puntos
 	si su ataque es el 5 y 6 danio es de 1250 a 1500 puntos
-	
-	si su fuerza es media (de 1000 a 500 puntos) 
+
+	si su fuerza es media (de 1000 a 500 puntos)
 	si su ataque es el 1 y 2 danio es de 500 a 750 puntos
 	si su ataque es el 3 y 4 danio es de 750 a 900 puntos
 	si su ataque es el 5 y 6 danio es de 900 a 1000 puntos
@@ -89,8 +140,8 @@ int cDragones::danio() {
 	si su ataque es el 3 y 4 danio es de 250 a 500 puntos
 	si su ataque es el 5 y 6 danio es de 750 a 500 puntos */
 	int daniio = 0;
-	int max=0;
-	int min=0;
+	int max = 0;
+	int min = 0;
 	if (Fuerza < 1500 && Fuerza > 1000) {
 
 		//Notiene, Garrasycolmillos, Ataquesfisicos, Respirarfuego, Cargasaereas, Proyectiles
@@ -129,9 +180,9 @@ int cDragones::danio() {
 		else
 			cout << "error, hacer algo con trycatch";
 
-	
+
 	}
-	
+
 	else if (Fuerza < 500 && Fuerza > 0) {
 
 		//Notiene, Garrasycolmillos, Ataquesfisicos, Respirarfuego, Cargasaereas, Proyectiles
@@ -151,49 +202,16 @@ int cDragones::danio() {
 			cout << "error, hacer algo con trycatch";
 
 	}
-	
 
-		random_device rndm; // Genera una semilla aleatoria
-		mt19937 generador(rndm()); // Generador de números aleatorios basado en la semilla
 
-		// Define el rango de distribución
-		uniform_int_distribution<int> distribucion(min, max);
+	random_device rndm; // Genera una semilla aleatoria
+	mt19937 generador(rndm()); // Generador de números aleatorios basado en la semilla
 
-		// Genera y devuelve un número aleatorio dentro del rango
-		daniio = distribucion(generador);
-		return daniio;
-		
-}
-void cDragones::vida(int danio)
-{
-	Vida = Vida - danio;
-	if (Vida < 0 || Vida == 0) {
-		cout << "El dragon murio" << endl;
-		Muerto = true;
-	}
-		
+	// Define el rango de distribución
+	uniform_int_distribution<int> distribucion(min, max);
 
-	//sacarlo de la lista 
-}
-
-int cDragones::atacar()
-{
-	int daniio = danio();
-	//deberia llamar a una funcion de cVikingo que haga que baje su vida 
+	// Genera y devuelve un número aleatorio dentro del rango
+	daniio = distribucion(generador);
 	return daniio;
-}
-	
 
-int cDragones::getvida() {
-	return Vida;
-}
-
-unsigned int cDragones::getfuerza()
-{
-	return Fuerza;
-}
-
-int cDragones::getEntrenado()
-{
-	return Entrenado; 
 }

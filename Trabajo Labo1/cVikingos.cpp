@@ -83,6 +83,11 @@ void cVikingos::trabajar()
 	//llamar a la funcion entrenar
 }
 
+bool cVikingos::getMuerto()
+{
+	return false;
+}
+
 cDragones* cVikingos::getDragon() {
 	return this->Dragon;
 }

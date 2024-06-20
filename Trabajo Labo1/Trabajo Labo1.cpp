@@ -5,11 +5,14 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include <fstream>
+#include <sstream>
 
 #include "cVikingos.h"
 #include "cJinetes.h"
 #include "cDragones.h"
 #include "Panoptico.cpp"// no se porque cuando pongo el .h me tira el error LNK2019 y con el cpp no
+class cDragones;
 
 using namespace std;
 
@@ -26,13 +29,17 @@ using namespace std;
 
 
 int main() {
-    srand(time(0)); // para los números aleatorios
+    string archivo = "Tp Labo1.csv"; // Nombre del archivo CSV
+    ifstream file(archivo);
+    // para los números aleatorios
     cPanoptico<cDragones> dragones;
+    list <cPersona*> listamodificada;// aca se van a guardar todos los cambios de las listas 
+
 
     // Crear objetos de tipo cDragones
 
-    cDragones* dragoncito1 = new cDragones("chimuelo", "15/10/2004", 100, 1000, false, "no tiene", false, 50);
-    cDragones* dragoncito2 = new cDragones("gaga", "15/10/2004", 100, 1000, false, "no tiene", false, 50);
+    cDragones* dragoncito1 = new cDragones("chimuelo", "15/10/2004", 100, 1000, false,1, "no tiene", false, 50);
+    cDragones* dragoncito2 = new cDragones("gaga", "15/10/2004", 100, 1000, false,2, "no tiene", false, 50);
 
     // Agregar los punteros a los objetos a la lista del panóptico
 
@@ -42,63 +49,78 @@ int main() {
     // Crear una lista vikingo
     cPanoptico<cVikingos> vikingos;
     cVikingos* vikingo1 = new cVikingos("Hiccup", "25/04/1990", 75, 500, false, Entrenador, dragoncito1, 0);
-    vikingos.agregarElemento(vikingo1);
+    vikingos.agregarElemento(vikingo1); 
 
     // Crear una lista jinete
     cJinetes* jinete1 = new cJinetes("Astrid", "31/08/1992", 85, 600, false, Jinete, dragoncito2, 0, "aprobado", "Chimuelo");
     cPanoptico<cJinetes> jinetes;
     jinetes.agregarElemento(jinete1);
 
-
-
+    int i = 0;
+    int repe = rand() % 10;
     int option = rand() % 3;
+    int option2;
+    while (i <= repe) {
+        switch (option) {
+        case 1://atacar
+            while (!vikingos.vacia() && !dragones.vacia()) {// no se porque no me deja acceder a los atributos de panoptico si son publicos
+                cVikingos* viking = vikingos.seleccionarElementoAleatorio();
+                cDragones* dragon = dragones.seleccionarElementoAleatorio();
+                while (viking->getMuerto() != true || dragon->getMuerto() != true) {
+                    option2 = rand() % 2;
+                    switch (option2) {
+                    case 0:
+                        dragon->atacar();
+                        if (viking->getvida() <= 0) {
+                            try {
+                                size_t pos = vikingos.encontrarPosicion(viking);
+                                vikingos.borrarLista(pos);
+                            }
+                            catch (const out_of_range& e) {
+                                cout << e.what() << endl;
+                            }
+                        }
+                        break;
 
-    switch (option) {
-    case 1:
-        while (!vikingos.vacia() && !dragones.vacia()) {// no se porque no me deja acceder a los atributos de panoptico si son publicos
-            cVikingos* viking = vikingos.seleccionarElementoAleatorio();
-            cDragones* dragon = dragones.seleccionarElementoAleatorio();
+                    case 1:
+                        viking->atacar();
 
-            int Option2 = rand() % 2;
-            switch (Option2) {
-            case 0:
-                dragon->atacar();
-                if (viking->getvida() <= 0) {
-                    try {
-                        size_t pos = vikingos.encontrarPosicion(viking);
-                        vikingos.borrarLista(pos);
-                    }
-                    catch (const out_of_range& e) {
-                        cout << e.what() << endl;
-                    }
-                }
-                break;
-
-            case 1:
-                viking->atacar();
-
-                if (dragon->getvida() <= 0) {
-                    try {
-                        size_t pos = dragones.encontrarPosicion(dragon);
-                        dragones.borrarLista(pos);
-                    }
-                    catch (const out_of_range& e) {
-                        cout << e.what() << endl;
+                        if (dragon->getvida() <= 0) {
+                            try {
+                                size_t pos = dragones.encontrarPosicion(dragon);
+                                dragones.borrarLista(pos);
+                            }
+                            catch (const out_of_range& e) {
+                                cout << e.what() << endl;
+                            }
+                        }
+                        break;
                     }
                 }
                 break;
             }
+
+        case 2: {// entrenar
+            cJinetes* jinete = jinetes.seleccionarElementoAleatorio();
+            jinete->entrenarDragon();
+
+            break;
         }
-        break;
+        case 3: {//trabajar
+            cVikingos* viking = vikingos.seleccionarElementoAleatorio();
+            viking->trabajar();
+            if (Posicion::Guerrero)
+                option = 1;
+            if (Posicion::Jinete)
+                option = 2;
+        }
+             
 
-    case 2:
-        //   jinete.entrenarDragon();
-
-           // Entrenar(dragon, jinete);
-           //  Necesito definir la función Entrenar y jinete
-        break;
+        }
+        i++;
     }
     // Liberar memoria
+    // reescribir el csv con las listas modificadas
 
     delete dragoncito1;
     delete dragoncito2;
@@ -107,14 +129,14 @@ int main() {
 
     return 0;
 
-    //Esto se deberia hacer en el csv cada vez que se leen los datos.
 
 }
 
 // Función para cargar datos desde un archivo CSV
-/*
-void cargarlistaDragones(const string& nombreArchivo, list<cDragones*>& dragones) {
+
+void cargarlistas(const string& nombreArchivo, list<cDragones*>& dragones, list <cVikingos*>& vikingos) {
     ifstream archivo(nombreArchivo);
+    // el getline lee cadenas de caracteres y los almacena como tal el >> los manda en su formato, por comodidad uso el ss>>
     if (!archivo.is_open()) {
         cerr << "No se pudo abrir el archivo: " << nombreArchivo << endl;
         return;
@@ -124,31 +146,57 @@ void cargarlistaDragones(const string& nombreArchivo, list<cDragones*>& dragones
     while (getline(archivo, linea)) {
         stringstream ss(linea);
         //auxiliares
-        string nombre, fecha_nac, ataque;
-        unsigned int fuerza;
-        int vida, entrenado, puntosDomado;
+        string tipo, nombre, fecha_nac, ataque; //para que sea mas facil leer los archivos csv voy a poner si es un dragon o un vikingo antes que todos sus atributos
+        unsigned int fuerza, id;
+        int vida, entrenado;
         bool muerto, estado;
         char delimitador;
-
+       
         // Lee los datos desde el stringstream
-        getline(ss, nombre, ',');
-        getline(ss, fecha_nac, ',');
+        ss >> tipo >> delimitador;
+        // estos son los atributos de cPersona
+        ss >> nombre >> delimitador;
+        ss >> fecha_nac >> delimitador;
         ss >> fuerza >> delimitador;
         ss >> vida >> delimitador;
         ss >> muerto >> delimitador;
-        getline(ss, ataque, ',');
-        ss >> estado >> delimitador;
-        ss >> entrenado >> delimitador;
-        ss >> puntosDomado;
-        //creo al dragon
-        cDragones* dragon = new cDragones(nombre, fecha_nac, fuerza, vida, muerto, ataque, estado, entrenado, puntosDomado);
-      //lo agrego a la lista
-        dragones.push_back(dragon);
-    }
+
+        if (tipo == "dragon") {
+            ss >> id >> delimitador; 
+            ss >> ataque >> delimitador;
+            ss >> estado >> delimitador;
+            ss >> entrenado;
+            //creo al dragon
+            cDragones* dragon = new cDragones(nombre, fecha_nac, fuerza, vida, muerto, id, ataque, estado, entrenado);
+
+            //lo agrego a la lista
+            dragones.push_back(dragon);
+        }
+
+        //ver como leer y escribir la posicion y el dragon, el dragon lo vamos a hacer con un id que los une y la posicion va a ser un string que se pasa a enumprobablemente
+        if (tipo == "vikingo") {
+          //  Posicion trabajo;
+           // cDragones* dragon;
+            int dragon_muerto;
+           // ss >> trabajo >> delimitador;
+           // ss >> dragon >> delimitador;
+            ss >> dragon_muerto >> delimitador;
+           
+            if (Posicion::Jinete) {
+                string resultado;
+                string nombreDragon;
+
+                ss >> resultado >> delimitador;
+                ss >> nombreDragon >> delimitador;
+            }
+       }
+
+        
+    } 
 
     archivo.close();
 }
-*/
+
 
 
 
@@ -158,22 +206,6 @@ void cargarlistaDragones(const string& nombreArchivo, list<cDragones*>& dragones
 * friend: el jinete le tiene que dar permiso a la clase del dragon para que acceda a sus atributos
 */
 
-/*
-Vamos a hacer dos herencias:
-cambiar cPersona a cHabitantes
-
-cPersona es el padre de vikingo y cdragones, vikingo es el padre de jinete
-
-¿Qué comparten entre ellos?
-
-
-Plantear funciones polimorficas
-vida, nombre, struct
-listas
-
-NOTA: cuando el dragon esta domado el vikingo no lo puede matar y viceversa.
-
-*/
 
 
 

@@ -4,9 +4,6 @@
 class cVikingos;
 class cDragones;
 using namespace std;
-/*
-void Altanombre(cJinetes& asignado, string nuevoNombre)
-*/
 
 cJinetes::cJinetes(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, Posicion trabajo, cDragones* dragon, int dragon_muerto, string resultado, string nombredragon)
     :cVikingos(nombre, fecha_nac, fuerza, vida, muerto, trabajo, dragon, dragon_muerto) {
@@ -17,13 +14,16 @@ cJinetes::cJinetes(string nombre, string fecha_nac, unsigned int fuerza, int vid
 cJinetes::~cJinetes()
 {
 }
-void cJinetes::entrenarDragon() {
+void cJinetes::entrenarDragon() {//agregar en el main que si no aprobo el curso no va a poder entrenar a un dragon y si termino primero se le agrega un 50+ de fuerza
+    /* tomar en consideracion
+    1. La fuerza del dragon y del jinete
+    2. la posicion del jinete, si termina en 1 o 2 lugar tiene ventaja, sino es normalito */
     cDragones* Dragon = this->getDragon();
     int entrenado;
     // poner getter y setter para que deje de tirar erroes
     if (Dragon == nullptr) {
         cout << "No hay dragon asignado para entrenar." << endl;
-        return;
+        
     }
     // usar e
     if (Dragon->getfuerza() > this->Fuerza && (Dragon->getfuerza() - this->Fuerza) > 100) {
@@ -58,7 +58,7 @@ void cJinetes::entrenarDragon() {
     }
 
     if (Dragon->getEntrenado() >= MaxEntrenamiento) {
-        cout << "El dragon ha alcanzado el nivel m�ximo de entrenamiento." << endl;
+        cout << "El dragon ha alcanzado el nivel maximo de entrenamiento." << endl;
     }
 
     if (this->Vida <= 0) {

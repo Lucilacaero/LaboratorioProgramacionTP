@@ -19,7 +19,7 @@ public:
     virtual void vida(int danio) = 0;// esta tambien porque despues llamo a los destructores 
     //virtual string to_string() const = 0;
   //  virtual void Imprimir() const = 0;
-    bool getMuerto();
+   virtual bool getMuerto(); 
 };
 
 
