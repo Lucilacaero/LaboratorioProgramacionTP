@@ -94,3 +94,23 @@ cDragones* cVikingos::getDragon() {
 void cVikingos::setDragon(cDragones* dragon) {
 	this->Dragon = dragon;
 }
+cVikingos* aleatorio(list <cVikingos*> vikingos) {
+
+	if (vikingos.empty()) {
+		throw out_of_range("La lista está vacía");
+	}
+	list<cVikingos*>::iterator it = vikingos.begin();
+	advance(it, rand() % vikingos.size());
+	return *it;
+}
+
+size_t cVikingos::encontrarPosicion(list <cVikingos*> vikingos) {
+
+	size_t posicion = 0;
+	for (list<cVikingos*>::iterator it = vikingos.begin(); it != vikingos.end(); ++it, ++posicion) {
+		//if ((it)->Id == this->Id) {
+		return posicion;
+		//}
+	}
+	throw out_of_range("Elemento no encontrado en la lista");
+}

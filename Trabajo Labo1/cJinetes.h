@@ -16,4 +16,5 @@ public:
 	//friend void asignarnombre(cJinetes& jinete, cDragones& dragon);
 	friend void cDragones::setNombre(cJinetes*& jinete); 
 	void entrenarDragon();
+	friend cJinetes* aleatorio(list <cJinetes*> jinetes);
 }; 

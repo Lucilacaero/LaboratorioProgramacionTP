@@ -2,6 +2,7 @@
 #include "cJinetes.h"
 #include <iostream>
 #include <random> 
+#include <cstdlib>
 using namespace std;
 int cDragones::DragonesVivos = 0;
 int cDragones::DragonesMuertos = 0;
@@ -72,6 +73,17 @@ void cDragones::setNombre(cJinetes*& jinete)
 		cerr << e.what() << endl; // cerr = cout error
 	}
 
+}
+
+cDragones* aleatorio( list<cDragones*> dragones)
+{
+		if (dragones.empty()) {
+			throw out_of_range("La lista está vacía");
+		}
+		list<cDragones*>::iterator it = dragones.begin();
+		advance(it, rand() % dragones.size());
+		return *it;
+	
 }
   
 
@@ -204,14 +216,21 @@ int cDragones::atacar()
 	}
 
 
-	random_device rndm; // Genera una semilla aleatoria
-	mt19937 generador(rndm()); // Generador de números aleatorios basado en la semilla
-
-	// Define el rango de distribución
-	uniform_int_distribution<int> distribucion(min, max);
-
+	
 	// Genera y devuelve un número aleatorio dentro del rango
-	daniio = distribucion(generador);
+	daniio = rand() % max;
 	return daniio;
 
 }
+
+size_t cDragones::encontrarPosicion(list <cDragones*> dragones) {
+
+		size_t posicion = 0;
+		for (list<cDragones*>::iterator it = dragones.begin(); it != dragones.end(); ++it, ++posicion) {
+			//if ((it)->Id == this->Id) {
+				return posicion;
+		//}
+		}
+		throw out_of_range("Elemento no encontrado en la lista");
+	}
+

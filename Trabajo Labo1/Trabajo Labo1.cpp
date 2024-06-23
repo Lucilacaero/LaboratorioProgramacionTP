@@ -7,11 +7,12 @@
 #include <cstdlib>
 #include <fstream>
 #include <sstream>
+#include <list>
 
 #include "cVikingos.h"
 #include "cJinetes.h"
 #include "cDragones.h"
-#include "Panoptico.cpp"// no se porque cuando pongo el .h me tira el error LNK2019 y con el cpp no
+// no se porque cuando pongo el .h me tira el error LNK2019 y con el cpp no
 class cDragones;
 
 using namespace std;
@@ -32,7 +33,7 @@ int main() {
     string archivo = "Tp Labo1.csv"; // Nombre del archivo CSV
     ifstream file(archivo);
     // para los números aleatorios
-    cPanoptico<cDragones> dragones;
+    list <cDragones*> dragones;
     list <cPersona*> listamodificada;// aca se van a guardar todos los cambios de las listas 
 
 
@@ -43,18 +44,19 @@ int main() {
 
     // Agregar los punteros a los objetos a la lista del panóptico
 
-    dragones.agregarElemento(dragoncito1);
-    dragones.agregarElemento(dragoncito2);
+    dragones.push_back(dragoncito1);
+    dragones.push_back(dragoncito2);
+   
 
     // Crear una lista vikingo
-    cPanoptico<cVikingos> vikingos;
+    list <cVikingos*> vikingos;
     cVikingos* vikingo1 = new cVikingos("Hiccup", "25/04/1990", 75, 500, false, Entrenador, dragoncito1, 0);
-    vikingos.agregarElemento(vikingo1); 
+    vikingos.push_back(vikingo1); 
 
     // Crear una lista jinete
     cJinetes* jinete1 = new cJinetes("Astrid", "31/08/1992", 85, 600, false, Jinete, dragoncito2, 0, "aprobado", "Chimuelo");
-    cPanoptico<cJinetes> jinetes;
-    jinetes.agregarElemento(jinete1);
+    list<cJinetes*> jinetes;
+    jinetes.push_back(jinete1);
 
     int i = 0;
     int repe = rand() % 10;
@@ -63,9 +65,9 @@ int main() {
     while (i <= repe) {
         switch (option) {
         case 1://atacar
-            while (!vikingos.vacia() && !dragones.vacia()) {// no se porque no me deja acceder a los atributos de panoptico si son publicos
-                cVikingos* viking = vikingos.seleccionarElementoAleatorio();
-                cDragones* dragon = dragones.seleccionarElementoAleatorio();
+            while (!vikingos.empty() && !dragones.empty()) {// no se porque no me deja acceder a los atributos de panoptico si son publicos
+                cVikingos* viking = aleatorio(vikingos);
+                cDragones* dragon = aleatorio(dragones);
                 while (viking->getMuerto() != true || dragon->getMuerto() != true) {
                     option2 = rand() % 2;
                     switch (option2) {
@@ -73,8 +75,8 @@ int main() {
                         dragon->atacar();
                         if (viking->getvida() <= 0) {
                             try {
-                                size_t pos = vikingos.encontrarPosicion(viking);
-                                vikingos.borrarLista(pos);
+                                size_t pos = (*viking).encontrarPosicion(vikingos);
+                             //   vikingos.Borrarlista(pos);
                             }
                             catch (const out_of_range& e) {
                                 cout << e.what() << endl;
@@ -87,8 +89,8 @@ int main() {
 
                         if (dragon->getvida() <= 0) {
                             try {
-                                size_t pos = dragones.encontrarPosicion(dragon);
-                                dragones.borrarLista(pos);
+                                size_t pos = (*dragon).encontrarPosicion(dragones);
+                               // dragones.borrarLista(pos);
                             }
                             catch (const out_of_range& e) {
                                 cout << e.what() << endl;
@@ -101,13 +103,13 @@ int main() {
             }
 
         case 2: {// entrenar
-            cJinetes* jinete = jinetes.seleccionarElementoAleatorio();
+            cJinetes* jinete = aleatorio(jinetes);
             jinete->entrenarDragon();
 
             break;
         }
         case 3: {//trabajar
-            cVikingos* viking = vikingos.seleccionarElementoAleatorio();
+            cVikingos* viking = aleatorio(vikingos); 
             viking->trabajar();
             if (Posicion::Guerrero)
                 option = 1;

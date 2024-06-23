@@ -67,3 +67,13 @@ void cJinetes::entrenarDragon() {//agregar en el main que si no aprobo el curso 
 
     Dragon->Domado();
 }
+
+cJinetes* aleatorio(list<cJinetes*> jinetes)
+{
+    if (jinetes.empty()) {
+        throw out_of_range("La lista está vacía");
+    }
+    list<cJinetes*>::iterator it = jinetes.begin();
+    advance(it, rand() % jinetes.size());
+    return *it;
+}

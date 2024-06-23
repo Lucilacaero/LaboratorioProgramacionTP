@@ -2,7 +2,7 @@
 #pragma once
 #include "cPersona.h"
 #include <string>
-
+#include<list>
 class cVikingos;
 class cJinetes;
 const int MaxEntrenamiento = 3200;
@@ -48,6 +48,9 @@ public:
 	int getEntrenado();
 	bool getMuerto();
 	void setNombre(cJinetes*& jinete);
+	friend cDragones* aleatorio(list <cDragones*> dragones); 
+	size_t encontrarPosicion(list <cDragones*> dragones);
+	
 	/*
 	string to_string() const override;
 	void Imprimir() const override;

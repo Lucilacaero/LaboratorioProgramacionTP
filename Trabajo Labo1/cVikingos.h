@@ -26,7 +26,9 @@ public:
 	void asignarDragon(cDragones* dragon);
 	void trabajar();
 	bool getMuerto();
-	
+	friend cVikingos* aleatorio(list <cVikingos*> vikingos);
+	size_t encontrarPosicion(list <cVikingos*> vikingos);
+
 	/*
 	string to_string() const override;
 	void Imprimir() const override;
