@@ -1,2 +1,2 @@
-﻿cVikingos.obj : error LNK2019: símbolo externo "public: class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __cdecl cVikingos::EnumAstring(void)" (?EnumAstring@cVikingos@@QEAA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ) sin resolver al que se hace referencia en la función "public: virtual class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __cdecl cVikingos::to__string(void)" (?to__string@cVikingos@@UEAA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ)
-C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\x64\Debug\Trabajo Labo1.exe : fatal error LNK1120: 1 externos sin resolver
+﻿  Trabajo Labo1.cpp
+  Trabajo Labo1.vcxproj -> C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\x64\Debug\Trabajo Labo1.exe

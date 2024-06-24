@@ -104,6 +104,7 @@ cVikingos* aleatorio(list <cVikingos*> vikingos) {
 	return *it;
 }
 
+
 size_t cVikingos::encontrarPosicion(list <cVikingos*> vikingos) {
 
 	size_t posicion = 0;
@@ -123,6 +124,7 @@ string cVikingos::to__string()
 	string str_trabajo = EnumAstring();
 	s += ", Trabajo: " + str_trabajo;
 
+
 	// Si Dragon es un puntero válido, obtenemos su representación como string usando to_string() de cDragones
 	if (Dragon != nullptr) {
 		s += ", Dragon: " + Dragon->to__string();
@@ -138,5 +140,18 @@ string cVikingos::to__string()
 void cVikingos::Imprimir()
 {
 	cout << to__string();
+}
+
+string cVikingos::EnumAstring()
+{
+	return string();
+}
+
+string cVikingos::guardar()
+{
+
+	string s = cPersona::guardar();
+	s = EnumAstring() + "," + to_string(Dragon->getid()) + "," + to_string(Dragon_Muerto);
+	return s;
 }
 

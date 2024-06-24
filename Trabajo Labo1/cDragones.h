@@ -53,9 +53,9 @@ public:
 	size_t encontrarPosicion(list <cDragones*> dragones);
 	string to__string(); //voy a imprimir todos los atributos de cPErsona y despues le agrego los de la clase correspondiente
 	void Imprimir();
-	cDragones* encontrardragon(unsigned int id, list<cDragones*>& dragones);
-
-
+	friend cDragones* encontrardragon(unsigned int id, list<cDragones*>& dragones);
+	//friend void guardarlistas( string& nombreArchivo, list<cDragones*>& dragones, list<cVikingos*>& vikingos);
+	string guardar();
 
 	/*
 	string to_string() const override;

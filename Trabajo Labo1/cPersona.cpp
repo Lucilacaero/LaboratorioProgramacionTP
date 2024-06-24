@@ -49,5 +49,18 @@ void cPersona::Imprimir()
 	cout << to__string();
 }
 
+string cPersona::guardar()
+{
+	/* string Tipo;
+    string Nombre;
+    string Fecha_nac;
+    unsigned int Fuerza; // Cambiado a unsigned int
+    int Vida;
+    bool Muerto;*/
+	string s;
+	s= Tipo + "," + Nombre + "," + Fecha_nac + "," + to_string(Fuerza) + "," + to_string(Vida) + "," + (Muerto ? "Sí" : "No");
+	return s;
+}
+
 
 

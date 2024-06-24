@@ -16,7 +16,9 @@
 class cDragones;
 
 using namespace std;
-
+void cargarlistas(string& nombreArchivo, list<cDragones*>& dragones, list <cVikingos*>& vikingos, list <cJinetes*> &jinetes);
+void guardarlistas (string & nombreArchivo, list<cPersona*>&listamodificada); 
+Posicion stringToPosicion(string& stringt);
 /*
 Ante cualquier error que no se pueda solucioner:
 1. reiniciar la compu,
@@ -30,13 +32,11 @@ using namespace std;
 
 
 int main() {
-    string archivo = "Tp Labo1.csv"; // Nombre del archivo CSV
-    ifstream file(archivo);
+    
     // para los números aleatorios
     list <cDragones*> dragones;
     list <cPersona*> listamodificada;// aca se van a guardar todos los cambios de las listas 
-
-
+   
     // Crear objetos de tipo cDragones
 
     cDragones* dragoncito1 = new cDragones("chimuelo", "15/10/2004", 100, 1000, false,1, "no tiene", false, 50);
@@ -45,8 +45,7 @@ int main() {
     // Agregar los punteros a los objetos a la lista del panóptico
 
     dragones.push_back(dragoncito1);
-    dragones.push_back(dragoncito2);
-   
+    dragones.push_back(dragoncito2); 
 
     // Crear una lista vikingo
     list <cVikingos*> vikingos;
@@ -54,12 +53,15 @@ int main() {
     vikingos.push_back(vikingo1); 
 
     // Crear una lista jinete
-    cJinetes* jinete1 = new cJinetes("Astrid", "31/08/1992", 85, 600, false, Jinete, dragoncito2, 0, "aprobado", "Chimuelo");
+    cJinetes* jinete1 = new cJinetes("Alan", "31/08/1992", 85, 600, false, Jinete, dragoncito2, 0, "aprobado", "Chimuelo");
     list<cJinetes*> jinetes;
     jinetes.push_back(jinete1);
-
+    string archivo = "Tp Labo1.csv"; // Nombre del archivo CSV 
+    ifstream file(archivo); 
+    cargarlistas(archivo, dragones, vikingos, jinetes); 
     int i = 0;
-    int repe = rand() % 10;
+    int repe = 0;
+    repe = rand() % 50;
     int option = rand() % 3;
     int option2;
     while (i <= repe) {
@@ -105,6 +107,7 @@ int main() {
         case 2: {// entrenar
             cJinetes* jinete = aleatorio(jinetes);
             jinete->entrenarDragon();
+            jinete->Imprimir();
 
             break;
         }
@@ -133,14 +136,38 @@ int main() {
 
 
 }
+Posicion stringToPosicion(string& stringt) {
+
+    if (stringt == "Entrenador") {
+        return Posicion::Entrenador;
+    }
+    else if (stringt == "Guerrero") {
+        return Posicion::Guerrero;
+    }
+    else if (stringt == "Agricultor") {
+        return Posicion::Agricultor;
+    }
+    else if (stringt == "Pescador") {
+        return Posicion::Pescador;
+    }
+    else if (stringt == "Herrero") {
+        return Posicion::Herrero;
+    }
+    else if (stringt == "Jinete") {
+        return Posicion::Jinete;
+    }
+    else {
+        throw std::invalid_argument("String no válido para Posicion");
+    }
+}
 
 // Función para cargar datos desde un archivo CSV
 
-void cargarlistas(const string& nombreArchivo, list<cDragones*>& dragones, list <cVikingos*>& vikingos) {
+void cargarlistas(string& nombreArchivo, list<cDragones*>& dragones, list <cVikingos*>& vikingos, list <cJinetes*>& jinetes) {
     ifstream archivo(nombreArchivo);
     // el getline lee cadenas de caracteres y los almacena como tal el >> los manda en su formato, por comodidad uso el ss>>
     if (!archivo.is_open()) {
-        cerr << "No se pudo abrir el archivo: " << nombreArchivo << endl;
+        throw exception("no se pudo abrir el archivo");
         return;
     }
 
@@ -153,7 +180,7 @@ void cargarlistas(const string& nombreArchivo, list<cDragones*>& dragones, list 
         int vida, entrenado;
         bool muerto, estado;
         char delimitador;
-       
+
         // Lee los datos desde el stringstream
         ss >> tipo >> delimitador;
         // estos son los atributos de cPersona
@@ -164,7 +191,7 @@ void cargarlistas(const string& nombreArchivo, list<cDragones*>& dragones, list 
         ss >> muerto >> delimitador;
 
         if (tipo == "dragon") {
-            ss >> id >> delimitador; 
+            ss >> id >> delimitador;
             ss >> ataque >> delimitador;
             ss >> estado >> delimitador;
             ss >> entrenado;
@@ -177,32 +204,57 @@ void cargarlistas(const string& nombreArchivo, list<cDragones*>& dragones, list 
 
         //ver como leer y escribir la posicion y el dragon, el dragon lo vamos a hacer con un id que los une y la posicion va a ser un string que se pasa a enumprobablemente
         if (tipo == "vikingo") {
-          //  Posicion trabajo;
-           // cDragones* dragon;
+            //  Posicion trabajo;
+             // cDragones* dragon;
             int dragon_muerto;
-           // ss >> trabajo >> delimitador;
-           // ss >> dragon >> delimitador;
+            unsigned int idDragon;
+            string stringt;
+            ss >> stringt >> delimitador;
+            Posicion trabajo = stringToPosicion(stringt);
+            ss >> idDragon >> delimitador;
+
+            cDragones* dragon = encontrardragon(idDragon, dragones);
             ss >> dragon_muerto >> delimitador;
-           
+
+
             if (Posicion::Jinete) {
                 string resultado;
                 string nombreDragon;
 
                 ss >> resultado >> delimitador;
                 ss >> nombreDragon >> delimitador;
+
+                cJinetes* jinete = new cJinetes(nombre, fecha_nac, fuerza, vida, muerto, trabajo, dragon, dragon_muerto, resultado, nombreDragon);
+                jinetes.push_back(jinete);
             }
-       }
 
-        
-    } 
+            else {
+                cVikingos* vikingo = new cVikingos(nombre, fecha_nac, fuerza, vida, muerto, trabajo, dragon, dragon_muerto);
+                vikingos.push_back(vikingo);
+            }
+        }
 
-    archivo.close();
+        archivo.close();
+
+    }
 }
 
+/*
+void guardarlistas(string& nombreArchivo, list<cPersona*>& listamodificada) {
+    ofstream archivo(nombreArchivo);
 
+    if (!archivo.is_open()) {
+       throw "No se pudo abrir el archivo: ";
+        return;
+    }
 
+    list<cPersona*>::const_iterator it;
+    for (it = listamodificada.begin(); it != listamodificada.end(); ++it) {
+            archivo << (*it)->guardar() << endl;
+    }
 
-
+}
+*/
 /*
 * en el uml no va el friend 
 * friend: el jinete le tiene que dar permiso a la clase del dragon para que acceda a sus atributos

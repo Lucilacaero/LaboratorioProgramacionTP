@@ -240,7 +240,7 @@ size_t cDragones::encontrarPosicion(list <cDragones*> dragones) {
 	}
 
 
-cDragones* cDragones::encontrardragon(unsigned int id, list<cDragones*>& dragones)
+cDragones* encontrardragon(unsigned int id, list<cDragones*>& dragones)
 {
 	list<cDragones*>::iterator it;
 	for (it = dragones.begin(); it != dragones.end(); ++it) {
@@ -250,6 +250,14 @@ cDragones* cDragones::encontrardragon(unsigned int id, list<cDragones*>& dragone
 		}
 	}
 	return nullptr;
+}
+
+string cDragones::guardar()
+{
+	string s;
+	s = to_string(Id) + "," + Ataque + "," + (Estado ? "Si" : "No") + "," + to_string(Entrenado);
+	
+	return s;
 }
 
 
@@ -268,3 +276,7 @@ void cDragones::Imprimir()
 {
 	cout << to__string();
 }
+
+
+
+

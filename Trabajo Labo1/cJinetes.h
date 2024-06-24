@@ -20,6 +20,7 @@ public:
 
 	string to__string(); //son virtual porque se lo voy a pasar a cJinete
 	void Imprimir();
+	string guardar();
 
 
 

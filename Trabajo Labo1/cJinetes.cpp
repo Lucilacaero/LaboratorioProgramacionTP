@@ -81,11 +81,18 @@ cJinetes* aleatorio(list<cJinetes*> jinetes)
 string cJinetes::to__string()
 {
     string s = cVikingos::to__string();
-    s += " Resultado: " + Resultado; //no le pongo el atributo nombredragon porque es repetitivo
+    s +="/n Resultado: " + Resultado; //no le pongo el atributo nombredragon porque es repetitivo
     return s;
 }
 
 void cJinetes::Imprimir()
 {
     cout << to__string();
+}
+
+string cJinetes::guardar()
+{
+    string s = cVikingos::guardar();
+    s += Resultado + "," + NombreDragon;
+    return string();
 }
