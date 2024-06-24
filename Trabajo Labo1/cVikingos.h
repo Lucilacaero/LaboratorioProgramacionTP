@@ -28,6 +28,10 @@ public:
 	bool getMuerto();
 	friend cVikingos* aleatorio(list <cVikingos*> vikingos);
 	size_t encontrarPosicion(list <cVikingos*> vikingos);
+	virtual string to__string(); //son virtual porque se lo voy a pasar a cJinete
+	virtual void Imprimir();
+	string EnumAstring();
+
 
 	/*
 	string to_string() const override;

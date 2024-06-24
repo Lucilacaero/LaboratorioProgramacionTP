@@ -47,10 +47,16 @@ public:
 	unsigned int getfuerza();
 	int getEntrenado();
 	bool getMuerto();
+	unsigned int getid();
 	void setNombre(cJinetes*& jinete);
 	friend cDragones* aleatorio(list <cDragones*> dragones); 
 	size_t encontrarPosicion(list <cDragones*> dragones);
-	
+	string to__string(); //voy a imprimir todos los atributos de cPErsona y despues le agrego los de la clase correspondiente
+	void Imprimir();
+	cDragones* encontrardragon(unsigned int id, list<cDragones*>& dragones);
+
+
+
 	/*
 	string to_string() const override;
 	void Imprimir() const override;

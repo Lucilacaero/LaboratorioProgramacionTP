@@ -77,3 +77,15 @@ cJinetes* aleatorio(list<cJinetes*> jinetes)
     advance(it, rand() % jinetes.size());
     return *it;
 }
+
+string cJinetes::to__string()
+{
+    string s = cVikingos::to__string();
+    s += " Resultado: " + Resultado; //no le pongo el atributo nombredragon porque es repetitivo
+    return s;
+}
+
+void cJinetes::Imprimir()
+{
+    cout << to__string();
+}

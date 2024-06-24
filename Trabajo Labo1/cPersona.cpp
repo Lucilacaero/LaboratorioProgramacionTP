@@ -32,3 +32,22 @@ cPersona::cPersona()
 	Vida= 500;
 	Muerto= false;
 }
+
+string cPersona::to__string()
+{
+	string s;
+	s = "Nombre: " + Nombre
+		+ ", Fecha de nacimiento: " + Fecha_nac
+		+ ", Fuerza: " + to_string(Fuerza)//castea 
+		+ ", Vida: " + to_string(Vida)
+		+ ", Esta muerto: " + (Muerto ? "Sí" : "No");
+	return s;
+}
+
+void cPersona::Imprimir()
+{
+	cout << to__string();
+}
+
+
+

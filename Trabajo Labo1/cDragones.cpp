@@ -46,6 +46,11 @@ bool cDragones::getMuerto()
 	return Muerto;
 }
 
+unsigned int cDragones::getid()
+{
+	return Id;
+}
+
 string cDragones::getnombre() {
 	return Nombre;
 }
@@ -234,3 +239,32 @@ size_t cDragones::encontrarPosicion(list <cDragones*> dragones) {
 		throw out_of_range("Elemento no encontrado en la lista");
 	}
 
+
+cDragones* cDragones::encontrardragon(unsigned int id, list<cDragones*>& dragones)
+{
+	list<cDragones*>::iterator it;
+	for (it = dragones.begin(); it != dragones.end(); ++it) {
+		cDragones* dragon = *it;
+		if (dragon->getid() == id) {
+			return dragon;
+		}
+	}
+	return nullptr;
+}
+
+
+
+string cDragones::to__string(){
+	string s = cPersona::to__string();
+	s += ", Id: " + to_string(Id)
+		+ ", Ataque: " + Ataque
+		+ ", Estado: " + (Estado ? "Domado" : "No domado")
+		+ ", Entrenado: " + to_string(Entrenado);
+	return s;
+}
+
+
+void cDragones::Imprimir()
+{
+	cout << to__string();
+}

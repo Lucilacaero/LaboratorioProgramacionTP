@@ -17,4 +17,12 @@ public:
 	friend void cDragones::setNombre(cJinetes*& jinete); 
 	void entrenarDragon();
 	friend cJinetes* aleatorio(list <cJinetes*> jinetes);
+
+	string to__string(); //son virtual porque se lo voy a pasar a cJinete
+	void Imprimir();
+
+
+
+
+
 }; 

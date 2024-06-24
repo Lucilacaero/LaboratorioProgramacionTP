@@ -114,3 +114,29 @@ size_t cVikingos::encontrarPosicion(list <cVikingos*> vikingos) {
 	}
 	throw out_of_range("Elemento no encontrado en la lista");
 }
+
+
+
+string cVikingos::to__string()
+{
+	string s = cPersona::to__string();
+	string str_trabajo = EnumAstring();
+	s += ", Trabajo: " + str_trabajo;
+
+	// Si Dragon es un puntero válido, obtenemos su representación como string usando to_string() de cDragones
+	if (Dragon != nullptr) {
+		s += ", Dragon: " + Dragon->to__string();
+	}
+	else
+		s += "No tiene dragon asignado";
+
+	s += ", Dragon Muerto: " + to_string(Dragon_Muerto);
+
+	return s;
+}
+
+void cVikingos::Imprimir()
+{
+	cout << to__string();
+}
+

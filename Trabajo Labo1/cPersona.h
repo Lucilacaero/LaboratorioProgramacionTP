@@ -20,6 +20,16 @@ public:
     //virtual string to_string() const = 0;
   //  virtual void Imprimir() const = 0;
    virtual bool getMuerto(); 
+   virtual string to__string(); //voy a imprimir todos los atributos de cPErsona y despues le agrego los de la clase correspondiente
+   virtual void Imprimir();
+  
+
+   void borrarLista(size_t position);
+   cPersona* seleccionarElementoAleatorio();
+   size_t encontrarPosicion(cPersona* value);
+
+
+
 };
 
 
