@@ -1,17 +1,17 @@
-dragon,Fafnir,01/01/2000,150,1000,no,1,No tiene,si,80
-dragon,Smaug,15/05/2001,200,1200,no,2,Garras y Colmillos,si,95
-dragon,Toothless,10/10/2002,180,1100,no,3,Ataques fisicos,si,90
+dragon,Fafnir,01/01/2000,150,1000,no,1, ,si,80
+dragon,Smaug,15/05/2001,200,1200,no,2,Respirar fuego,si,95
+dragon,Toothless,10/10/2002,180,1100,no,3,Proyectiles,si,90
 dragon,Drogon,20/03/2003,220,1300,no,4,Respirar fuego,si,100
-dragon,Viserion,05/12/2004,170,1150,no,5,Cargas aereas,si,85
+dragon,Viserion,05/12/2004,170,1150,no,5,Respirar fuego,si,85
 dragon,Stormfly,12/06/2002,160,1000,no,6,Proyectiles,si,85
-dragon,Barf and Belch,06/06/2002,190,1150,no,7,No tiene,si,90
-dragon,Grump,15/03/2000,140,900,no,8,Respirar fuego,si,75
-dragon,Skullcrusher,18/11/2003,210,1200,no,9,Respirar fuego,si,95
-dragon,Windshear,25/07/2004,175,1050,no,10,Cargas aereas,si,88
-dragon,Shattermaster,09/04/2004,185,1100,no,11,Proyectiles,si,90
-dragon,Thornado,03/09/2003,195,1150,no,12,Ataques fisicos,si,92
-dragon,Fireworm Queen,14/01/2005,170,1000,no,13,Proyectiles,si,87
-dragon,Cavern Crasher,07/08/2000,160,950,no,14,No tiene,si,80
+dragon,Barf and Belch,06/06/2002,190,1150,no,7,Proyectiles,si,90
+dragon,Grump,15/03/2000,140,900,no,8,Garras y colmillos,si,75
+dragon,Skullcrusher,18/11/2003,210,1200,no,9,Garras y colmillos,si,95
+dragon,Windshear,25/07/2004,175,1050,no,10,Ataques fisicos,si,88
+dragon,Shattermaster,09/04/2004,185,1100,no,11,Ataques fisicos,si,90
+dragon,Thornado,03/09/2003,195,1150,no,12,Cargas aereas,si,92
+dragon,Fireworm Queen,14/01/2005,170,1000,no,13,Respirar fuego,si,87
+dragon,Cavern Crasher,07/08/2000,160,950,no,14,Ataques fisicos,si,80
 vikingo,Hiccup,25/04/1990,75,500,no,Entrenador,1,0
 vikingo,Astrid,14/07/1991,80,600,no,Guerrero,2,0
 vikingo,Stoick,12/02/1980,90,700,no,Guerrero,1,0

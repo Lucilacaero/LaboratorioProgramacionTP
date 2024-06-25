@@ -1,17 +1,28 @@
+ï»¿
+#include "AyuditaMain.h"
 
 #include "AyuditaMain.h"
 
 
+cDragones* encontrardragon(unsigned int id, std::list<cDragones*>& dragones) {
+    for (auto& dragon : dragones) {
+    
+        if (dragon->Id == id) {
+            return dragon;
+        }
+    }
+    return nullptr;
+}
 
-// Función para cargar datos desde un archivo CSV
+// Funcion para cargar datos desde un archivo CSV
 void cargarlistas(const string& nombreArchivo, list<cDragones*>& dragones, list<cVikingos*>& vikingos, list<cJinetes*>& jinetes) {
     ifstream archivo(nombreArchivo);
     if (!archivo.is_open()) {
         throw runtime_error("No se pudo abrir el archivo");
     }
-    cout << "¿Ver las listas cargadas? S/N";
+    cout << "Ver las listas cargadas? S/N";
     string  respuesta;
-    cin >> respuesta; 
+    cin >> respuesta;
     string linea;
     while (getline(archivo, linea)) {
         stringstream ss(linea);
@@ -31,13 +42,13 @@ void cargarlistas(const string& nombreArchivo, list<cDragones*>& dragones, list<
         getline(ss, muertoStr, ',');
         muerto = (muertoStr == "si");
 
-        // Depuración: Imprimir los valores leídos
-        
+        // Depuracion: Imprimir los valores leï¿½dos
+
         if (respuesta == "S") {
-            cout << "Tipo: " << tipo << ", Nombre: " << nombre << ", Fecha: " << fecha_nac << ", Fuerza: " << fuerza << ", Vida: " << vida << ", Muerto: " << muerto << endl;
+            cout << "Tipo: " << tipo << ", Nombre: " << nombre << ", Fecha: " << fecha_nac << ", Fuerza: " << fuerza << ", Vida: " << vida << ", Muerto: " << muerto << ", ataque: " << ataque << endl;
 
         }
-        
+
         if (tipo == "dragon") {
             ss >> id >> delimitador;
             getline(ss, ataque, ',');
@@ -46,7 +57,10 @@ void cargarlistas(const string& nombreArchivo, list<cDragones*>& dragones, list<
             estado = (estadoStr == "si");
             ss >> entrenado;
 
+
             cDragones* dragon = new cDragones(nombre, fecha_nac, fuerza, vida, muerto, id, ataque, estado, entrenado);
+            dragon->formaDeAtaque();
+            
             dragones.push_back(dragon);
         }
         else if (tipo == "vikingo") {
@@ -60,7 +74,7 @@ void cargarlistas(const string& nombreArchivo, list<cDragones*>& dragones, list<
 
             cDragones* dragon = encontrardragon(idDragon, dragones);
             if (dragon == nullptr) {
-                throw runtime_error("No se encontró el dragón con el ID especificado");
+                throw runtime_error("No se encontrï¿½ el dragï¿½n con el ID especificado");
             }
 
             ss >> dragon_muerto >> delimitador;
@@ -80,7 +94,7 @@ void cargarlistas(const string& nombreArchivo, list<cDragones*>& dragones, list<
 
             cDragones* dragon = encontrardragon(idDragon, dragones);
             if (dragon == nullptr) {
-                throw runtime_error("No se encontró el dragón con el ID especificado");
+                throw runtime_error("No se encontrï¿½ el dragï¿½n con el ID especificado");
             }
 
             ss >> dragon_muerto >> delimitador;
@@ -90,10 +104,12 @@ void cargarlistas(const string& nombreArchivo, list<cDragones*>& dragones, list<
             cJinetes* jinete = new cJinetes(nombre, fecha_nac, fuerza, vida, muerto, trabajo, dragon, dragon_muerto, resultado, nombreDragon);
             jinetes.push_back(jinete);
         }
+       
         else {
             throw invalid_argument("Tipo no reconocido: " + tipo);
         }
     }
+    cout << "Se cargaron correctamente las listas" << endl;
 
     archivo.close();
 }
@@ -160,7 +176,7 @@ string TrabajoToString(Posicion& Trabajo) {
         s = "Agricultor";
         break;
     case Posicion::Pescador:
-        cout << "Posición: Pescador" << endl;
+        cout << "Posiciï¿½n: Pescador" << endl;
         break;
     case Posicion::Herrero:
         s = "Herrero";
@@ -169,13 +185,13 @@ string TrabajoToString(Posicion& Trabajo) {
         s = "Jinete";
         break;
     default:
-        cout << "Posición no reconocida" << endl;
+        cout << "Posiciï¿½n no reconocida" << endl;
         break;
     }
     return s;
 
 }
-// Función para convertir string a enum Posicion
+// Funciï¿½n para convertir string a enum Posicion
 Posicion stringToTrabajo(const string& stringt) {
     if (stringt == "Entrenador") {
         return Posicion::Entrenador;
@@ -196,12 +212,6 @@ Posicion stringToTrabajo(const string& stringt) {
         return Posicion::Jinete;
     }
     else {
-        throw invalid_argument("String no válido para Posicion");
+        throw invalid_argument("String no vï¿½lido para Posicion");
     }
 }
-
-
-// Función auxiliar para encontrar un
-
-// 
-// estoy trabajando con el dato original porwue lo devuelvo por referencia, puede perder el encapsulamiwnto

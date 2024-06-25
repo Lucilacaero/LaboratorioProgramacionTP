@@ -33,44 +33,40 @@ private:
 
 
 public:
+	//CONSTRUCTORES
 	cDragones(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, unsigned int id, string ataque, bool estado, int entrenado);
-	~cDragones();
 	cDragones(const cDragones& otro);
-	int getvida();
+	
+	~cDragones(); 
+	
 	//friend void asignarnombre(cJinetes& jinete, cDragones& dragon);
-	bool Domado();
-	int danio();
+	
+	
+	//GETTERS Y SETTERS
 	string getnombre();
-	void setEntrenado(int entrenado);
-	void formaDeAtaque();
-	int atacar();
-	void vida(int danio);
-	void setMuerto(bool muerte);
-	unsigned int getfuerza();
+	int getvida();
 	int getEntrenado();
-	bool getMuerto();
+	unsigned int getfuerza();
 	unsigned int getid();
+	bool getMuerto();
+	bool Domado(); 
+	void setEntrenado(int entrenado); 
+	void setMuerto(bool muerte); 
 	void setNombre(cJinetes*& jinete);
-	friend cDragones* aleatorio(list <cDragones*> dragones); 
-	size_t encontrarPosicion(list <cDragones*> dragones);
-	string to__string(); //voy a imprimir todos los atributos de cPErsona y despues le agrego los de la clase correspondiente
-	void Imprimir();
-	friend cDragones* encontrardragon(unsigned int id, list<cDragones*>& dragones);
-	//friend void guardarlistas( string& nombreArchivo, list<cDragones*>& dragones, list<cVikingos*>& vikingos);
+
+	//Otras funciones
+	int atacar();
+	void formaDeAtaque();
+	void vida(int danio);
 	string guardar();
+	size_t encontrarPosicion(list <cDragones*> dragones);
+	string to__string();
+	void Imprimir();
+	void recibirDanio(int danio);
+	//Funciones friend
 	friend void guardarListas(string& nombreArchivo, list<cDragones*>& listamodificadaD, list<cVikingos*>& listamodificadaV, list<cJinetes*>& listamodificadaJ);
-	
-
-	
-	/*
-	string to_string() const override;
-	void Imprimir() const override;
-	*/
-	
-
-	//HACER FUNCION PARA ASIGNARLE UN NOMBRE
-	//friend void Entrenar(cJinetes& jinete);
-	//void modificarDragonSegunJinete(cJinetes& jinete);
+	friend cDragones* encontrardragon(unsigned int id, list<cDragones*>& dragones);
+	friend cDragones* aleatorio(list <cDragones*> dragones);
 };
 list<cDragones*>& operator+=(list<cDragones*>& lista, cDragones* dragon);
 list<cDragones*>& operator-=(list<cDragones*>& lista, cDragones* dragon);

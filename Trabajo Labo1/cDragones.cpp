@@ -8,6 +8,8 @@ int cDragones::DragonesVivos = 0;
 int cDragones::DragonesMuertos = 0;
 int cDragones::domados = 0;
 
+
+//CONSTRUCTORES Y DESTRUCTORES
 cDragones::cDragones(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, unsigned int id, string ataque, bool estado, int entrenado)
 	: cPersona(nombre, fecha_nac, fuerza, vida, muerto) {
 	Id = id;
@@ -17,7 +19,7 @@ cDragones::cDragones(string nombre, string fecha_nac, unsigned int fuerza, int v
 	DragonesVivos++;
 }
 cDragones::cDragones(const cDragones& otro) {
-	// Copiar cada atributo desde 'otro' al nuevo objeto creado (this)
+	// Constructor por copia, para copiar los elementos a una lista de modificados
 	this->Nombre = otro.Nombre;
 	this->Fecha_nac = otro.Fecha_nac;
 	this->Fuerza = otro.Fuerza;
@@ -28,6 +30,7 @@ cDragones::cDragones(const cDragones& otro) {
 	this->Estado = otro.Estado;
 	this->Entrenado = otro.Entrenado;
 }
+
 
 cDragones::~cDragones() {
 	DragonesVivos--;
@@ -68,7 +71,10 @@ string cDragones::getnombre() {
 
 //SETTERS
 
-
+void cDragones::setMuerto(bool muerte)
+{
+	Muerto = muerte;
+}
 
 void cDragones::setEntrenado(int entrenado)
 {
@@ -90,7 +96,7 @@ void cDragones::setNombre(cJinetes*& jinete)
 
 }
 
-
+//FRIEND
 cDragones* aleatorio( list<cDragones*> dragones)
 {
 		if (dragones.empty()) {
@@ -101,11 +107,32 @@ cDragones* aleatorio( list<cDragones*> dragones)
 		return *it;
 	
 }
-  
+
+
 
 //Otras funciones importantes y no tanto
 
 
+
+void cDragones::formaDeAtaque() {
+	//ASUMO QUE PUEDE ESTAR DESACTUUALIZADO Y COMO ENTRENA VA ADQQUIRIENDO NUEVAS FORMAS DE ATAQUE
+	if (this->Ataque == "No tiene" || this->Ataque == " ") {
+		if (Entrenado < 100)
+			this->Ataque = "No tiene";
+		else if (Entrenado < 200 && Entrenado >100)
+			this->Ataque = "Garras y colmillos";
+		else if (Entrenado < 400 && Entrenado >200)
+			this->Ataque = "Ataques fisicos";
+		else if (Entrenado < 800 && Entrenado >400)
+			this->Ataque = "Respirar fuego";
+		else if (Entrenado < 1600 && Entrenado >800)
+			this->Ataque = "Cargas aereas";
+		else if (Entrenado < 3200 && Entrenado >1600)
+			this->Ataque = "Proyectiles";
+	}
+	cout << "Después de asignar: Ataque = " << Ataque << endl;
+	
+}
 
 bool cDragones::Domado() {
 	if (Entrenado >= 100) {
@@ -113,52 +140,18 @@ bool cDragones::Domado() {
 		domados++;
 	}
 	return Estado;
-
-}
-
-
-void cDragones::formaDeAtaque() {
-	if (Ataque == "no tiene" || Ataque == " ") {
-		if (Entrenado < 100)
-			Ataque = "No tiene";
-		else if (Entrenado < 200 && Entrenado >100)
-			Ataque = "Garras y colmillos";
-		else if (Entrenado < 400 && Entrenado >200)
-			Ataque = "Ataques fisicos";
-		else if (Entrenado < 800 && Entrenado >400)
-			Ataque = "Respirar fuego";
-		else if (Entrenado < 1600 && Entrenado >800)
-			Ataque = "Cargas aereas";
-		else if (Entrenado < 3200 && Entrenado >1600)
-			Ataque = "Proyectiles";
-
-	}
-}
-
-
-int cDragones::danio() {
-	return 0;
 }
 void cDragones::vida(int danio)
 {
 	Vida = Vida - danio;
 	if (Vida < 0 || Vida == 0) {
 		Muerto = true;
-		system("pause");
-		system("cls");
+		//system("pause");
+		//system("cls");
 	}
-	//sacarlo de la lista 
-}
+	}
 
-void cDragones::setMuerto(bool muerte)
-{
-	Muerto = muerte;
-}
-
-int cDragones::atacar() 
-{
-
-	//para calcular el danio que puede causar un dragon voy a tomar en cuenta la fueerza del dragon y su tipo de ataque
+//para calcular el danio que puede causar un dragon voy a tomar en cuenta la fueerza del dragon y su tipo de ataque
 	/* si su fuerza es alta (de 1500 a 1000 puntos)
 	si su ataque es el 1 y 2 danio es de 900 a 1000 puntos
 	si su ataque es el 3 y 4 danio es de 1000 a 1250 puntos
@@ -173,53 +166,13 @@ int cDragones::atacar()
 	si su ataque es el 1 y 2 danio es de 0 a 250 puntos
 	si su ataque es el 3 y 4 danio es de 250 a 500 puntos
 	si su ataque es el 5 y 6 danio es de 750 a 500 puntos */
+int cDragones::atacar()
+{
 	int daniio = 0;
 	int max = 0;
 	int min = 0;
-	if (Fuerza < 1500 && Fuerza > 1000) {
 
-		//Notiene, Garrasycolmillos, Ataquesfisicos, Respirarfuego, Cargasaereas, Proyectiles
-		if (Ataque == "No tiene" || Ataque == "Garras y colmillos") {
-			min = 900;
-			max = 1000;
-		}
-		else if (Ataque == "Ataques fisicos" || Ataque == "Respirar fuego") {
-			min = 750;
-			max = 9000;
-		}
-		else if (Ataque == "Cargas aereas" || Ataque == "Proyectiles") {
-			min = 900;
-			max = 1000;
-		}
-		else {
-			cerr << "error, fallo cDragones atacar()";
-		}
-	}
-
-	else if (Fuerza < 1000 && Fuerza > 500) {
-
-		//Notiene, Garrasycolmillos, Ataquesfisicos, Respirarfuego, Cargasaereas, Proyectiles
-		if (Ataque == "No tiene" || Ataque == "Garras y colmillos") {
-			min = 500;
-			max = 750;
-		}
-		else if (Ataque == "Ataques fisicos" || Ataque == "Respirar fuego") {
-			min = 750;
-			max = 900;
-		}
-		else if (Ataque == "Cargas aereas" || Ataque == "Proyectiles") {
-			min = 900;
-			max = 1000;
-		}
-		else
-			cerr << "error, falla de cDragones";
-
-
-	}
-
-	else if (Fuerza < 500 && Fuerza > 0) {
-
-		//Notiene, Garrasycolmillos, Ataquesfisicos, Respirarfuego, Cargasaereas, Proyectiles
+	if (Fuerza >= 0 && Fuerza <= 500) {
 		if (Ataque == "No tiene" || Ataque == "Garras y colmillos") {
 			min = 0;
 			max = 250;
@@ -233,44 +186,76 @@ int cDragones::atacar()
 			max = 750;
 		}
 		else {
-			cerr << "error, Falla con dragones atacar()";
-			max = 50;
+			cout << "No se detectó un tipo específico de ataque. Se le asignará un daño aleatorio.\n";
+			min = 0;
+			max = 500;
 		}
-			
-
-
-
 	}
-	daniio = rand() % max;
-;
-	// Genera y devuelve un número aleatorio dentro del rango
-	
-	return daniio;
+	else if (Fuerza > 500 && Fuerza <= 1000) {
+		if (Ataque == "No tiene" || Ataque == "Garras y colmillos") {
+			min = 500;
+			max = 750;
+		}
+		else if (Ataque == "Ataques físicos" || Ataque == "Respirar fuego") {
+			min = 750;
+			max = 900;
+		}
+		else if (Ataque == "Cargas aéreas" || Ataque == "Proyectiles") {
+			min = 900;
+			max = 1000;
+		}
+		else {
+			cout << "No se detectó un tipo específico de ataque. Se le asignará un daño aleatorio.\n";
+			min = 500;
+			max = 1000;
+		}
+	}
+	else if (Fuerza > 1000 && Fuerza <= 1500) {
+		if (Ataque == "No tiene" || Ataque == "Garras y colmillos") {
+			min = 900;
+			max = 1000;
+		}
+		else if (Ataque == "Ataques físicos" || Ataque == "Respirar fuego") {
+			min = 1000;
+			max = 1250;
+		}
+		else if (Ataque == "Cargas aéreas" || Ataque == "Proyectiles") {
+			min = 1250;
+			max = 1500;
+		}
+		else {
+			cout << "No se detectó un tipo específico de ataque. Se le asignará un daño aleatorio.\n";
+			min = 1000;
+			max = 1500;
+		}
+	}
+	else {
+		cout << "Error: La fuerza del dragón está fuera de los límites esperados.\n";
+		return 0;
+	}
 
+	// Generar un número aleatorio en el rango [min, max]
+	daniio = min + rand() % (max - min + 1);
+
+//	cout << "El dragón " << Nombre << " ataca y genera un daño de " << daniio << " puntos.\n";
+	return daniio;
 }
 
+
+//FUNCIONES PARA CSV y otros
 size_t cDragones::encontrarPosicion(list <cDragones*> dragones) {
 
-		size_t posicion = 0;
-		for (list<cDragones*>::iterator it = dragones.begin(); it != dragones.end(); ++it, ++posicion) {
-			//if ((it)->Id == this->Id) {
-				return posicion;
-		//}
+	size_t posicion = 0;
+	for (list<cDragones*>::iterator it = dragones.begin(); it != dragones.end(); ++it, ++posicion) {
+		if ((*it)->Id == this->Id) {
+			return posicion;
 		}
 		throw out_of_range("Elemento no encontrado en la lista");
 	}
 
-
-
-cDragones* encontrardragon(unsigned int id, list<cDragones*>& dragones) {
-	for (auto dragon : dragones) {
-		if (dragon->getid() == id) {
-			return dragon;
-		}
-	}
-	return nullptr; // Retorna nullptr si no se encuentra el dragón con el ID 
 }
-string cDragones::guardar()
+
+string cDragones::guardar() //va a ser para escribir mas facil el csv
 {
 	string s;
 	s = to_string(Id) + "," + Ataque + "," + (Estado ? "Si" : "No") + "," + to_string(Entrenado);
@@ -278,10 +263,8 @@ string cDragones::guardar()
 	return s;
 }
 
-
-
-
 string cDragones::to__string(){
+	//voy a imprimir todos los atributos de cPersona y despues le agrego los de la clase correspondiente
 	string s = cPersona::to__string();
 	s += ", Id: " + to_string(Id)
 		+ ", Ataque: " + Ataque
@@ -295,8 +278,16 @@ void cDragones::Imprimir()
 {
 	cout << to__string();
 }
+void cDragones::recibirDanio(int danio) {
+	Vida = Vida - danio;
+	if (Vida <= 0) {
+		cout << "El dragón " << Nombre << " ha sido derrotado." << endl;
+		// Podrías implementar aquí la lógica adicional cuando el dragón muere
+	}
+}
 
 list<cDragones*>& operator+=(list<cDragones*>& lista, cDragones* dragon) {
+	
 	lista.push_back(dragon);
 	return lista;
 }

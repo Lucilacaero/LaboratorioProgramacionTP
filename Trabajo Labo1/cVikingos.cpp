@@ -48,7 +48,7 @@ int cVikingos::atacar()
 		danio = rand() % 400;	}
 	else {danio = rand() % 500;}
 	
-	cout << "el vikingo " << Nombre << " ataca y genera un danio de " << danio << " puntos al dragon "<< Dragon->getnombre() << endl;
+	
 	return danio;
 }
 
@@ -61,11 +61,10 @@ void cVikingos::vida(int danio)
 {
 	Vida = Vida - danio;
 	if (Vida < 0 || Vida == 0) {
-		cout << "El vikingo murio en combate" << endl;
+		
 		Muerto = true;
 
-		system("pause");
-		system("cls");
+		
 	}
 	
 	//sacarlo de la lista
@@ -79,7 +78,8 @@ void cVikingos::asignarDragon(cDragones* dragon) {
 		
 	} 
 	else {
-		cout << "El dragon no está disponible o está domado." << endl;
+		cout << "El dragon no esta disponible o esta domado." << endl;
+		asignarDragon(dragon);
 	}
 }
 
