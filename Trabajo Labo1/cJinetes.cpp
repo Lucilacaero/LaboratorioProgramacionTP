@@ -11,6 +11,19 @@ cJinetes::cJinetes(string nombre, string fecha_nac, unsigned int fuerza, int vid
     Resultado = resultado;
     NombreDragon = nombredragon;
 }
+cJinetes::cJinetes(const cJinetes& otro) {
+    // Copiar cada atributo desde 'otro' al nuevo objeto creado (this)
+    this->Nombre = otro.Nombre;
+    this->Fecha_nac = otro.Fecha_nac;
+    this->Fuerza = otro.Fuerza;
+    this->Vida = otro.Vida; 
+    this->Muerto = otro.Muerto;
+    this->Trabajo = otro.Trabajo;
+    this->Dragon = otro.Dragon;
+    this->Dragon_Muerto = otro.Dragon_Muerto;
+    this->Resultado = otro.Resultado;
+    this->NombreDragon = otro.NombreDragon;
+}
 cJinetes::~cJinetes()
 {
 }
@@ -78,6 +91,11 @@ cJinetes* aleatorio(list<cJinetes*> jinetes)
     return *it;
 }
 
+void cJinetes::setMuerte(bool muerte)
+{
+    Muerto = muerte;
+}
+
 string cJinetes::to__string()
 {
     string s = cVikingos::to__string();
@@ -96,3 +114,20 @@ string cJinetes::guardar()
     s += Resultado + "," + NombreDragon;
     return string();
 }
+
+int cJinetes::getvida()
+{
+    return Vida;
+}
+
+
+list<cJinetes*>& operator+=(list<cJinetes*>& lista, cJinetes* jinete) {
+    lista.push_back(jinete);
+    return lista;
+}
+
+list<cJinetes*>& operator-=(list<cJinetes*>& lista, cJinetes* jinete) {
+    lista.remove(jinete);
+    return lista;
+}
+

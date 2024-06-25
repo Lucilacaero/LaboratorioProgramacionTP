@@ -16,13 +16,16 @@ protected:
 
 public:
 	cVikingos();
+	cVikingos(const cVikingos& otro);
 	cVikingos(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, Posicion trabajo, cDragones* dragon, int dragon_muerto);
 	virtual ~cVikingos();
 	int atacar();
+	int getvida();
+	Posicion getPosicion();
 	void vida(int danio);
 	void setDragon(cDragones* dragon);
 	cDragones* getDragon();
-	int getvida();
+	void setMuerto(bool muerte);
 	void asignarDragon(cDragones* dragon);
 	void trabajar();
 	bool getMuerto();
@@ -30,12 +33,13 @@ public:
 	size_t encontrarPosicion(list <cVikingos*> vikingos);
 	virtual string to__string() override; //son virtual porque se lo voy a pasar a cJinete
 	virtual void Imprimir();
-	string EnumAstring();
+	string getnombre();
 	//friend void cargarlistas(string& nombreArchivo, list<cDragones*>& dragones, list <cVikingos*>& vikingos, list <cJinetes*> jinetes);
 	virtual string guardar();
-	/*
-	string to_string() const override;
-	void Imprimir() const override;
-	*/
+
+	friend void guardarListas(string& nombreArchivo, list<cDragones*>& listamodificadaD, list<cVikingos*>& listamodificadaV, list<cJinetes*>& listamodificadaJ);
+	
 	};
 
+list<cVikingos*>& operator+=(list<cVikingos*>& lista, cVikingos* vikingo);
+list<cVikingos*>& operator-=(list<cVikingos*>& lista, cVikingos* vikingo); 

@@ -30,7 +30,7 @@
     <ClCompile Include="cPersona.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Panoptico.cpp">
+    <ClCompile Include="AyuditaMain.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,8 +47,11 @@
     <ClInclude Include="cPersona.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Panoptico.h">
+    <ClInclude Include="AyuditaMain.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Tp Labo1.csv" />
   </ItemGroup>
 </Project>

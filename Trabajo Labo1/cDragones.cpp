@@ -7,9 +7,7 @@ using namespace std;
 int cDragones::DragonesVivos = 0;
 int cDragones::DragonesMuertos = 0;
 int cDragones::domados = 0;
-// void cDragones::operator=() {
 
-//}
 cDragones::cDragones(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, unsigned int id, string ataque, bool estado, int entrenado)
 	: cPersona(nombre, fecha_nac, fuerza, vida, muerto) {
 	Id = id;
@@ -17,6 +15,18 @@ cDragones::cDragones(string nombre, string fecha_nac, unsigned int fuerza, int v
 	Estado = estado;
 	Entrenado = entrenado;
 	DragonesVivos++;
+}
+cDragones::cDragones(const cDragones& otro) {
+	// Copiar cada atributo desde 'otro' al nuevo objeto creado (this)
+	this->Nombre = otro.Nombre;
+	this->Fecha_nac = otro.Fecha_nac;
+	this->Fuerza = otro.Fuerza;
+	this->Vida = otro.Vida;
+	this->Muerto = otro.Muerto;
+	this->Id = otro.Id;
+	this->Ataque = otro.Ataque;
+	this->Estado = otro.Estado;
+	this->Entrenado = otro.Entrenado;
 }
 
 cDragones::~cDragones() {
@@ -80,6 +90,7 @@ void cDragones::setNombre(cJinetes*& jinete)
 
 }
 
+
 cDragones* aleatorio( list<cDragones*> dragones)
 {
 		if (dragones.empty()) {
@@ -132,13 +143,19 @@ void cDragones::vida(int danio)
 {
 	Vida = Vida - danio;
 	if (Vida < 0 || Vida == 0) {
-		cout << "El dragon murio" << endl;
 		Muerto = true;
+		system("pause");
+		system("cls");
 	}
 	//sacarlo de la lista 
 }
 
-int cDragones::atacar()
+void cDragones::setMuerto(bool muerte)
+{
+	Muerto = muerte;
+}
+
+int cDragones::atacar() 
 {
 
 	//para calcular el danio que puede causar un dragon voy a tomar en cuenta la fueerza del dragon y su tipo de ataque
@@ -175,7 +192,7 @@ int cDragones::atacar()
 			max = 1000;
 		}
 		else {
-			cout << "error, hacer algo con trycatch";
+			cerr << "error, fallo cDragones atacar()";
 		}
 	}
 
@@ -195,7 +212,7 @@ int cDragones::atacar()
 			max = 1000;
 		}
 		else
-			cout << "error, hacer algo con trycatch";
+			cerr << "error, falla de cDragones";
 
 
 	}
@@ -215,15 +232,19 @@ int cDragones::atacar()
 			min = 500;
 			max = 750;
 		}
-		else
-			cout << "error, hacer algo con trycatch";
+		else {
+			cerr << "error, Falla con dragones atacar()";
+			max = 50;
+		}
+			
+
+
 
 	}
-
-
-	
-	// Genera y devuelve un número aleatorio dentro del rango
 	daniio = rand() % max;
+;
+	// Genera y devuelve un número aleatorio dentro del rango
+	
 	return daniio;
 
 }
@@ -240,18 +261,15 @@ size_t cDragones::encontrarPosicion(list <cDragones*> dragones) {
 	}
 
 
-cDragones* encontrardragon(unsigned int id, list<cDragones*>& dragones)
-{
-	list<cDragones*>::iterator it;
-	for (it = dragones.begin(); it != dragones.end(); ++it) {
-		cDragones* dragon = *it;
+
+cDragones* encontrardragon(unsigned int id, list<cDragones*>& dragones) {
+	for (auto dragon : dragones) {
 		if (dragon->getid() == id) {
 			return dragon;
 		}
 	}
-	return nullptr;
+	return nullptr; // Retorna nullptr si no se encuentra el dragón con el ID 
 }
-
 string cDragones::guardar()
 {
 	string s;
@@ -259,6 +277,7 @@ string cDragones::guardar()
 	
 	return s;
 }
+
 
 
 
@@ -277,6 +296,15 @@ void cDragones::Imprimir()
 	cout << to__string();
 }
 
+list<cDragones*>& operator+=(list<cDragones*>& lista, cDragones* dragon) {
+	lista.push_back(dragon);
+	return lista;
+}
 
+// Sobrecarga del operador -= para eliminar un cDragones de la lista
+list<cDragones*>& operator-=(list<cDragones*>& lista, cDragones* dragon) {
+	lista.remove(dragon);
+	return lista;
+}
 
 

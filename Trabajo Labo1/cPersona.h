@@ -17,6 +17,9 @@ public:
     cPersona();
     cPersona(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto);
     virtual ~cPersona();
+    cPersona(const cPersona& otro);
+    void setMuerto(bool muerte);
+  int getvida();
     virtual int atacar() = 0;// esta va a ser la funcion con polimorfismo
     virtual void vida(int danio) = 0;// esta tambien porque despues llamo a los destructores 
    virtual bool getMuerto(); 

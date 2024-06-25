@@ -4,6 +4,7 @@
 #include "cVikingos.h"
 #include <iostream>
 #include <cstdlib>
+#include "AyuditaMain.h"
 using namespace std;
 
 cVikingos::cVikingos(): cPersona()
@@ -12,6 +13,17 @@ cVikingos::cVikingos(): cPersona()
 	Dragon_Muerto= 0;
 	Dragon = NULL;
 	
+}
+cVikingos::cVikingos(const cVikingos& otro)  {
+	this->Nombre = otro.Nombre;
+	this->Fecha_nac = otro.Fecha_nac;
+	this->Fuerza = otro.Fuerza;
+	this->Vida = otro.Vida;
+	this->Muerto = otro.Muerto;
+	this->Trabajo = otro.Trabajo;
+	this->Dragon = otro.Dragon;
+	this->Dragon_Muerto = otro.Dragon_Muerto; 
+	// Aquí se copian los atributos privados del objeto 'otro' al nuevo objeto creado
 }
 
 cVikingos::cVikingos(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, Posicion trabajo, cDragones* dragon, int dragon_muerto)
@@ -36,25 +48,30 @@ int cVikingos::atacar()
 		danio = rand() % 400;	}
 	else {danio = rand() % 500;}
 	
-	cout << "el vikingo ataca y genera un daño de " << danio;
+	cout << "el vikingo " << Nombre << " ataca y genera un danio de " << danio << " puntos al dragon "<< Dragon->getnombre() << endl;
 	return danio;
+}
+
+Posicion cVikingos::getPosicion()
+{
+	return Trabajo;
 }
 
 void cVikingos::vida(int danio)
 {
 	Vida = Vida - danio;
 	if (Vida < 0 || Vida == 0) {
-		cout << "El vikingo murio" << endl;
+		cout << "El vikingo murio en combate" << endl;
 		Muerto = true;
+
+		system("pause");
+		system("cls");
 	}
 	
 	//sacarlo de la lista
 }
 
-int cVikingos::getvida()
-{
-	return Vida;
-}
+
 
 void cVikingos::asignarDragon(cDragones* dragon) {
 	if (dragon != nullptr && dragon->Domado()) {
@@ -79,7 +96,7 @@ void cVikingos::trabajar()
 	else if (Trabajo == Posicion::Herrero)
 		cout << "el vikingo herrero " << Nombre << " fue a soldar" << endl;
 	else if (Trabajo == Posicion::Jinete)
-		cout << "el vikingo Jinete " << Nombre << " fue a entrenar un dragon" << endl;
+		cout << "el vikingo Jinete " << Nombre << " fue a entrenar su dragon "<< Dragon->getnombre() << endl;
 	//llamar a la funcion entrenar
 }
 
@@ -90,6 +107,10 @@ bool cVikingos::getMuerto()
 
 cDragones* cVikingos::getDragon() {
 	return this->Dragon;
+}
+void cVikingos::setMuerto(bool muerte)
+{
+	Muerto = muerte;
 }
 void cVikingos::setDragon(cDragones* dragon) {
 	this->Dragon = dragon;
@@ -121,7 +142,7 @@ size_t cVikingos::encontrarPosicion(list <cVikingos*> vikingos) {
 string cVikingos::to__string()
 {
 	string s = cPersona::to__string();
-	string str_trabajo = EnumAstring();
+	string str_trabajo = TrabajoToString(Trabajo);
 	s += ", Trabajo: " + str_trabajo;
 
 
@@ -142,16 +163,37 @@ void cVikingos::Imprimir()
 	cout << to__string();
 }
 
-string cVikingos::EnumAstring()
+string cVikingos::getnombre()
 {
-	return string();
+	return Nombre;
 }
+
+
 
 string cVikingos::guardar()
 {
 
 	string s = cPersona::guardar();
-	s = EnumAstring() + "," + to_string(Dragon->getid()) + "," + to_string(Dragon_Muerto);
+	s = TrabajoToString(Trabajo) + "," + to_string(Dragon->getid()) + "," + to_string(Dragon_Muerto);
 	return s;
+}
+
+
+
+
+int cVikingos::getvida()
+{
+	return Vida;
+}
+// Sobrecarga del operador += para agregar un cVikingos a la lista
+list<cVikingos*>& operator+=(list<cVikingos*>& lista, cVikingos* vikingo) {
+	lista.push_back(vikingo);
+	return lista;
+}
+
+// Sobrecarga del operador -= para eliminar un cVikingos de la lista
+list<cVikingos*>& operator-=(list<cVikingos*>& lista, cVikingos* vikingo) {
+	lista.remove(vikingo);
+	return lista;
 }
 

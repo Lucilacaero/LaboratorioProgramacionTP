@@ -12,8 +12,24 @@ cPersona::cPersona(string nombre, string fecha_nac, unsigned int fuerza, int vid
 	Vida = vida; 
 	Muerto = muerto;
 }
+cPersona::cPersona(const cPersona& otro) {
+	this->Nombre = otro.Nombre;
+	this->Fecha_nac = otro.Fecha_nac;
+	this->Fuerza = otro.Fuerza;
+	this->Vida = otro.Vida;
+	this->Muerto = otro.Muerto;
+	
+}
 
 cPersona::~cPersona() {}
+void cPersona::setMuerto(bool muerte)
+{
+	Muerto = muerte;
+}
+int cPersona::getvida()
+{
+	return Vida;
+}
 
 bool cPersona::getMuerto()
 {

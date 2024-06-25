@@ -35,6 +35,8 @@ private:
 public:
 	cDragones(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, unsigned int id, string ataque, bool estado, int entrenado);
 	~cDragones();
+	cDragones(const cDragones& otro);
+	int getvida();
 	//friend void asignarnombre(cJinetes& jinete, cDragones& dragon);
 	bool Domado();
 	int danio();
@@ -43,7 +45,7 @@ public:
 	void formaDeAtaque();
 	int atacar();
 	void vida(int danio);
-	int getvida();
+	void setMuerto(bool muerte);
 	unsigned int getfuerza();
 	int getEntrenado();
 	bool getMuerto();
@@ -56,7 +58,10 @@ public:
 	friend cDragones* encontrardragon(unsigned int id, list<cDragones*>& dragones);
 	//friend void guardarlistas( string& nombreArchivo, list<cDragones*>& dragones, list<cVikingos*>& vikingos);
 	string guardar();
+	friend void guardarListas(string& nombreArchivo, list<cDragones*>& listamodificadaD, list<cVikingos*>& listamodificadaV, list<cJinetes*>& listamodificadaJ);
+	
 
+	
 	/*
 	string to_string() const override;
 	void Imprimir() const override;
@@ -67,3 +72,5 @@ public:
 	//friend void Entrenar(cJinetes& jinete);
 	//void modificarDragonSegunJinete(cJinetes& jinete);
 };
+list<cDragones*>& operator+=(list<cDragones*>& lista, cDragones* dragon);
+list<cDragones*>& operator-=(list<cDragones*>& lista, cDragones* dragon);
