@@ -1,12 +1,8 @@
 ﻿
 #include "AyuditaMain.h"
 
-#include "AyuditaMain.h"
-
-
-cDragones* encontrardragon(unsigned int id, std::list<cDragones*>& dragones) {
-    for (auto& dragon : dragones) {
-    
+cDragones* encontrardragon(unsigned int id, list<cDragones*>& dragones) {
+    for(auto &dragon :dragones){
         if (dragon->Id == id) {
             return dragon;
         }
@@ -20,7 +16,7 @@ void cargarlistas(const string& nombreArchivo, list<cDragones*>& dragones, list<
     if (!archivo.is_open()) {
         throw runtime_error("No se pudo abrir el archivo");
     }
-    cout << "Ver las listas cargadas? S/N";
+    cout << "Ver las listas cargadas? S/N: ";
     string  respuesta;
     cin >> respuesta;
     string linea;
@@ -42,12 +38,10 @@ void cargarlistas(const string& nombreArchivo, list<cDragones*>& dragones, list<
         getline(ss, muertoStr, ',');
         muerto = (muertoStr == "si");
 
-        // Depuracion: Imprimir los valores le�dos
+        // Depuracion: Imprimir los valores leIdos
 
-        if (respuesta == "S") {
-            cout << "Tipo: " << tipo << ", Nombre: " << nombre << ", Fecha: " << fecha_nac << ", Fuerza: " << fuerza << ", Vida: " << vida << ", Muerto: " << muerto << ", ataque: " << ataque << endl;
-
-        }
+       
+        //"Tipo: " << tipo << ", Nombre: " << nombre << ", Fecha: " << fecha_nac << ", Fuerza: " << fuerza << ", Vida: " << vida << ", Esta muerto: " << (muerto ? "si" : "no") << endl;
 
         if (tipo == "dragon") {
             ss >> id >> delimitador;
@@ -58,10 +52,14 @@ void cargarlistas(const string& nombreArchivo, list<cDragones*>& dragones, list<
             ss >> entrenado;
 
 
-            cDragones* dragon = new cDragones(nombre, fecha_nac, fuerza, vida, muerto, id, ataque, estado, entrenado);
+            cDragones* dragon = new cDragones(tipo,nombre, fecha_nac, fuerza, vida, muerto, id, ataque, estado, entrenado);
+           
             dragon->formaDeAtaque();
             
-            dragones.push_back(dragon);
+            dragones+=dragon;
+            if (respuesta == "S") {
+                cout << *dragon;
+            }
         }
         else if (tipo == "vikingo") {
             string posicionStr;
@@ -74,13 +72,16 @@ void cargarlistas(const string& nombreArchivo, list<cDragones*>& dragones, list<
 
             cDragones* dragon = encontrardragon(idDragon, dragones);
             if (dragon == nullptr) {
-                throw runtime_error("No se encontr� el drag�n con el ID especificado");
+                throw runtime_error("No se encontro el dragon con el ID especificado");
             }
 
             ss >> dragon_muerto >> delimitador;
 
-            cVikingos* vikingo = new cVikingos(nombre, fecha_nac, fuerza, vida, muerto, trabajo, dragon, dragon_muerto);
-            vikingos.push_back(vikingo);
+            cVikingos* vikingo = new cVikingos(tipo, nombre, fecha_nac, fuerza, vida, muerto, trabajo, dragon, dragon_muerto);
+            vikingos+=vikingo;
+            if (respuesta == "S") {
+                cout << *vikingo;
+            }
         }
         else if (tipo == "jinete") {
             string posicionStr;
@@ -94,73 +95,31 @@ void cargarlistas(const string& nombreArchivo, list<cDragones*>& dragones, list<
 
             cDragones* dragon = encontrardragon(idDragon, dragones);
             if (dragon == nullptr) {
-                throw runtime_error("No se encontr� el drag�n con el ID especificado");
+                throw runtime_error("No se encontro el dragon con el ID especificado");
             }
 
             ss >> dragon_muerto >> delimitador;
             getline(ss, resultado, ',');
             getline(ss, nombreDragon, ',');
 
-            cJinetes* jinete = new cJinetes(nombre, fecha_nac, fuerza, vida, muerto, trabajo, dragon, dragon_muerto, resultado, nombreDragon);
-            jinetes.push_back(jinete);
+            cJinetes* jinete = new cJinetes(tipo, nombre, fecha_nac, fuerza, vida, muerto, trabajo, dragon, dragon_muerto, resultado, nombreDragon);
+            jinetes+=jinete;
+            if (respuesta == "S") {
+                cout << *jinete;
+            }
         }
        
         else {
             throw invalid_argument("Tipo no reconocido: " + tipo);
         }
+       
     }
+    
     cout << "Se cargaron correctamente las listas" << endl;
 
     archivo.close();
 }
 
-
-void guardarListas(string& nombreArchivo, list<cDragones*>& listamodificadaD, list<cVikingos*>& listamodificadaV, list<cJinetes*>& listamodificadaJ) {
-    ofstream archivo(nombreArchivo);
-    if (!archivo.is_open()) {
-        throw runtime_error("No se pudo abrir el archivo para guardar");
-    }
-
-    // Guardar dragones
-    for (auto it = listamodificadaD.begin(); it != listamodificadaD.end(); ++it) {
-        archivo << "dragon,"
-            << (*it)->Nombre << ","
-            << (*it)->Fecha_nac << ","
-            << (*it)->Fuerza << ","
-            << (*it)->Vida << ","
-            << ((*it)->Muerto ? "si" : "no") << ","
-            << (*it)->Id << ","
-            << (*it)->Ataque << ","
-            << ((*it)->Entrenado ? "si" : "no") << endl;
-    }
-
-    // Guardar vikingos
-    for (auto it = listamodificadaV.begin(); it != listamodificadaV.end(); ++it) {
-        archivo << "vikingo,"
-            << (*it)->Nombre << ","
-            << (*it)->Fecha_nac << ","
-            << TrabajoToString((*it)->Trabajo) << ","
-            << (*it)->getDragon()->Id << ","
-            << (*it)->Dragon_Muerto << endl;
-    }
-
-    // Guardar jinetes
-    for (auto it = listamodificadaJ.begin(); it != listamodificadaJ.end(); ++it) {
-        archivo << "jinete,"
-            << (*it)->Nombre << ","
-            << (*it)->Fecha_nac << ","
-            << (*it)->Fuerza << ","
-            << (*it)->Vida << ","
-            << ((*it)->Muerto ? "si" : "no") << ","
-            << TrabajoToString((*it)->Trabajo) << ","
-            << (*it)->getDragon()->Id << ","
-            << (*it)->Dragon_Muerto << ","
-            << (*it)->Resultado << ","
-            << (*it)->NombreDragon << endl;
-    }
-
-    archivo.close();
-}
 
 
 string TrabajoToString(Posicion& Trabajo) {
@@ -176,7 +135,7 @@ string TrabajoToString(Posicion& Trabajo) {
         s = "Agricultor";
         break;
     case Posicion::Pescador:
-        cout << "Posici�n: Pescador" << endl;
+        s = "Pescador";
         break;
     case Posicion::Herrero:
         s = "Herrero";
@@ -185,13 +144,13 @@ string TrabajoToString(Posicion& Trabajo) {
         s = "Jinete";
         break;
     default:
-        cout << "Posici�n no reconocida" << endl;
+        cout << "Posicion no reconocida" << endl;
         break;
     }
     return s;
 
 }
-// Funci�n para convertir string a enum Posicion
+// Funcion para convertir string a enum Posicion
 Posicion stringToTrabajo(const string& stringt) {
     if (stringt == "Entrenador") {
         return Posicion::Entrenador;
@@ -212,6 +171,71 @@ Posicion stringToTrabajo(const string& stringt) {
         return Posicion::Jinete;
     }
     else {
-        throw invalid_argument("String no v�lido para Posicion");
+        throw invalid_argument("El String no coincide con la Posicion");
     }
+}
+
+void imprimirresumen(list <cDragones*>& listamodificadaD, list <cVikingos*>&listamodificadaV, list <cJinetes*>& listamodificadaJ) {
+
+
+    cout << "A continuacion se mostraran los cambios de este dia" << endl;
+    print();
+    if (listamodificadaD.empty()) {
+        cout << "Dragones muertos: Ningun dragon murio hoy" << endl;
+    }
+    else {
+        cout << "Dragones : " << cDragones::DragonesMuertos << endl;
+        cout << "Dragones muertos: " << endl;
+        for (auto it = listamodificadaD.begin(); it != listamodificadaD.end(); ++it) {
+            cDragones* dragon = *it;
+            dragon->Imprimir();
+        }
+    }
+    cout << "Dragones Vivos: " << cDragones::DragonesVivos << endl;
+   
+    cout << "Dragones domados " << cDragones::Domados << endl;
+    cout << "\n";
+    cout << "Vikingos muertos:" << endl;
+    if (listamodificadaV.empty()) {
+        cout << "Ningun vikingo murio hoy" << endl;
+    }
+    else {
+        for (auto it = listamodificadaV.begin(); it != listamodificadaV.end(); ++it) {
+            cVikingos* vikingo = *it;
+            vikingo->Imprimir();
+        }
+    }
+    cout << "\n";
+    cout << "Jinetes muertos:" << endl;
+    if (listamodificadaJ.empty()) {
+        cout << "Ningun jinete murio hoy" << endl;
+    }
+    else {
+        for (auto it = listamodificadaJ.begin(); it != listamodificadaJ.end(); ++it) {
+            cJinetes* jinete = *it;
+            jinete->Imprimir();
+        }
+    }
+
+}
+void print() {
+    string dragon =
+        R"(
+                                        (  )   /\   _                 (     
+                                       \ |  (  \ ( \.(               )                      _____
+                                     \  \ \  `  `   ) \             (  ___                 / _   \
+                                    (_`    \+   . x  ( .\            \/   \____-----------/ (o)   \_
+                                    - .-               \+  ;          (  O                           \____
+                                       \_____________  `              \  /
+                                    (__                +- .( -'.- <. - _  VVVVVVV VV V\                 \/
+                                    ( _____            ._._: <_ - <- _  (--  _AAAAAAA__A_/                  |
+                                 .    /./.+-  . .- /  +--  - .     \______________//_              \_______
+                                (__ ' /x  / x _/ (                                  \___'          \     /
+                                 , x / ( '  . / .  /                                      |           \   /
+                                   /  /  _/ /    +                                      /              \/
+                                  '  (__/                                             /
+
+                            
+)";
+    cout << dragon;
 }

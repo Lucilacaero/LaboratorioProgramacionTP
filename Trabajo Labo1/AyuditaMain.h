@@ -16,3 +16,5 @@ void cargarlistas(const string& nombreArchivo, list<cDragones*>& dragones, list<
 Posicion stringToTrabajo(const string& stringt);
 cDragones* encontrardragon(unsigned int id, list<cDragones*>& dragones);
 string TrabajoToString(Posicion& Trabajo);
+void imprimirresumen(list <cDragones*>& listamodificadaD, list <cVikingos*>& listamodificadaV, list <cJinetes*>& listamodificadaJ);
+void print();

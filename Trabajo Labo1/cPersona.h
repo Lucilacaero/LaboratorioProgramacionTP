@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <list>
+#include <iomanip>
 
 using namespace std;
 class cPersona {
@@ -15,7 +16,7 @@ protected:
 public:
     void setNombre(const string& nombre);
     cPersona();
-    cPersona(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto);
+    cPersona(string tipo, string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto);
     virtual ~cPersona();
     cPersona(const cPersona& otro);
     void setMuerto(bool muerte);
@@ -25,15 +26,7 @@ public:
    virtual bool getMuerto(); 
    virtual string to__string(); //voy a imprimir todos los atributos de cPErsona y despues le agrego los de la clase correspondiente
    virtual void Imprimir();
-   virtual string guardar(); // copiar el csv
-   friend void guardarlistas( string& nombreArchivo, list<cPersona*>& listamodificada);
- //  friend  void cargarlistas(string& nombreArchivo, list<cDragones*>& dragones, list <cVikingos*>& vikingos, list <cJinetes*> jinetes);
-   void borrarLista(size_t position);
-   cPersona* seleccionarElementoAleatorio();
-   size_t encontrarPosicion(cPersona* value);
-
-
-
+   
 };
 
 

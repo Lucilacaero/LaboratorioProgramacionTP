@@ -11,10 +11,15 @@ private:
 	string NombreDragon;
 public:
 	
-	cJinetes(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, Posicion trabajo, cDragones* dragon, int dragon_muerto, string resultado, string nombredragon);
+	cJinetes(string tipo, string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, Posicion trabajo, cDragones* dragon, int dragon_muerto, string resultado, string nombredragon);
 	~cJinetes();
 	cJinetes(const cJinetes& otro);
 	int getvida();
+	int getFuerza();
+	bool getMuerto();
+	cDragones* getDragon();
+	void setDragon(cDragones* dragon);
+	void setResultado(string resultado);
 	//friend void asignarnombre(cJinetes& jinete, cDragones& dragon);
 	friend void cDragones::setNombre(cJinetes*& jinete); 
 	void entrenarDragon();
@@ -22,10 +27,7 @@ public:
 	void setMuerte(bool muerte);
 	string to__string(); //son virtual porque se lo voy a pasar a cJinete
 	void Imprimir();
-	string guardar();
-	friend void guardarListas(string& nombreArchivo, list<cDragones*>& listamodificadaD, list<cVikingos*>& listamodificadaV, list<cJinetes*>& listamodificadaJ);
-
-
+	friend ostream& operator<<(ostream& out, cJinetes& jinete);
 
 
 }; 

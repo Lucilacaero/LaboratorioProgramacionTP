@@ -27,16 +27,16 @@ private:
 	bool Estado;// domado o no
 	int Entrenado;// para saber si esta domado y su forma de ataque
 	
-	static int DragonesVivos;
-	static int DragonesMuertos;
-	static int domados;
+	
 
 
 public:
+	static int DragonesVivos;
+	static int DragonesMuertos;
+	static int Domados;
 	//CONSTRUCTORES
-	cDragones(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, unsigned int id, string ataque, bool estado, int entrenado);
+	cDragones(string tipo, string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, unsigned int id, string ataque, bool estado, int entrenado);
 	cDragones(const cDragones& otro);
-	
 	~cDragones(); 
 	
 	//friend void asignarnombre(cJinetes& jinete, cDragones& dragon);
@@ -44,6 +44,7 @@ public:
 	
 	//GETTERS Y SETTERS
 	string getnombre();
+	bool getDomado();
 	int getvida();
 	int getEntrenado();
 	unsigned int getfuerza();
@@ -58,15 +59,15 @@ public:
 	int atacar();
 	void formaDeAtaque();
 	void vida(int danio);
-	string guardar();
-	size_t encontrarPosicion(list <cDragones*> dragones);
+	
 	string to__string();
 	void Imprimir();
-	void recibirDanio(int danio);
+
 	//Funciones friend
-	friend void guardarListas(string& nombreArchivo, list<cDragones*>& listamodificadaD, list<cVikingos*>& listamodificadaV, list<cJinetes*>& listamodificadaJ);
+
 	friend cDragones* encontrardragon(unsigned int id, list<cDragones*>& dragones);
 	friend cDragones* aleatorio(list <cDragones*> dragones);
+	friend ostream& operator<<(ostream& out, cDragones& dragon);
 };
 list<cDragones*>& operator+=(list<cDragones*>& lista, cDragones* dragon);
 list<cDragones*>& operator-=(list<cDragones*>& lista, cDragones* dragon);

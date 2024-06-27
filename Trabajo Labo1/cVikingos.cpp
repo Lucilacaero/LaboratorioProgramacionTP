@@ -15,6 +15,7 @@ cVikingos::cVikingos(): cPersona()
 	
 }
 cVikingos::cVikingos(const cVikingos& otro)  {
+	this->Tipo = otro.Tipo;
 	this->Nombre = otro.Nombre;
 	this->Fecha_nac = otro.Fecha_nac;
 	this->Fuerza = otro.Fuerza;
@@ -26,8 +27,8 @@ cVikingos::cVikingos(const cVikingos& otro)  {
 	// Aquí se copian los atributos privados del objeto 'otro' al nuevo objeto creado
 }
 
-cVikingos::cVikingos(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, Posicion trabajo, cDragones* dragon, int dragon_muerto)
-	: cPersona(nombre, fecha_nac, fuerza, vida, muerto) {
+cVikingos::cVikingos(string tipo, string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, Posicion trabajo, cDragones* dragon, int dragon_muerto)
+	: cPersona(tipo,nombre, fecha_nac, fuerza, vida, muerto) {
 	Trabajo = trabajo;
 	Dragon = dragon; 
 	Dragon_Muerto = dragon_muerto;
@@ -36,19 +37,19 @@ cVikingos::cVikingos(string nombre, string fecha_nac, unsigned int fuerza, int v
 cVikingos::~cVikingos() {}
 
 int cVikingos::atacar()
-{// en el caso de los vikingos asumo que la fuerza va hasta 500, de los dragones hasta 1000 
+{// en el caso de los vikingos asumo que la fuerza va hasta 700, de los dragones hasta 1000 
 	int danio = 0;
 	if (Fuerza < 100) {
-		danio = rand() % 100;}
-	else if (Fuerza < 200) {
 		danio = rand() % 200;}
-	else if (Fuerza < 300) {
+	else if (Fuerza < 200) {
 		danio = rand() % 300;}
+	else if (Fuerza < 300) {
+		danio = rand() % 400;}
 	else if (Fuerza < 400) {
-		danio = rand() % 400;	}
-	else {danio = rand() % 500;}
+		danio = rand() % 500;	}
+	else {danio = rand() % 700;}
 	
-	
+	cout << "el vikingo genero un danio de " << danio << " puntos." << endl;
 	return danio;
 }
 
@@ -62,9 +63,7 @@ void cVikingos::vida(int danio)
 	Vida = Vida - danio;
 	if (Vida < 0 || Vida == 0) {
 		
-		Muerto = true;
-
-		
+		Muerto = true;		
 	}
 	
 	//sacarlo de la lista
@@ -72,14 +71,17 @@ void cVikingos::vida(int danio)
 
 
 
-void cVikingos::asignarDragon(cDragones* dragon) {
+void cVikingos::asignarDragon(list <cDragones*> dragones, cDragones * dragon) {
 	if (dragon != nullptr && dragon->Domado()) {
 		this->Dragon = dragon;
-		
 	} 
 	else {
 		cout << "El dragon no esta disponible o esta domado." << endl;
-		asignarDragon(dragon);
+		while (Dragon == nullptr) {
+			dragon = aleatorio(dragones);
+			asignarDragon(dragones, dragon);
+		}
+		
 	}
 }
 
@@ -105,6 +107,11 @@ bool cVikingos::getMuerto()
 	return false;
 }
 
+void cVikingos::setDragonmuerto()
+{
+	Dragon_Muerto++;
+}
+
 cDragones* cVikingos::getDragon() {
 	return this->Dragon;
 }
@@ -126,34 +133,14 @@ cVikingos* aleatorio(list <cVikingos*> vikingos) {
 }
 
 
-size_t cVikingos::encontrarPosicion(list <cVikingos*> vikingos) {
-
-	size_t posicion = 0;
-	for (list<cVikingos*>::iterator it = vikingos.begin(); it != vikingos.end(); ++it, ++posicion) {
-		//if ((it)->Id == this->Id) {
-		return posicion;
-		//}
-	}
-	throw out_of_range("Elemento no encontrado en la lista");
-}
-
 
 
 string cVikingos::to__string()
 {
-	string s = cPersona::to__string();
+
 	string str_trabajo = TrabajoToString(Trabajo);
-	s += ", Trabajo: " + str_trabajo;
-
-
-	// Si Dragon es un puntero válido, obtenemos su representación como string usando to_string() de cDragones
-	if (Dragon != nullptr) {
-		s += ", Dragon: " + Dragon->to__string();
-	}
-	else
-		s += "No tiene dragon asignado";
-
-	s += ", Dragon Muerto: " + to_string(Dragon_Muerto);
+	string s = cPersona::to__string();
+	s += " Trabajo: " + str_trabajo + "\n" + " Dragon Muerto: " + to_string(Dragon_Muerto) + "\n" + "\n";
 
 	return s;
 }
@@ -167,18 +154,6 @@ string cVikingos::getnombre()
 {
 	return Nombre;
 }
-
-
-
-string cVikingos::guardar()
-{
-
-	string s = cPersona::guardar();
-	s = TrabajoToString(Trabajo) + "," + to_string(Dragon->getid()) + "," + to_string(Dragon_Muerto);
-	return s;
-}
-
-
 
 
 int cVikingos::getvida()
@@ -197,3 +172,14 @@ list<cVikingos*>& operator-=(list<cVikingos*>& lista, cVikingos* vikingo) {
 	return lista;
 }
 
+ostream& operator<<(ostream& out,  cVikingos& vikingo) {
+	out << left << setw(15) << setfill(' ') << "Vikingo"
+		<< left << setw(15) << setfill(' ') << vikingo.Nombre
+		<< left << setw(15) << setfill(' ') << vikingo.Fecha_nac
+		<< left << setw(10) << setfill(' ') << vikingo.Fuerza
+		<< left << setw(10) << setfill(' ') << vikingo.Vida
+		<< left << setw(10) << setfill(' ') << (vikingo.Muerto ? "si" : "no")
+		<< left << setw(15) << setfill(' ') << TrabajoToString(vikingo.Trabajo) // Assumes you have a function to convert Posicion to string
+		<< endl;
+	return out;
+}

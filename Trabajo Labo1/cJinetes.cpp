@@ -1,18 +1,20 @@
 ﻿
 #include "cJinetes.h"
 #include <iostream>
+#include "AyuditaMain.h"
 class cVikingos;
 class cDragones;
 using namespace std;
 
-cJinetes::cJinetes(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, Posicion trabajo, cDragones* dragon, int dragon_muerto, string resultado, string nombredragon)
-    :cVikingos(nombre, fecha_nac, fuerza, vida, muerto, trabajo, dragon, dragon_muerto) {
+cJinetes::cJinetes(string tipo, string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, Posicion trabajo, cDragones* dragon, int dragon_muerto, string resultado, string nombredragon)
+    :cVikingos(tipo, nombre, fecha_nac, fuerza, vida, muerto, trabajo, dragon, dragon_muerto) {
 
     Resultado = resultado;
     NombreDragon = nombredragon;
 }
 cJinetes::cJinetes(const cJinetes& otro) {
     // Copiar cada atributo desde 'otro' al nuevo objeto creado (this)
+    this->Tipo = otro.Tipo;
     this->Nombre = otro.Nombre;
     this->Fecha_nac = otro.Fecha_nac;
     this->Fuerza = otro.Fuerza;
@@ -35,46 +37,51 @@ void cJinetes::entrenarDragon() {//agregar en el main que si no aprobo el curso 
     int entrenado;
     // poner getter y setter para que deje de tirar erroes
     if (Dragon == nullptr) {
-        cerr << "No hay dragon asignado para entrenar." << endl;
-        
+        throw  ("No hay dragon asignado para entrenar.");
     }
-    cout << "El jinnete " << Nombre << " va a entrena al dragon " << Dragon->getnombre() << endl;
-    if (Dragon->getfuerza() > this->Fuerza && (Dragon->getfuerza() - this->Fuerza) < 100) {
-        this->Vida -= rand() % 10;
-        entrenado = rand() % 5 + Dragon->getEntrenado();
-        Dragon->setEntrenado(entrenado);
-        cout << "durante el entrenamiento el dragon obtuvo " << entrenado << " puntos de entrenamiente" << endl;
+    cout << "El jinete " << Nombre << " va a entrena al dragon " << Dragon->getnombre() << endl;
+    if (Resultado == "desaprobado") {
+        cout << "lamentamos informarle que el jinete no aprobo el examen y por lo tanto no puede entrenar dragones"<<endl;
     }
-    else if (Dragon->getfuerza() > this->Fuerza && (Dragon->getfuerza() - this->Fuerza) < 200) {
-        this->Vida -= rand() % 20;
-        entrenado = rand() % 3 + Dragon->getEntrenado();
-        Dragon->setEntrenado(entrenado);
-        cout << "durante el entrenamiento el dragon obtuvo " << entrenado << " puntos de entrenamiente" << endl;
+    else if (Resultado == "primero" || Resultado == "segundo") {
+        this->Fuerza = this->Fuerza + 30;
     }
-    else if (Dragon->getfuerza() > this->Fuerza && (Dragon->getfuerza() - this->Fuerza) > 200) {
-        this->Vida -= rand() % 30;
-        entrenado = rand() % 2 + Dragon->getEntrenado();
-        Dragon->setEntrenado(entrenado);
-        cout << "durante el entrenamiento el dragon obtuvo " << entrenado << " puntos de entrenamiente" << endl;
-    }
+        if (Dragon->getfuerza() > this->Fuerza && (Dragon->getfuerza() - this->Fuerza) < 100) {
+            this->Vida -= rand() % 10;
+            entrenado = rand() % 5 + Dragon->getEntrenado();
+            Dragon->setEntrenado(entrenado);
+            cout << "durante el entrenamiento el dragon obtuvo " << entrenado << " puntos de entrenamiente" << endl;
+   }
+   else if (Dragon->getfuerza() > this->Fuerza && (Dragon->getfuerza() - this->Fuerza) < 200) {
+            this->Vida -= rand() % 20;
+            entrenado = rand() % 3 + Dragon->getEntrenado();
+            Dragon->setEntrenado(entrenado);
+            cout << "durante el entrenamiento el dragon obtuvo " << entrenado << " puntos de entrenamiente" << endl;
+        }
+  else if (Dragon->getfuerza() > this->Fuerza && (Dragon->getfuerza() - this->Fuerza) > 200) {
+            this->Vida -= rand() % 30;
+            entrenado = rand() % 2 + Dragon->getEntrenado();
+            Dragon->setEntrenado(entrenado);
+            cout << "durante el entrenamiento el dragon obtuvo " << entrenado << " puntos de entrenamiente" << endl;
+        }
 
-    if (Dragon->getfuerza() < this->Fuerza && (this->Fuerza - Dragon->getfuerza()) < 100) {
+  else if (Dragon->getfuerza() < this->Fuerza && (this->Fuerza - Dragon->getfuerza()) < 100) {
 
-        entrenado = rand() % 10 + Dragon->getEntrenado();
-        Dragon->setEntrenado(entrenado);
-        cout << "durante el entrenamiento el dragon obtuvo " << entrenado << " puntos de entrenamiente" << endl;
-    }
-    else if (Dragon->getfuerza() < this->Fuerza && (this->Fuerza - Dragon->getfuerza()) < 200) {
-        entrenado = rand() % 20 + Dragon->getEntrenado();
-        Dragon->setEntrenado(entrenado);
-        cout << "durante el entrenamiento el dragon obtuvo " << entrenado << " puntos de entrenamiente" << endl;
-    }
-    else if (Dragon->getfuerza() < this->Fuerza && (this->Fuerza - Dragon->getfuerza()) > 200) {
-        entrenado = rand() % 30 + Dragon->getEntrenado();
-        Dragon->setEntrenado(entrenado);
-        cout << "durante el entrenamiento el dragon obtuvo " << entrenado << " puntos de entrenamiente" << endl;
-    }
-
+            entrenado = rand() % 10 + Dragon->getEntrenado();
+            Dragon->setEntrenado(entrenado);
+            cout << "durante el entrenamiento el dragon obtuvo " << entrenado << " puntos de entrenamiente" << endl;
+        }
+        else if (Dragon->getfuerza() < this->Fuerza && (this->Fuerza - Dragon->getfuerza()) < 200) {
+            entrenado = rand() % 20 + Dragon->getEntrenado();
+            Dragon->setEntrenado(entrenado);
+            cout << "durante el entrenamiento el dragon obtuvo " << entrenado << " puntos de entrenamiente" << endl;
+        }
+        else if (Dragon->getfuerza() < this->Fuerza && (this->Fuerza - Dragon->getfuerza()) > 200) {
+            entrenado = rand() % 30 + Dragon->getEntrenado();
+            Dragon->setEntrenado(entrenado);
+            cout << "durante el entrenamiento el dragon obtuvo " << entrenado << " puntos de entrenamiente" << endl;
+        }
+    
    
     if (Dragon->getEntrenado() >= MaxEntrenamiento) {
         cout << "El dragon ha alcanzado el nivel maximo de entrenamiento." << endl;
@@ -105,6 +112,12 @@ void cJinetes::setMuerte(bool muerte)
 string cJinetes::to__string()
 {
     string s = cVikingos::to__string();
+
+    if (Dragon != nullptr) {
+        s += " Dragon: " + Dragon->to__string();
+    }
+    else
+        s += "No tiene dragon asignado";
     s +="/n Resultado: " + Resultado; //no le pongo el atributo nombredragon porque es repetitivo
     return s;
 }
@@ -114,16 +127,34 @@ void cJinetes::Imprimir()
     cout << to__string();
 }
 
-string cJinetes::guardar()
-{
-    string s = cVikingos::guardar();
-    s += Resultado + "," + NombreDragon;
-    return string();
-}
-
 int cJinetes::getvida()
 {
     return Vida;
+}
+
+int cJinetes::getFuerza()
+{
+    return Fuerza;
+}
+
+bool cJinetes::getMuerto()
+{
+    return Muerto;
+}
+
+cDragones* cJinetes::getDragon()
+{
+    return Dragon;
+}
+
+void cJinetes::setDragon(cDragones* dragon)
+{
+    Dragon = dragon;
+}
+
+void cJinetes::setResultado(string resultado)
+{
+    Resultado = resultado;
 }
 
 
@@ -134,6 +165,21 @@ list<cJinetes*>& operator+=(list<cJinetes*>& lista, cJinetes* jinete) {
 
 list<cJinetes*>& operator-=(list<cJinetes*>& lista, cJinetes* jinete) {
     lista.remove(jinete);
+ 
     return lista;
+}
+ostream& operator<<(ostream& out,  cJinetes& jinete) {
+    out << left << setw(15) << setfill(' ') << "Jinete"
+        << left << setw(15) << setfill(' ') << jinete.Nombre
+        << left << setw(15) << setfill(' ') << jinete.Fecha_nac
+        << left << setw(10) << setfill(' ') << jinete.Fuerza
+        << left << setw(10) << setfill(' ') << jinete.Vida
+        << left << setw(10) << setfill(' ') << (jinete.Muerto ? "si" : "no")
+ 
+        << left << setw(15) << setfill(' ') << TrabajoToString(jinete.Trabajo)
+        << left << setw(15) << setfill(' ') << jinete.Resultado
+        << left << setw(15) << setfill(' ') << jinete.NombreDragon
+        << endl;
+    return out;
 }
 

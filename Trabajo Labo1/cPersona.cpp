@@ -4,8 +4,9 @@
 // using namespace std;
 
 //la clase cPersona es mas que nada abstracta 
-cPersona::cPersona(string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto)
+cPersona::cPersona(string tipo,string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto)
 {
+	Tipo = tipo;
 	Nombre = nombre;
 	Fecha_nac = fecha_nac;
 	Fuerza = fuerza;
@@ -13,6 +14,7 @@ cPersona::cPersona(string nombre, string fecha_nac, unsigned int fuerza, int vid
 	Muerto = muerto;
 }
 cPersona::cPersona(const cPersona& otro) {
+	this->Tipo = otro.Tipo;
 	this->Nombre = otro.Nombre;
 	this->Fecha_nac = otro.Fecha_nac;
 	this->Fuerza = otro.Fuerza;
@@ -52,11 +54,11 @@ cPersona::cPersona()
 string cPersona::to__string()
 {
 	string s;
-	s = "Nombre: " + Nombre
-		+ ", Fecha de nacimiento: " + Fecha_nac
-		+ ", Fuerza: " + to_string(Fuerza)//castea 
-		+ ", Vida: " + to_string(Vida)
-		+ ", Esta muerto: " + (Muerto ? "Sí" : "No");
+	s = " Nombre: " + Nombre + "\n"
+		+ " Fecha de nacimiento: " + Fecha_nac + "\n"
+		+ " Fuerza: " + to_string(Fuerza) + "\n"
+		+ " Vida: " + to_string(Vida) + "\n"
+		+ " Esta muerto: " + (Muerto ? "Si" : "No") + "\n";
 	return s;
 }
 
@@ -64,19 +66,5 @@ void cPersona::Imprimir()
 {
 	cout << to__string();
 }
-
-string cPersona::guardar()
-{
-	/* string Tipo;
-    string Nombre;
-    string Fecha_nac;
-    unsigned int Fuerza; // Cambiado a unsigned int
-    int Vida;
-    bool Muerto;*/
-	string s;
-	s= Tipo + "," + Nombre + "," + Fecha_nac + "," + to_string(Fuerza) + "," + to_string(Vida) + "," + (Muerto ? "Sí" : "No");
-	return s;
-}
-
 
 

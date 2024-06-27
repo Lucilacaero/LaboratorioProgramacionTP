@@ -3,12 +3,9 @@
 #pragma once
 
 #include "AyuditaMain.h"
-class cVikingos;
+
 using namespace std;
 
-
-// no se porque cuando pongo el .h me tira el error LNK2019 y con el cpp no
-class cDragones;
 
 /*
 Ante cualquier error que no se pueda solucioner:
@@ -19,234 +16,193 @@ y volver a escribir el codigo
 4. si nada de eso funciona hacerlo en distinto orden
 */
 
-using namespace std;
 
+
+class cVikingos;
+class cDragones;
 
 int main() {
+    // Para numeros aleatorios
+    srand(time(NULL));
 
-    // para los números aleatorios
-   ;// aca se van a guardar todos los cambios de las listas 
+    // Listas normales y de cambio
     list<cDragones*> dragones;
     list<cVikingos*> vikingos;
     list<cJinetes*> jinetes;
     list<cDragones*> listamodificadaD;
     list<cVikingos*> listamodificadaV;
     list<cJinetes*> listamodificadaJ;
-    // Crear objetos de tipo cDragones
 
-    cDragones* dragoncito1 = new cDragones("chimuelo", "15/10/2004", 100, 1000, false, 1, "no tiene", false, 50);
-    cDragones* dragoncito2 = new cDragones("gaga", "15/10/2004", 100, 1000, false, 2, "no tiene", false, 50);
+    // objetos random de prueba
+    cDragones* dragoncito1 = new cDragones("dragon", "chimuelo", "15 / 10 / 2004", 100, 1000, false, 1, "No tiene", false, 50);
+    cDragones* dragoncito2 = new cDragones("dragon", "gaga", "15 / 10 / 2004", 100, 1000, false, 2, "No tiene", false, 50);
 
-    // Agregar los punteros a los objetos a la lista del panóptico
+    // operator prueba
+    dragones += dragoncito1;
+    dragones += dragoncito2;
 
-    dragones+=dragoncito1;
-    dragones+=dragoncito2;
+    // lista cVikingo
+    cVikingos* vikingo1 = new cVikingos("vikingo", "Hiccup", "25/04/1990", 75, 500, false, Entrenador, dragoncito1, 0);
+    vikingos += (vikingo1);
 
-    // Crear una lista vikingo
-  
-    cVikingos* vikingo1 = new cVikingos("Hiccup", "25/04/1990", 75, 500, false, Entrenador, dragoncito1, 0);
-    vikingos+=vikingo1;
+    // Lista cJinete
+    cJinetes* jinete1 = new cJinetes("jinete", "Alan", "31 / 08 / 1992", 85, 600, false, Jinete, dragoncito2, 0, "aprobado", "Chimuelo");
+    jinetes += (jinete1);
 
-    // Crear una lista jinete
-   // cJinetes* jinete1 = new cJinetes("Alan", "31/08/1992", 85, 600, false, Jinete, dragoncito2, 0, "aprobado", "Chimuelo");
-   
-   // jinetes+=jinete1);
-    string archivo = "Tp Labo1.csv"; // Nombre del archivo CSV 
+    string archivo = "Tp Labo1.csv"; // archivo de los objetos
     ifstream file(archivo);
 
     cargarlistas(archivo, dragones, vikingos, jinetes);
+
+
+    for (auto it = dragones.begin(); it != dragones.end(); ++it) {//quiero saber cuantos dragones domados hay antes de iniciar el dia 
+        cDragones* dragon = *it;
+        if (dragon->getDomado() == true) {
+            cDragones::Domados++;
+        }
+
+    }
+
     int i = 0;
-   
-   
     int option = 0;
-    int option2;
+
+    cJinetes* JineteSeleccionado = nullptr;     //creo objetos dinamicos para despues usarlos como auxiliares
+    cDragones* DragonSeleccionado = nullptr;
+    cVikingos* VikingoSeleccionado = nullptr;
+    system("pause");
+    system("cls");
 
 
     while (i <= 5) {
-       option = rand() % 3;
+        // Reseteo los seleccionados para cada iteración, me va  a servir para los aleatorios
+        VikingoSeleccionado = nullptr;
+        DragonSeleccionado = nullptr;
+        JineteSeleccionado = nullptr;
+
+        option = rand() % 3;
         switch (option) {
         case 0: // Atacar
-            cout << "caso 3, batalla" << endl;
+            cout << "Ocurrio un caso de hostilidad" << endl;
             if (!vikingos.empty() && !dragones.empty()) {
-              
-                cVikingos* viking = aleatorio(vikingos);
-                cDragones* dragon = aleatorio(dragones);
-                cout << "Se genera un pelea entre el vikingo " << viking->getnombre()<< " y el dragon "<< dragon->getnombre() << endl;
-                while (!viking->getMuerto() && !dragon->getMuerto()) {
-                    int danio;
-                    danio = dragon->atacar();
-                      //  cout << "el vikingo " << viking->getnombre() << " ataca y genera un danio de " << danio << " puntos al dragon " << dragon->getnombre() << endl;
-                    viking->vida(danio);
-                        if (viking->getvida() <= 0) {
-                            viking->setMuerto(true);
-                           // cout << "El vikingo murio en combate" << endl;
-                            listamodificadaV+=viking;
-                            //eliminarlo de la lista original
-                          
-                        }
-                          
-                          dragon->vida(viking->atacar());
-                        if (dragon->getvida() <= 0) {
-                            dragon->setMuerto(true);
-                            listamodificadaD+=dragon;
-                            //eliminar dragon de la lista original
-                          
-                        }
-                       
-                    
+                VikingoSeleccionado = aleatorio(vikingos);
+                DragonSeleccionado = VikingoSeleccionado->getDragon();
+
+                if (DragonSeleccionado == nullptr) {
+                    DragonSeleccionado = aleatorio(dragones);
+                }
+
+                cout << "Se genera una pelea ente el vikingo " << VikingoSeleccionado->getnombre() << " y el dragon " << DragonSeleccionado->getnombre() << endl;
+                while (!VikingoSeleccionado->getMuerto() && !DragonSeleccionado->getMuerto()) {
+                    int danio = DragonSeleccionado->atacar();
+                    VikingoSeleccionado->vida(danio);
+                    if (VikingoSeleccionado->getvida() <= 0) {
+                        VikingoSeleccionado->setMuerto(true);
+                        cout << "El Vikingo murio en el combate." << endl;
+                        listamodificadaV += VikingoSeleccionado;
+                        vikingos -= (VikingoSeleccionado);
+                        break;
+                    }
+                    DragonSeleccionado->vida(VikingoSeleccionado->atacar());
+                    if (DragonSeleccionado->getvida() <= 0) {
+                        DragonSeleccionado->setMuerto(true);
+                        listamodificadaD += DragonSeleccionado;
+                        dragones -= (DragonSeleccionado);
+                        VikingoSeleccionado->setDragonmuerto();
+                        break;
+                    }
                 }
             }
             break;
 
         case 1: // Trabajar
-            cout << "caso 1 trabajar"<< endl;
+            cout << "El vikingo agarra la pala (va a trabajar) " << endl;
             if (!vikingos.empty()) {
-                cVikingos* viking = aleatorio(vikingos);
-                viking->trabajar();
-                if (viking->getPosicion() == Posicion::Guerrero) {
-                    option = 0;
-                    break;
-                }
+                VikingoSeleccionado = aleatorio(vikingos);
+                VikingoSeleccionado->trabajar();
+                if (VikingoSeleccionado->getPosicion() == Posicion::Guerrero) {
 
-           
-            if (viking->getPosicion() == Posicion::Jinete) // tengo que castear a los vikingos a jinetes
-                if (!jinetes.empty()) {
-                    option = 2;
-                    break;
+                    if (!dragones.empty()) {
+                        DragonSeleccionado = VikingoSeleccionado->getDragon();
+                        if (DragonSeleccionado == nullptr) {
+                            DragonSeleccionado = aleatorio(dragones);
+                        }
+
+                        cout << "Se genera una pelea entre el vikingo " << VikingoSeleccionado->getnombre() << " Y el dragon " << DragonSeleccionado->getnombre() << endl;
+                        while (!VikingoSeleccionado->getMuerto() && !DragonSeleccionado->getMuerto()) {
+                            int danio = DragonSeleccionado->atacar();
+                            VikingoSeleccionado->vida(danio);
+                            if (VikingoSeleccionado->getvida() <= 0) {
+                                VikingoSeleccionado->setMuerto(true);
+                                cout << "El vikingo murio en el combate." << endl;
+                                listamodificadaV += VikingoSeleccionado;
+                                vikingos -= (VikingoSeleccionado); // Eliminar de la lista original
+
+                                break; // Terminar la batalla si el vikingo muere
+                            }
+                            DragonSeleccionado->vida(VikingoSeleccionado->atacar());
+                            if (DragonSeleccionado->getvida() <= 0) {
+                                DragonSeleccionado->setMuerto(true);
+                                VikingoSeleccionado->setDragonmuerto();
+                                cDragones::DragonesMuertos++;
+                                listamodificadaD += (DragonSeleccionado);
+                                dragones -= (DragonSeleccionado); // Eliminar de la lista original
+                                break; // Terminar la batalla si el dragón muere
+                            }
+                        }
+                    }
                 }
-            }
-            
-          
-        case 2: // Entrenar
-            cout << "caso 2, entrenar"<<endl;
-            if (!jinetes.empty()) {
-                cJinetes* jinete = aleatorio(jinetes);//aca se cambia el jinete y el dragon ver
-                jinete->entrenarDragon(); 
+                else if (VikingoSeleccionado->getPosicion() == Posicion::Jinete && !jinetes.empty()) {
+                    cJinetes* jinete = dynamic_cast<cJinetes*>(VikingoSeleccionado);
+                    (jinete->getFuerza() > 70) ? jinete->setResultado("aprobado") : jinete->setResultado("desaprobado");
+
+                    if (VikingoSeleccionado->getDragon() != nullptr) {
+                        jinete->entrenarDragon();
+                    }
+                    else
+                        cout << "el vikingo jinete aun no tiene asignado ningun dragon, la proxima le tocara entrenar";
+                }
             }
             break;
 
-        }
 
-        // Eliminar vikingos muertos de la lista
-        auto it_vikingo = vikingos.begin();
-        while (it_vikingo != vikingos.end()) {
-            if ((*it_vikingo)->getMuerto()) {
-                delete* it_vikingo;
-                it_vikingo = vikingos.erase(it_vikingo); // Avanzar iterador después de borrar
+            case 2: // Entrenar
+            cout << "Hoy es un lindo dia para entrenar " << endl;
+            if (!jinetes.empty()) {
+                cJinetes* jinete = aleatorio(jinetes);
+                if (jinete->getDragon() == nullptr) {
+                    cDragones* dragon = aleatorio(dragones);
+                    jinete->setDragon(dragon);
+                }
+                jinete->entrenarDragon();
             }
-            else {
-                ++it_vikingo; // Avanzar al siguiente elemento
-            }
-        }
+            break;
 
-        // Eliminar dragones muertos de la lista
-        auto it_dragon = dragones.begin();
-        while (it_dragon != dragones.end()) {
-            if ((*it_dragon)->getMuerto()) {
-                delete* it_dragon;
-                it_dragon = dragones.erase(it_dragon); // Avanzar iterador después de borrar
-            }
-            else {
-                ++it_dragon; // Avanzar al siguiente elemento
-            }
+            
         }
-
+        cout << "Iteracion: " << i + 1 << endl;
         i++;
         system("pause");
         system("cls");
-    }
-    // Guardar listas modificadas en archivo
-    /*try {
-        ofstream archivoSalida("dragones_modificados.csv");
-        if (archivoSalida.is_open()) {
-            // guardarlistas(archivoSalida, listamodificada);
-            archivoSalida.close();
-        }
-        else {
-            throw runtime_error("No se pudo abrir el archivo para escritura");
-        }
-    }
-    catch (const exception& e) {
-        cerr << "Error al guardar listas en archivo: " << e.what() << endl;
-    }
-    */
+         }
+        imprimirresumen(listamodificadaD, listamodificadaV, listamodificadaJ);
 
+        //Elimino la memoria que pedi
+        auto it_jinete = jinetes.begin();
+        while (it_jinete != jinetes.end()) {
+            delete* it_jinete;
+            it_jinete = jinetes.erase(it_jinete);
+        }
+        auto it_vikingo = vikingos.begin();
+        while (it_vikingo != vikingos.end()) {
+            delete* it_vikingo;
+            it_vikingo = vikingos.erase(it_vikingo);
+        }
+        auto it_dragon = dragones.begin();
+        while (it_dragon != dragones.end()) {
+            delete* it_dragon;
+            it_dragon = dragones.erase(it_dragon);
+        }
    
-   
-    return 0;
-  
-}
-    /*
-    while (i <= repe) {
-        switch (option) {
-        case 1://atacar
-            while (!vikingos.empty() && !dragones.empty()) {// no se porque no me deja acceder a los atributos de panoptico si son publicos
-                cVikingos* viking = aleatorio(vikingos);
-                cDragones* dragon = aleatorio(dragones);
-                while (viking->getMuerto() != true || dragon->getMuerto() != true) {
-                    option2 = rand() % 2;
-                    switch (option2) {
-                    case 0:
-                        dragon->atacar();
-                        if (viking->getvida() <= 0) {
-                            try {
-                                size_t pos = (*viking).encontrarPosicion(vikingos);
-                                //   vikingos.Borrarlista(pos);
-                            }
-                            catch (const out_of_range& e) {
-                                cout << e.what() << endl;
-                            }
-                        }
-                        break;
-
-                    case 1:
-                        viking->atacar();
-
-                        if (dragon->getvida() <= 0) {
-                            try {
-                                size_t pos = (*dragon).encontrarPosicion(dragones);
-                                // dragones.borrarLista(pos);
-                            }
-                            catch (const out_of_range& e) {
-                                cout << e.what() << endl;
-                            }
-                        }
-                        break;
-                    }
-                }
-                break;
-            }
-
-        case 2: {// entrenar
-            cJinetes* jinete = aleatorio(jinetes);
-            jinete->entrenarDragon();
-            jinete->Imprimir();
-
-            break;
-        }
-        case 3: {//trabajar
-            cVikingos* viking = aleatorio(vikingos);
-            viking->trabajar();
-            if (Posicion::Guerrero)
-                option = 1;
-            if (Posicion::Jinete)
-                option = 2;
-        }
-
-
-        }
-        i++;
-    }
-    // Liberar memoria
-    // reescribir el csv con las listas modificadas
-
-    delete dragoncito1;
-    delete dragoncito2;
-    delete vikingo1;
-   // delete jinete1;
 
     return 0;
-
-
 }
-*/
