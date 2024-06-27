@@ -14,6 +14,7 @@ Ante cualquier error que no se pueda solucioner:
 3. si eso tampoco funciona, entonces borrar lo que no funca, reiniciar la compu, compilarlo
 y volver a escribir el codigo
 4. si nada de eso funciona hacerlo en distinto orden
+.
 */
 
 

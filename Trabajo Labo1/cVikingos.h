@@ -36,8 +36,7 @@ public:
 	virtual string to__string() override; //son virtual porque se lo voy a pasar a cJinete
 	virtual void Imprimir();
 	string getnombre();
-	//friend void cargarlistas(string& nombreArchivo, list<cDragones*>& dragones, list <cVikingos*>& vikingos, list <cJinetes*> jinetes);
-	
+
 	friend ostream& operator<<(ostream& out, cVikingos& vikingo);
 	};
 

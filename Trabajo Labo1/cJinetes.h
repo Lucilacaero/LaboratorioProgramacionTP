@@ -20,7 +20,7 @@ public:
 	cDragones* getDragon();
 	void setDragon(cDragones* dragon);
 	void setResultado(string resultado);
-	//friend void asignarnombre(cJinetes& jinete, cDragones& dragon);
+	
 	friend void cDragones::setNombre(cJinetes*& jinete); 
 	void entrenarDragon();
 	friend cJinetes* aleatorio(list <cJinetes*> jinetes);
