@@ -20,7 +20,8 @@ public:
     virtual ~cPersona();
     cPersona(const cPersona& otro);
     void setMuerto(bool muerte);
-  int getvida();
+    int getvida() const;
+
     virtual int atacar() = 0;// esta va a ser la funcion con polimorfismo
     virtual void vida(int danio) = 0;// esta tambien porque despues llamo a los destructores 
    virtual bool getMuerto(); 

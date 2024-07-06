@@ -35,20 +35,20 @@ int main() {
     list<cJinetes*> listamodificadaJ;
 
     // objetos random de prueba
-    cDragones* dragoncito1 = new cDragones("dragon", "chimuelo", "15 / 10 / 2004", 100, 1000, false, 1, "No tiene", false, 50);
-    cDragones* dragoncito2 = new cDragones("dragon", "gaga", "15 / 10 / 2004", 100, 1000, false, 2, "No tiene", false, 50);
+ //   cDragones* dragoncito1 = new cDragones("dragon", "chimuelo", "15 / 10 / 2004", 100, 1000, false, 1, "No tiene", false, 50);
+ //   cDragones* dragoncito2 = new cDragones("dragon", "gaga", "15 / 10 / 2004", 100, 1000, false, 2, "No tiene", false, 50);
 
     // operator prueba
-    dragones += dragoncito1;
-    dragones += dragoncito2;
+ //   dragones += dragoncito1;
+ //   dragones += dragoncito2;
 
     // lista cVikingo
-    cVikingos* vikingo1 = new cVikingos("vikingo", "Hiccup", "25/04/1990", 75, 500, false, Entrenador, dragoncito1, 0);
-    vikingos += (vikingo1);
+//    cVikingos* vikingo1 = new cVikingos("vikingo", "Hiccup", "25/04/1990", 75, 500, false, Entrenador, dragoncito1, 0);
+ //   vikingos += (vikingo1);
 
     // Lista cJinete
-    cJinetes* jinete1 = new cJinetes("jinete", "Alan", "31 / 08 / 1992", 85, 600, false, Jinete, dragoncito2, 0, "aprobado", "Chimuelo");
-    jinetes += (jinete1);
+//    cJinetes* jinete1 = new cJinetes("jinete", "Alan", "31 / 08 / 1992", 85, 600, false, Jinete, dragoncito2, 0, "aprobado", "Chimuelo");
+  //  jinetes += (jinete1);
 
     string archivo = "Tp Labo1.csv"; // archivo de los objetos
     ifstream file(archivo);

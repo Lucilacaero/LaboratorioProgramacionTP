@@ -40,35 +40,35 @@ cDragones::~cDragones() {
 
 	//GETTERS
 
-int cDragones::getvida() {
+int cDragones::getvida()const {
 	return Vida;
 }
 
-unsigned int cDragones::getfuerza()
+unsigned int cDragones::getfuerza()const
 {
 	return Fuerza;
 }
 
-int cDragones::getEntrenado()
+int cDragones::getEntrenado () const
 {
 	return Entrenado; 
 }
 
-bool cDragones::getMuerto()
+bool cDragones::getMuerto()const
 {
 	return Muerto;
 }
 
-unsigned int cDragones::getid()
+unsigned int cDragones::getid() const
 {
 	return Id;
 }
 
-string cDragones::getnombre() {
+string cDragones::getnombre()const {
 	return Nombre;
 }
 
-bool cDragones::getDomado()
+bool cDragones::getDomado() const
 {
 	return Estado;
 }
@@ -91,9 +91,9 @@ void cDragones::setNombre(cJinetes*& jinete)
 	try {
 		// el puntero jinete no debe se nulo
 		if (jinete == nullptr) {
-			throw invalid_argument("Error: jinete es un puntero nulo"); //un tipo de error definido
+			cout<< "Error: jinete es un puntero nulo"<<endl; 
 		}
-		this->Nombre = jinete->NombreDragon;
+		this->Nombre = jinete->NombreDragon; 
 	}
 	catch (const invalid_argument& e) {
 		cerr << e.what() << endl; // cerr = cout error

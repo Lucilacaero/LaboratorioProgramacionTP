@@ -1,8 +1,5 @@
-﻿  AyuditaMain.cpp
-  Trabajo Labo1.cpp
-C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\Trabajo Labo1.cpp(26,15): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
-  cDragones.cpp
-  cJinetes.cpp
-  cVikingos.cpp
+﻿  cControl.cpp
+  cDragonAtaque.cpp
+  cVikingoAtaque.cpp
   Generando código...
   Trabajo Labo1.vcxproj -> C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\x64\Debug\Trabajo Labo1.exe

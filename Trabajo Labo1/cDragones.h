@@ -43,13 +43,13 @@ public:
 	
 	
 	//GETTERS Y SETTERS
-	string getnombre();
-	bool getDomado();
-	int getvida();
-	int getEntrenado();
-	unsigned int getfuerza();
-	unsigned int getid();
-	bool getMuerto();
+	string getnombre()const;
+	bool getDomado () const;
+	int getvida()const;
+	int getEntrenado()const;
+	unsigned int getfuerza() const;
+	unsigned int getid() const;
+	bool getMuerto()const;
 	bool Domado(); 
 	void setEntrenado(int entrenado); 
 	void setMuerto(bool muerte); 

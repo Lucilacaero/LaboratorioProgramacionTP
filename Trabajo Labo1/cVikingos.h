@@ -21,7 +21,7 @@ public:
 	virtual ~cVikingos();
 	int atacar();
 	int getvida();
-	Posicion getPosicion();
+	Posicion getPosicion() const;
 	void vida(int danio);
 	void setDragon(cDragones* dragon);
 	cDragones* getDragon();

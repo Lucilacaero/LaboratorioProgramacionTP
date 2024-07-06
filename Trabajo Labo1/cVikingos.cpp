@@ -14,7 +14,7 @@ cVikingos::cVikingos(): cPersona()
 	Dragon = NULL;
 	
 }
-cVikingos::cVikingos(const cVikingos& otro)  {
+cVikingos::cVikingos(const cVikingos& otro)  {// ya le encontre un uso
 	this->Tipo = otro.Tipo;
 	this->Nombre = otro.Nombre;
 	this->Fecha_nac = otro.Fecha_nac;
@@ -53,7 +53,7 @@ int cVikingos::atacar()
 	return danio;
 }
 
-Posicion cVikingos::getPosicion()
+Posicion cVikingos::getPosicion() const
 {
 	return Trabajo;
 }

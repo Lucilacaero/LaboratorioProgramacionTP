@@ -28,7 +28,7 @@ void cPersona::setMuerto(bool muerte)
 {
 	Muerto = muerte;
 }
-int cPersona::getvida()
+int cPersona::getvida() const
 {
 	return Vida;
 }
@@ -56,7 +56,7 @@ string cPersona::to__string()
 	string s;
 	s = " Nombre: " + Nombre + "\n"
 		+ " Fecha de nacimiento: " + Fecha_nac + "\n"
-		+ " Fuerza: " + to_string(Fuerza) + "\n"
+		+ " Fuerza: " + to_string(Fuerza) + "\n"	  
 		+ " Vida: " + to_string(Vida) + "\n"
 		+ " Esta muerto: " + (Muerto ? "Si" : "No") + "\n";
 	return s;
@@ -66,5 +66,3 @@ void cPersona::Imprimir()
 {
 	cout << to__string();
 }
-
-
