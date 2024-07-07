@@ -43,6 +43,10 @@ void cVikingoAtaque::pintarCorazones() {
     cout << "Vida: " << Vida;
 
 }
+void cVikingoAtaque::MostrarDanio(int danio) {
+    situarCursor(78, 1); cout << "El dragon  ataca y genera un danio de " << danio << "\n";
+
+}
 
 void cVikingoAtaque::morir() {
     
@@ -57,10 +61,9 @@ void cVikingoAtaque::morir() {
         situarCursor(x, y + 2); cout << " *    *";
         usleep(2000000);
         borrar();
-        atacar();
-       
         pintarCorazones();
         pintar();
+       
     
 }
 

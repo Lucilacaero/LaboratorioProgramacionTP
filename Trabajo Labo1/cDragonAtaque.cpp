@@ -30,8 +30,10 @@ void cDragonAtaque::mover() {
 
 
 void cDragonAtaque::choque(cVikingoAtaque& N) {
-    if (x >= N.X() && x <= N.X() + 4 && y >= N.Y() && y <= N.Y() + 2) {
+    if (x >= N.X() && x <= N.X() + 4 && y >= N.Y() && y <= N.Y() + 2) {// verifico las coordenadas para 
       int  danio = atacar();
+      // si algo falla en panatlla es por esto
+   //   situarCursor(77, 4); cout << "se genero un danio de " << danio << "al vikingo"<<endl;
         N.vida(danio);
         N.morir();
         N.pintar();

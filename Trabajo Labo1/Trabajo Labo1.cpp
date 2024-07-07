@@ -3,6 +3,7 @@
 #pragma once
 
 #include "AyuditaMain.h"
+#include "cControl.h"
 
 using namespace std;
 
@@ -35,7 +36,7 @@ int main() {
     list<cJinetes*> listamodificadaJ;
 
     // objetos random de prueba
- //   cDragones* dragoncito1 = new cDragones("dragon", "chimuelo", "15 / 10 / 2004", 100, 1000, false, 1, "No tiene", false, 50);
+    cDragones* dragoncito1 = new cDragones("dragon", "chimuelo", "15 / 10 / 2004", 100, 1000, false, 1, "No tiene", false, 50);
  //   cDragones* dragoncito2 = new cDragones("dragon", "gaga", "15 / 10 / 2004", 100, 1000, false, 2, "No tiene", false, 50);
 
     // operator prueba
@@ -43,7 +44,7 @@ int main() {
  //   dragones += dragoncito2;
 
     // lista cVikingo
-//    cVikingos* vikingo1 = new cVikingos("vikingo", "Hiccup", "25/04/1990", 75, 500, false, Entrenador, dragoncito1, 0);
+    cVikingos* vikingo1 = new cVikingos("vikingo", "Hiccup", "25/04/1990", 75, 500, false, Entrenador, dragoncito1, 0);
  //   vikingos += (vikingo1);
 
     // Lista cJinete
@@ -83,39 +84,10 @@ int main() {
         option = rand() % 3;
         switch (option) {
         case 0: // Atacar
-            cout << "Ocurrio un caso de hostilidad" << endl;
-            if (!vikingos.empty() && !dragones.empty()) {
-                VikingoSeleccionado = aleatorio(vikingos);
-                DragonSeleccionado = VikingoSeleccionado->getDragon();
+            cout << "Estamos trabajando para mejorar esta parte";
 
-                if (DragonSeleccionado == nullptr) {
-                    DragonSeleccionado = aleatorio(dragones);
-                }
-
-                cout << "Se genera una pelea ente el vikingo " << VikingoSeleccionado->getnombre() << " y el dragon " << DragonSeleccionado->getnombre() << endl;
-                while (!VikingoSeleccionado->getMuerto() && !DragonSeleccionado->getMuerto()) {
-                    int danio = DragonSeleccionado->atacar();
-                    VikingoSeleccionado->vida(danio);
-                    if (VikingoSeleccionado->getvida() <= 0) {
-                        VikingoSeleccionado->setMuerto(true);
-                        cout << "El Vikingo murio en el combate." << endl;
-                        listamodificadaV += VikingoSeleccionado;
-                        vikingos -= (VikingoSeleccionado);
-                        break;
-                    }
-                    DragonSeleccionado->vida(VikingoSeleccionado->atacar());
-                    if (DragonSeleccionado->getvida() <= 0) {
-                        DragonSeleccionado->setMuerto(true);
-                        listamodificadaD += DragonSeleccionado;
-                        dragones -= (DragonSeleccionado);
-                        VikingoSeleccionado->setDragonmuerto();
-                        break;
-                    }
-                }
-            }
-            break;
-
-        case 1: // Trabajar
+        case 1:
+            // Trabajar
             cout << "El vikingo agarra la pala (va a trabajar) " << endl;
             if (!vikingos.empty()) {
                 VikingoSeleccionado = aleatorio(vikingos);
@@ -166,6 +138,10 @@ int main() {
             break;
 
 
+
+            
+           
+
             case 2: // Entrenar
             cout << "Hoy es un lindo dia para entrenar " << endl;
             if (!jinetes.empty()) {
@@ -184,8 +160,10 @@ int main() {
         i++;
         system("pause");
         system("cls");
-         }
+    }
         imprimirresumen(listamodificadaD, listamodificadaV, listamodificadaJ);
+        system("pause");
+        system("cls");
 
         //Elimino la memoria que pedi
         auto it_jinete = jinetes.begin();
@@ -203,7 +181,13 @@ int main() {
             delete* it_dragon;
             it_dragon = dragones.erase(it_dragon);
         }
-   
+
+        cVikingoAtaque v(*vikingo1, 38,30);
+        cControl Juegos(&v);
+        Juegos.inicializar();
+        Juegos.ejecutar();
+        Juegos.terminar();
+      
 
     return 0;
 }

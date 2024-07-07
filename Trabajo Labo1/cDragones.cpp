@@ -3,6 +3,7 @@
 #include <iostream>
 #include <random> 
 #include <cstdlib>
+#include "AyuditaMain.h"
 
 using namespace std;
 int cDragones::DragonesVivos = 0;
@@ -243,7 +244,7 @@ int cDragones::atacar()
 	// Generar un número aleatorio en el rango [min, max]
 	daniio = min + rand() % (max - min + 1);
 
- cout << "El dragon " << Nombre << " ataca y genera un danio de " << daniio << " puntos.\n";
+	
 	return daniio;
 }
 
