@@ -58,16 +58,7 @@ Posicion cVikingos::getPosicion() const
 	return Trabajo;
 }
 
-void cVikingos::vida(int danio)
-{
-	Vida = Vida - danio;
-	if (Vida < 0 || Vida == 0) {
-		
-		Muerto = true;		
-	}
-	
-	//sacarlo de la lista
-}
+
 
 
 
@@ -102,10 +93,7 @@ void cVikingos::trabajar()
 	//llamar a la funcion entrenar
 }
 
-bool cVikingos::getMuerto()
-{
-	return false;
-}
+
 
 void cVikingos::setDragonmuerto()
 {
@@ -115,10 +103,7 @@ void cVikingos::setDragonmuerto()
 cDragones* cVikingos::getDragon() {
 	return this->Dragon;
 }
-void cVikingos::setMuerto(bool muerte)
-{
-	Muerto = muerte;
-}
+
 void cVikingos::setDragon(cDragones* dragon) {
 	this->Dragon = dragon;
 }
@@ -150,16 +135,10 @@ void cVikingos::Imprimir()
 	cout << to__string();
 }
 
-string cVikingos::getnombre()
-{
-	return Nombre;
-}
 
 
-int cVikingos::getvida()
-{
-	return Vida;
-}
+
+
 // Sobrecarga del operador += para agregar un cVikingos a la lista
 list<cVikingos*>& operator+=(list<cVikingos*>& lista, cVikingos* vikingo) {
 	lista.push_back(vikingo);
@@ -168,7 +147,11 @@ list<cVikingos*>& operator+=(list<cVikingos*>& lista, cVikingos* vikingo) {
 
 // Sobrecarga del operador -= para eliminar un cVikingos de la lista
 list<cVikingos*>& operator-=(list<cVikingos*>& lista, cVikingos* vikingo) {
-	lista.remove(vikingo);
+	auto it = find(lista.begin(), lista.end(), vikingo);
+	if (it != lista.end()) {
+		delete* it;
+		lista.erase(it);
+	}
 	return lista;
 }
 

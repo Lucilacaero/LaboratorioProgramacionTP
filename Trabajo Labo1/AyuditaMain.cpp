@@ -14,6 +14,7 @@ cDragones* encontrardragon(unsigned int id, list<cDragones*>& dragones) {
 void cargarlistas(const string& nombreArchivo, list<cDragones*>& dragones, list<cVikingos*>& vikingos, list<cJinetes*>& jinetes) {
     ifstream archivo(nombreArchivo);
     if (!archivo.is_open()) {
+      //  cout << "No se pudo abrir el archivo" << endl;
         throw runtime_error("No se pudo abrir el archivo");
     }
     cout << "Ver las listas cargadas? S/N: ";
@@ -221,10 +222,10 @@ void imprimirresumen(list <cDragones*>& listamodificadaD, list <cVikingos*>&list
 void print() {
     string dragon =
         R"(
-                                        (  )   /\   _                 (     
-                                       \ |  (  \ ( \.(               )                      _____
-                                     \  \ \  `  `   ) \             (  ___                 / _   \
-                                    (_`    \+   . x  ( .\            \/   \____-----------/ (o)   \_
+                                        (  )   /\   _                       
+                                       \ |  (  \ ( \.(                                      _____
+                                     \  \ \  `  `   ) \                ___                 / _   \
+                                    (_`    \+   . x  ( .\             /   \____-----------/ (o)   \_
                                     - .-               \+  ;          (  O                           \____
                                        \_____________  `              \  /
                                     (__                +- .( -'.- <. - _  VVVVVVV VV V\                 \/
@@ -281,9 +282,19 @@ void pintarLimites() {
         situarCursor(i, 2); cout << char(205);// caracter ═
         situarCursor(i, 33); cout << char(205);
     }
+   
     for (int i = 3; i < 33; i++) { // Dibuja las líneas de  los costados
-        situarCursor(2, i); cout << char(186); // caracter │
+       // caracter │
         situarCursor(77, i); cout << char(186);
+    }
+
+    for (int i = 3; i < 15; i++) { // Dibuja las líneas de  los costados
+        situarCursor(2, i); cout << char(186); // caracter │
+        
+    }
+    for (int i = 25; i < 33; i++) { // Dibuja las líneas de  los costados
+        situarCursor(2, i); cout << char(186); // caracter │
+        
     }
     // Dibujo las esquinas
     situarCursor(2, 2); cout << char(201);//caracter ╔

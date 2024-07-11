@@ -20,7 +20,7 @@ const int MaxEntrenamiento = 3200;
 // Que tenga una forma de ataque definida no significa que tenga puntos de entrenamiento, a menos que así sea.
 
 
-class cDragones : protected cPersona {
+class cDragones : public cPersona {
 private:
 	unsigned int Id;//para buscarlo facil en ell csv
 	string Ataque;
@@ -37,28 +37,26 @@ public:
 	//CONSTRUCTORES
 	cDragones(string tipo, string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, unsigned int id, string ataque, bool estado, int entrenado);
 	cDragones(const cDragones& otro);
+	cDragones();
 	~cDragones(); 
 	
 	//friend void asignarnombre(cJinetes& jinete, cDragones& dragon);
 	
 	
 	//GETTERS Y SETTERS
-	string getnombre()const;
+	
 	bool getDomado () const;
-	int getvida()const;
 	int getEntrenado()const;
 	unsigned int getfuerza() const;
 	unsigned int getid() const;
-	bool getMuerto()const;
 	bool Domado(); 
 	void setEntrenado(int entrenado); 
-	void setMuerto(bool muerte); 
 	void setNombre(cJinetes*& jinete);
 
 	//Otras funciones
 	int atacar();
 	void formaDeAtaque();
-	void vida(int danio);
+	
 	
 	string to__string();
 	void Imprimir();

@@ -33,6 +33,22 @@ cDragones::cDragones(const cDragones& otro) {
 	this->Entrenado = otro.Entrenado;
 }
 
+cDragones::cDragones()
+{
+
+	this->Tipo = "cDragon";
+	this->Nombre = " ";
+	this->Fecha_nac = " ";
+	this->Fuerza = 0;
+	this->Vida = 500;
+	this->Muerto = false;
+	this->Id = 0;
+	this->Ataque = "No tiene";
+	this->Estado = false;
+	this->Entrenado = 0;
+	
+}
+
 
 cDragones::~cDragones() {
 	
@@ -41,9 +57,6 @@ cDragones::~cDragones() {
 
 	//GETTERS
 
-int cDragones::getvida()const {
-	return Vida;
-}
 
 unsigned int cDragones::getfuerza()const
 {
@@ -55,19 +68,13 @@ int cDragones::getEntrenado () const
 	return Entrenado; 
 }
 
-bool cDragones::getMuerto()const
-{
-	return Muerto;
-}
+
 
 unsigned int cDragones::getid() const
 {
 	return Id;
 }
 
-string cDragones::getnombre()const {
-	return Nombre;
-}
 
 bool cDragones::getDomado() const
 {
@@ -77,10 +84,6 @@ bool cDragones::getDomado() const
 
 //SETTERS
 
-void cDragones::setMuerto(bool muerte)
-{
-	Muerto = muerte;
-}
 
 void cDragones::setEntrenado(int entrenado)
 {
@@ -105,7 +108,7 @@ void cDragones::setNombre(cJinetes*& jinete)
 //FRIEND
 cDragones* aleatorio( list<cDragones*> dragones)
 {
-		if (dragones.empty()) {
+		if (dragones.empty()) {// VER QUE NO HAYA UN TRYCATCH CON EL ALETATORIO
 			throw out_of_range("La lista está vacía");
 		}
 		list<cDragones*>::iterator it = dragones.begin();
@@ -148,15 +151,7 @@ bool cDragones::Domado() {
 	}
 	return Estado;
 }
-void cDragones::vida(int danio)
-{
-	Vida = Vida - danio;
-	if (Vida < 0 || Vida == 0) {
-		Muerto = true;
-		cout << "El dragón " << Nombre << " ha sido derrotado." << endl;
-		
-	}
-}
+
 
 //para calcular el danio que puede causar un dragon voy a tomar en cuenta la fueerza del dragon y su tipo de ataque
 	/* si su fuerza es alta (de 1500 a 1000 puntos)
@@ -279,7 +274,11 @@ list<cDragones*>& operator+=(list<cDragones*>& lista, cDragones* dragon) {
 
 // Sobrecarga del operador -= para eliminar un cDragones de la lista
 list<cDragones*>& operator-=(list<cDragones*>& lista, cDragones* dragon) {
-	lista.remove(dragon);
+	auto it = find(lista.begin(), lista.end(), dragon);
+	if (it != lista.end()) {
+		delete* it;
+		lista.erase(it);
+	}
 	return lista;
 }
 

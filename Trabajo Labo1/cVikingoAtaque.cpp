@@ -40,7 +40,7 @@ void cVikingoAtaque::mover() {
 
 void cVikingoAtaque::pintarCorazones() {
     situarCursor(50, 1);
-    cout << "Vida: " << Vida;
+    cout << "Vida : " << Vida;
 
 }
 void cVikingoAtaque::MostrarDanio(int danio) {
@@ -56,15 +56,8 @@ void cVikingoAtaque::morir() {
         situarCursor(x, y + 2); cout << "   **   ";
         usleep(200000);
         borrar();
-        situarCursor(x, y);     cout << " *    *";
-        situarCursor(x, y + 1); cout << "*   *  *";
-        situarCursor(x, y + 2); cout << " *    *";
-        usleep(2000000);
-        borrar();
         pintarCorazones();
         pintar();
-       
-    
 }
 
 

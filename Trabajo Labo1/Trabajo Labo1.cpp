@@ -35,21 +35,6 @@ int main() {
     list<cVikingos*> listamodificadaV;
     list<cJinetes*> listamodificadaJ;
 
-    // objetos random de prueba
-    cDragones* dragoncito1 = new cDragones("dragon", "chimuelo", "15 / 10 / 2004", 100, 1000, false, 1, "No tiene", false, 50);
- //   cDragones* dragoncito2 = new cDragones("dragon", "gaga", "15 / 10 / 2004", 100, 1000, false, 2, "No tiene", false, 50);
-
-    // operator prueba
- //   dragones += dragoncito1;
- //   dragones += dragoncito2;
-
-    // lista cVikingo
-    cVikingos* vikingo1 = new cVikingos("vikingo", "Hiccup", "25/04/1990", 75, 500, false, Entrenador, dragoncito1, 0);
- //   vikingos += (vikingo1);
-
-    // Lista cJinete
-//    cJinetes* jinete1 = new cJinetes("jinete", "Alan", "31 / 08 / 1992", 85, 600, false, Jinete, dragoncito2, 0, "aprobado", "Chimuelo");
-  //  jinetes += (jinete1);
 
     string archivo = "Tp Labo1.csv"; // archivo de los objetos
     ifstream file(archivo);
@@ -68,12 +53,12 @@ int main() {
     int i = 0;
     int option = 0;
 
-    cJinetes* JineteSeleccionado = nullptr;     //creo objetos dinamicos para despues usarlos como auxiliares
-    cDragones* DragonSeleccionado = nullptr;
-    cVikingos* VikingoSeleccionado = nullptr;
+    cJinetes* JineteSeleccionado = new cJinetes();     //creo objetos dinamicos para despues usarlos como auxiliares
+    cDragones* DragonSeleccionado = new cDragones() ;
+    cVikingos* VikingoSeleccionado = new cVikingos();
     system("pause");
     system("cls");
-
+    VikingoSeleccionado = aleatorio(vikingos); 
 
     while (i <= 5) {
         // Reseteo los seleccionados para cada iteración, me va  a servir para los aleatorios
@@ -85,6 +70,24 @@ int main() {
         switch (option) {
         case 0: // Atacar
             cout << "Estamos trabajando para mejorar esta parte";
+            if (!vikingos.empty() && !dragones.empty()) {
+                VikingoSeleccionado = aleatorio(vikingos);
+                DragonSeleccionado = VikingoSeleccionado->getDragon();
+
+                if (DragonSeleccionado == nullptr) {
+                    DragonSeleccionado = aleatorio(dragones);
+                }
+
+                cout << "Se genera una pelea ente el vikingo " << VikingoSeleccionado->getnombre() << " y el dragon " << DragonSeleccionado->getnombre() << endl;
+
+                cVikingoAtaque v(*VikingoSeleccionado, 38, 30);
+                cControl Juegos(&v);
+                Juegos.inicializar();
+                Juegos.ejecutar();
+                Juegos.terminar();
+
+            }
+            break;
 
         case 1:
             // Trabajar
@@ -94,53 +97,51 @@ int main() {
                 VikingoSeleccionado->trabajar();
                 if (VikingoSeleccionado->getPosicion() == Posicion::Guerrero) {
 
-                    if (!dragones.empty()) {
+                    if (!vikingos.empty() && !dragones.empty()) {
+                        VikingoSeleccionado = aleatorio(vikingos);
                         DragonSeleccionado = VikingoSeleccionado->getDragon();
+
                         if (DragonSeleccionado == nullptr) {
                             DragonSeleccionado = aleatorio(dragones);
                         }
 
-                        cout << "Se genera una pelea entre el vikingo " << VikingoSeleccionado->getnombre() << " Y el dragon " << DragonSeleccionado->getnombre() << endl;
-                        while (!VikingoSeleccionado->getMuerto() && !DragonSeleccionado->getMuerto()) {
-                            int danio = DragonSeleccionado->atacar();
-                            VikingoSeleccionado->vida(danio);
-                            if (VikingoSeleccionado->getvida() <= 0) {
-                                VikingoSeleccionado->setMuerto(true);
-                                cout << "El vikingo murio en el combate." << endl;
-                                listamodificadaV += VikingoSeleccionado;
-                                vikingos -= (VikingoSeleccionado); // Eliminar de la lista original
+                        cout << "Se genera una pelea ente el vikingo " << VikingoSeleccionado->getnombre() << " y el dragon " << DragonSeleccionado->getnombre() << endl;
 
-                                break; // Terminar la batalla si el vikingo muere
-                            }
-                            DragonSeleccionado->vida(VikingoSeleccionado->atacar());
-                            if (DragonSeleccionado->getvida() <= 0) {
-                                DragonSeleccionado->setMuerto(true);
-                                VikingoSeleccionado->setDragonmuerto();
-                                cDragones::DragonesMuertos++;
-                                listamodificadaD += (DragonSeleccionado);
-                                dragones -= (DragonSeleccionado); // Eliminar de la lista original
-                                break; // Terminar la batalla si el dragón muere
-                            }
-                        }
+                        cVikingoAtaque v(*VikingoSeleccionado, 38, 30);
+                        cControl Juegos(&v);
+                        Juegos.inicializar();
+                        Juegos.ejecutar();
+                        Juegos.terminar();
                     }
+                    
                 }
                 else if (VikingoSeleccionado->getPosicion() == Posicion::Jinete && !jinetes.empty()) {
                     cJinetes* jinete = dynamic_cast<cJinetes*>(VikingoSeleccionado);
-                    (jinete->getFuerza() > 70) ? jinete->setResultado("aprobado") : jinete->setResultado("desaprobado");
 
-                    if (VikingoSeleccionado->getDragon() != nullptr) {
-                        jinete->entrenarDragon();
+                    if (jinete != nullptr) {
+                        // Verificación de fuerza
+                        if (jinete->getFuerza() > 70) {
+                            jinete->setResultado("aprobado");
+                        }
+                        else {
+                            jinete->setResultado("desaprobado");
+                        }
+
+                        // Verificación y entrenamiento del dragón
+                        if (jinete->getDragon() != nullptr) {
+                            jinete->entrenarDragon();
+                        }
+                        else {
+                            cout << "El vikingo jinete aún no tiene asignado ningún dragón, la próxima le tocará entrenar";
+                        }
                     }
-                    else
-                        cout << "el vikingo jinete aun no tiene asignado ningun dragon, la proxima le tocara entrenar";
+                    else {
+                        cout << "Error: No se pudo realizar el dynamic_cast a cJinetes" << endl;
+                    }
                 }
+
             }
             break;
-
-
-
-            
-           
 
             case 2: // Entrenar
             cout << "Hoy es un lindo dia para entrenar " << endl;
@@ -168,26 +169,33 @@ int main() {
         //Elimino la memoria que pedi
         auto it_jinete = jinetes.begin();
         while (it_jinete != jinetes.end()) {
-            delete* it_jinete;
-            it_jinete = jinetes.erase(it_jinete);
+            jinetes -= *it_jinete;
+            
         }
         auto it_vikingo = vikingos.begin();
         while (it_vikingo != vikingos.end()) {
-            delete* it_vikingo;
-            it_vikingo = vikingos.erase(it_vikingo);
+            vikingos -= *it_vikingo;
         }
         auto it_dragon = dragones.begin();
         while (it_dragon != dragones.end()) {
-            delete* it_dragon;
-            it_dragon = dragones.erase(it_dragon);
+            dragones -= * it_dragon;
         }
 
-        cVikingoAtaque v(*vikingo1, 38,30);
-        cControl Juegos(&v);
-        Juegos.inicializar();
-        Juegos.ejecutar();
-        Juegos.terminar();
-      
+        it_jinete = jinetes.begin();
+        while (it_jinete != jinetes.end()) {
+            listamodificadaJ -= *it_jinete;
 
+        }
+        it_vikingo = vikingos.begin();
+        while (it_vikingo != vikingos.end()) {
+            listamodificadaV -= *it_vikingo;
+        }
+        it_dragon = dragones.begin();
+        while (it_dragon != dragones.end()) {
+            listamodificadaD -= *it_dragon;
+        }
+        delete JineteSeleccionado;
+        delete DragonSeleccionado;
+        delete VikingoSeleccionado;
     return 0;
 }

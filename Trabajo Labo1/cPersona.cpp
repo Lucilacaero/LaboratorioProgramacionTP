@@ -1,6 +1,6 @@
 
 #include "cPersona.h"
-
+#include "ayuditaMain.h"
 // using namespace std;
 
 //la clase cPersona es mas que nada abstracta 
@@ -31,6 +31,39 @@ void cPersona::setMuerto(bool muerte)
 int cPersona::getvida() const
 {
 	return Vida;
+}
+
+bool cPersona::getMuerto() const
+{
+	return Muerto;
+}
+
+string cPersona::getnombre() const
+{
+	return Nombre;
+}
+
+unsigned int cPersona::getFuerza() const
+{
+	return Fuerza;
+}
+
+void cPersona::vida(int danio)
+{
+
+	Vida = Vida - danio;
+	if (Vida < 0 || Vida == 0) {
+
+		Muerto = true;
+		situarCursor(78, 3); cout << Nombre << " fue derrotado." << endl;
+		if (Tipo == "dragon") {
+			cDragones::DragonesMuertos++;
+		}
+		//esto me mato el programa, ponerl en otro lado
+		//system("pause");
+		//system("cls");
+		//cout << "presiones enter para finalizar";
+	}
 }
 
 bool cPersona::getMuerto()

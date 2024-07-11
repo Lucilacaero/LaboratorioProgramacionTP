@@ -60,8 +60,10 @@ void cControl::manejarColisiones(cDragonAtaque& DragonAtaque) {
 
 
 void cControl::ejecutar() {
+   
     bool game_over = false;//la clase cControl tiene un puntero vikingo soo lo mando aca 
     while (!game_over) {
+        pintarLimites();
         generarAsteroides(v->getDragon());
 
         if (_kbhit()) {
@@ -88,7 +90,7 @@ void cControl::ejecutar() {
         for (auto& asteroide : asteroides) {
             asteroide->mover();
             asteroide->choque(*v);
-            if (v->getvida() == 0) {//CAMBIAR A <0
+            if (v->getvida() < 0) {//CAMBIAR A <0
                 game_over = true;
                 break;
             }
@@ -97,7 +99,9 @@ void cControl::ejecutar() {
         
         cDragonAtaque AtaqueD(*(v->getDragon()), 2,4);
         manejarColisiones(AtaqueD);
-        if (v->getvida() == 0) { game_over = true; }
+        if (v->getvida() < 0) {
+            v->setMuerto(true);
+            game_over = true; }
         this_thread::sleep_for(chrono::milliseconds(30));
     }
 }

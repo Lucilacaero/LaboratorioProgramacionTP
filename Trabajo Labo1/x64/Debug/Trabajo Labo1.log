@@ -1,2 +1,9 @@
-﻿  cControl.cpp
-LINK : fatal error LNK1168: no se puede abrir C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\x64\Debug\Trabajo Labo1.exe para escritura
+﻿  AyuditaMain.cpp
+  Trabajo Labo1.cpp
+C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\Trabajo Labo1\Trabajo Labo1.cpp(28,15): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+  cDragones.cpp
+  cJinetes.cpp
+  cPersona.cpp
+  cVikingos.cpp
+  Generando código...
+  Trabajo Labo1.vcxproj -> C:\Users\Toty\Desktop\Proyectos git\LaboratorioProgramacionTP\x64\Debug\Trabajo Labo1.exe

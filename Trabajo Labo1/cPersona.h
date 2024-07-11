@@ -21,9 +21,12 @@ public:
     cPersona(const cPersona& otro);
     void setMuerto(bool muerte);
     int getvida() const;
+    bool getMuerto() const;
+    string getnombre()const;
+    unsigned int getFuerza()const;
 
     virtual int atacar() = 0;// esta va a ser la funcion con polimorfismo
-    virtual void vida(int danio) = 0;// esta tambien porque despues llamo a los destructores 
+   void vida(int danio);// esta tambien porque despues llamo a los destructores 
    virtual bool getMuerto(); 
    virtual string to__string(); //voy a imprimir todos los atributos de cPErsona y despues le agrego los de la clase correspondiente
    virtual void Imprimir();

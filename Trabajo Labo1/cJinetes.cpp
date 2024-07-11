@@ -29,6 +29,20 @@ cJinetes::cJinetes(const cJinetes& otro) {
 cJinetes::~cJinetes()
 {
 }
+cJinetes::cJinetes()
+{
+    this->Tipo = "Jinete";
+    this->Nombre = " ";
+    this->Fecha_nac = " ";
+    this->Fuerza = 0;
+    this->Vida = 100;
+    this->Muerto = false;
+    this->Trabajo = Posicion::Jinete;
+    this->Dragon = nullptr;
+    this->Dragon_Muerto = 0;
+    this->Resultado = "desaprobado";
+    this->NombreDragon = " ";
+}
 void cJinetes::entrenarDragon() {//agregar en el main que si no aprobo el curso no va a poder entrenar a un dragon y si termino primero se le agrega un 50+ de fuerza
     /* tomar en consideracion
     1. La fuerza del dragon y del jinete
@@ -97,17 +111,15 @@ void cJinetes::entrenarDragon() {//agregar en el main que si no aprobo el curso 
 cJinetes* aleatorio(list<cJinetes*> jinetes)
 {
     if (jinetes.empty()) {
-        throw out_of_range("La lista está vacía");
+
+        cout <<"La lista está vacía"<<endl;
     }
     list<cJinetes*>::iterator it = jinetes.begin();
     advance(it, rand() % jinetes.size());
     return *it;
 }
 
-void cJinetes::setMuerte(bool muerte)
-{
-    Muerto = muerte;
-}
+
 
 string cJinetes::to__string()
 {
@@ -127,20 +139,10 @@ void cJinetes::Imprimir()
     cout << to__string();
 }
 
-int cJinetes::getvida()
-{
-    return Vida;
-}
 
-int cJinetes::getFuerza()
-{
-    return Fuerza;
-}
 
-bool cJinetes::getMuerto()
-{
-    return Muerto;
-}
+
+
 
 cDragones* cJinetes::getDragon()
 {
@@ -164,8 +166,11 @@ list<cJinetes*>& operator+=(list<cJinetes*>& lista, cJinetes* jinete) {
 }
 
 list<cJinetes*>& operator-=(list<cJinetes*>& lista, cJinetes* jinete) {
-    lista.remove(jinete);
- 
+    auto it = find(lista.begin(), lista.end(), jinete);
+    if (it != lista.end()) {
+        delete* it;
+        lista.erase(it);
+    }
     return lista;
 }
 ostream& operator<<(ostream& out,  cJinetes& jinete) {
