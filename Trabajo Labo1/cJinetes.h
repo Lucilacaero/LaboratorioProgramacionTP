@@ -15,7 +15,7 @@ public:
 	~cJinetes();
 	cJinetes();
 	cJinetes(const cJinetes& otro);
-	
+	cJinetes(const cVikingos& otro, string resultado, string Nombre );
 	cDragones* getDragon();
 	void setDragon(cDragones* dragon);
 	void setResultado(string resultado);

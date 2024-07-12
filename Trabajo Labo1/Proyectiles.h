@@ -11,6 +11,7 @@ public:
     void borrar() ;
     void mover() ;
     bool fuera()const;
+    unsigned int getDanio();
     int X() const { return x; }
     int Y()const { return y; }
 };

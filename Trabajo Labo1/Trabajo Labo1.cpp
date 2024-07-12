@@ -69,7 +69,7 @@ int main() {
         option = rand() % 3;
         switch (option) {
         case 0: // Atacar
-            cout << "Estamos trabajando para mejorar esta parte";
+          
             if (!vikingos.empty() && !dragones.empty()) {
                 VikingoSeleccionado = aleatorio(vikingos);
                 DragonSeleccionado = VikingoSeleccionado->getDragon();
@@ -115,16 +115,19 @@ int main() {
                     }
                     
                 }
+                
                 else if (VikingoSeleccionado->getPosicion() == Posicion::Jinete && !jinetes.empty()) {
-                    cJinetes* jinete = dynamic_cast<cJinetes*>(VikingoSeleccionado);
-
-                    if (jinete != nullptr) {
+                   
+                    
+                    if (VikingoSeleccionado != nullptr) {
                         // Verificación de fuerza
-                        if (jinete->getFuerza() > 70) {
-                            jinete->setResultado("aprobado");
-                        }
+                        cJinetes* jinete = nullptr;
+
+                        if (VikingoSeleccionado->getFuerza() > 70) {
+                            jinete = new cJinetes(*VikingoSeleccionado, "aprobado", " ");
+                        } 
                         else {
-                            jinete->setResultado("desaprobado");
+                            jinete = new cJinetes(*VikingoSeleccionado, "desaprobado", " ");
                         }
 
                         // Verificación y entrenamiento del dragón
@@ -139,6 +142,7 @@ int main() {
                         cout << "Error: No se pudo realizar el dynamic_cast a cJinetes" << endl;
                     }
                 }
+                
 
             }
             break;
@@ -167,6 +171,7 @@ int main() {
         system("cls");
 
         //Elimino la memoria que pedi
+        /*
         auto it_jinete = jinetes.begin();
         while (it_jinete != jinetes.end()) {
             jinetes -= *it_jinete;
@@ -197,5 +202,7 @@ int main() {
         delete JineteSeleccionado;
         delete DragonSeleccionado;
         delete VikingoSeleccionado;
+        */
+        
     return 0;
 }

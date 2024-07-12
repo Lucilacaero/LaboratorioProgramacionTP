@@ -56,7 +56,7 @@ public:
 	//Otras funciones
 	int atacar();
 	void formaDeAtaque();
-	
+	void MostrarVida();
 	
 	string to__string();
 	void Imprimir();

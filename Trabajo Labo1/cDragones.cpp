@@ -144,6 +144,12 @@ void cDragones::formaDeAtaque() {
 	
 }
 
+void cDragones::MostrarVida()
+{
+	situarCursor(78, 11);
+	cout << "Vida del Dragon " << Nombre << ": " << Vida << endl;
+}
+
 bool cDragones::Domado() {
 	if (Entrenado >= 100) {
 		Estado = true;

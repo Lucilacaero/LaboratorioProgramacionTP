@@ -50,9 +50,18 @@ unsigned int cPersona::getFuerza() const
 
 void cPersona::vida(int danio)
 {
-
-	Vida = Vida - danio;
-	if (Vida < 0 || Vida == 0) {
+	
+	Vida -= danio;
+	if (Vida <= 0) {
+		Vida = 0;
+		Muerto = true;
+		situarCursor(78, 3);
+		cout << Nombre << " fue derrotado." << endl;
+		if (Tipo == "dragon") {
+			cDragones::DragonesMuertos++;
+		}
+	}
+	/*if (Vida < 0 || Vida == 0) {
 
 		Muerto = true;
 		situarCursor(78, 3); cout << Nombre << " fue derrotado." << endl;
@@ -64,6 +73,7 @@ void cPersona::vida(int danio)
 		//system("cls");
 		//cout << "presiones enter para finalizar";
 	}
+	*/
 }
 
 bool cPersona::getMuerto()

@@ -38,7 +38,7 @@ cVikingos::~cVikingos() {}
 
 int cVikingos::atacar()
 {// en el caso de los vikingos asumo que la fuerza va hasta 700, de los dragones hasta 1000 
-	int danio = 0;
+	unsigned int danio = 0;
 	if (Fuerza < 100) {
 		danio = rand() % 200;}
 	else if (Fuerza < 200) {
@@ -48,8 +48,8 @@ int cVikingos::atacar()
 	else if (Fuerza < 400) {
 		danio = rand() % 500;	}
 	else {danio = rand() % 700;}
-	
-	cout << "el vikingo genero un danio de " << danio << " puntos." << endl;
+
+
 	return danio;
 }
 

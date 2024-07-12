@@ -6,6 +6,7 @@ cDragonAtaque::cDragonAtaque( cDragones& otro, int x, int y): cDragones(otro) {
     this->x = x;
     this->y = y;
     dx = 1;
+    this->danio = otro.atacar();// de esta forma los ataques del dragon tienen un danio predefinido
 }
 
 void cDragonAtaque::pintar() {
@@ -27,8 +28,12 @@ void cDragonAtaque::mover() {
     }
     pintar();
 }
-
-
+/*
+void cDragonAtaque:: PintarVida() {
+    situarCursor(78, 10);
+    cout << "Vida del Dragon: " << Vida;
+}
+*/
 void cDragonAtaque::choque(cVikingoAtaque& N) {
     if (x >= N.X() && x <= N.X() + 4 && y >= N.Y() && y <= N.Y() + 2) {// verifico las coordenadas para 
       int  danio = atacar();
@@ -38,6 +43,11 @@ void cDragonAtaque::choque(cVikingoAtaque& N) {
         N.morir();
         N.pintar();
         N.pintarCorazones();
+      
         x = rand() % 71 + 4;
     }
+}
+
+unsigned int cDragonAtaque::getDanio() {
+    return danio;
 }

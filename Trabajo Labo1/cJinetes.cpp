@@ -26,6 +26,12 @@ cJinetes::cJinetes(const cJinetes& otro) {
     this->Resultado = otro.Resultado;
     this->NombreDragon = otro.NombreDragon;
 }
+cJinetes::cJinetes(const cVikingos& otro, string resultado, string Nombre): cVikingos(otro)
+{
+    Resultado = resultado;
+    this->Nombre = Nombre;
+
+}
 cJinetes::~cJinetes()
 {
 }

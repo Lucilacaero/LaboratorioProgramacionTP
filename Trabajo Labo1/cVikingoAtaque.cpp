@@ -39,12 +39,13 @@ void cVikingoAtaque::mover() {
 }
 
 void cVikingoAtaque::pintarCorazones() {
-    situarCursor(50, 1);
+    situarCursor(78, 6);
     cout << "Vida : " << Vida;
+   
 
 }
 void cVikingoAtaque::MostrarDanio(int danio) {
-    situarCursor(78, 1); cout << "El dragon  ataca y genera un danio de " << danio << "\n";
+    situarCursor(78, 8); cout << "El dragon  ataca y genera un danio de " << danio << "\n";
 
 }
 
@@ -66,5 +67,3 @@ void cVikingoAtaque::morir() {
 void cVikingoAtaque::disparar(list<Proyectiles*>& B) {
     B.push_back(new Proyectiles(x + 2, y - 1, atacar()));
 }
-
-
