@@ -275,7 +275,7 @@ string cDragones::to__string(){
 	s += " Id: " + to_string(Id) + "\n"
 		+ " Ataque: " + Ataque + "\n"
 		+ " Estado: " + (Estado ? "Domado" : "No domado") + "\n"
-		+ " Entrenado: " + to_string(Entrenado) + "\n" + "\n";;
+		+ " Entrenado: " + to_string(Entrenado) + "\n" + "\n";
 	return s;
 }
 

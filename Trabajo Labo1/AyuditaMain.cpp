@@ -328,4 +328,5 @@ string buscarJinetePorDragon(list<cJinetes*>& jinetes, cDragones* dragon) {
         }
     }
     return " No se encontro en la lista de datos. "; // Si no se encuentra ningún jinete para el dragon
+    //si dice esto es porque en el csv falta un jinete que tenga al dragon como puntero, puede pasar porque no tengo la misma cantidad de dragones que de jinetes
 }
