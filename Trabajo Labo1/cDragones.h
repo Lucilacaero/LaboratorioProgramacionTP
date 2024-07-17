@@ -52,7 +52,7 @@ public:
 	bool Domado(); 
 	void setEntrenado(int entrenado); 
 	void setNombre(cJinetes*& jinete);
-
+	
 	//Otras funciones
 	int atacar();
 	void formaDeAtaque();

@@ -185,11 +185,14 @@ void imprimirresumen(list <cDragones*>& listamodificadaD, list <cVikingos*>&list
         cout << "Dragones muertos: Ningun dragon murio hoy" << endl;
     }
     else {
-        cout << "Dragones : " << cDragones::DragonesMuertos << endl;
-        cout << "Dragones muertos: " << endl;
+        cout << "Dragones : "<< endl;
+        cout << "Dragones muertos: " << cDragones::DragonesMuertos << endl; 
         for (auto it = listamodificadaD.begin(); it != listamodificadaD.end(); ++it) {
             cDragones* dragon = *it;
             dragon->Imprimir();
+            if (dragon->Domado() == true) {
+               cout<<"Jinete: "<< buscarJinetePorDragon(listamodificadaJ, dragon)<< endl;
+            }
         }
     }
     cout << "Dragones Vivos: " << cDragones::DragonesVivos << endl;
@@ -316,4 +319,13 @@ void pintarLimites() {
     situarCursor(1, 19); cout << "/    /\\  /\\    \\";
     situarCursor(1, 20); cout << "\\/\\/`\\ \\/ /`\\/\\/ ";
     situarCursor(1, 21); cout << "   ^^--^^^^-^^ ";
+}
+
+string buscarJinetePorDragon(list<cJinetes*>& jinetes, cDragones* dragon) {
+    for (const auto& jinete : jinetes) {
+        if (jinete->getDragon() == dragon) {
+            return jinete->getnombre();
+        }
+    }
+    return " No se encontro en la lista de datos. "; // Si no se encuentra ningún jinete para el dragon
 }

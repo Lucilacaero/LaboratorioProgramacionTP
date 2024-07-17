@@ -97,13 +97,18 @@ void cDragones::setNombre(cJinetes*& jinete)
 		if (jinete == nullptr) {
 			cout<< "Error: jinete es un puntero nulo"<<endl; 
 		}
-		this->Nombre = jinete->NombreDragon; 
+		else {
+			this->Nombre = jinete->NombreDragon;
+		} 
+		
 	}
 	catch (const invalid_argument& e) {
 		cerr << e.what() << endl; // cerr = cout error
 	}
 
 }
+
+
 
 //FRIEND
 cDragones* aleatorio(list<cDragones*> dragones) {
@@ -114,13 +119,13 @@ cDragones* aleatorio(list<cDragones*> dragones) {
 
 	list<cDragones*>::iterator it;
 	int intentos = 0;
-	int maxIntentos = dragones.size() * 2; // Un limite razonable para evitar un bucle infinito
+	int maxIntentos = dragones.size(); // Un limite para evitar un bucle infinito
 
 	do {
 		it = dragones.begin();
 		advance(it, rand() % dragones.size());
 		intentos++;
-	} while ((*it)->getMuerto() && intentos < maxIntentos);
+	} while ((*it)->getMuerto() && intentos < maxIntentos);// con esto verifico que no se utilicen dragones muertos
 
 	if (intentos >= maxIntentos) {
 		cout << "No se encontro un dragon vivo después de varios intentos." << endl;
@@ -267,10 +272,10 @@ int cDragones::atacar()
 string cDragones::to__string(){
 	//voy a imprimir todos los atributos de cPersona y despues le agrego los de la clase correspondiente
 	string s = cPersona::to__string();
-	s += ", Id: " + to_string(Id) + "\n"
-		+ ", Ataque: " + Ataque + "\n"
-		+ ", Estado: " + (Estado ? "Domado" : "No domado") + "\n"
-		+ ", Entrenado: " + to_string(Entrenado) + "\n";
+	s += " Id: " + to_string(Id) + "\n"
+		+ " Ataque: " + Ataque + "\n"
+		+ " Estado: " + (Estado ? "Domado" : "No domado") + "\n"
+		+ " Entrenado: " + to_string(Entrenado) + "\n" + "\n";;
 	return s;
 }
 

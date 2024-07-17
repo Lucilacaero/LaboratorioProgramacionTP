@@ -36,7 +36,7 @@ void cControl::manejarColisiones() {
     for (auto it = balas.begin(); it != balas.end(); ) {
 
         // Primer caso: el vikingo genera un ataque al dragon
-        if ((*it)->X() >= 2 && (*it)->X() <= 10 && (*it)->Y() >= 15 && (*it)->Y() <= 20) {
+        if ((*it)->X() >= 2 && (*it)->X() <= 10 && (*it)->Y() >= 15 && (*it)->Y() <= 20) { //verifico que las balas esten en  unrango que causan "danio"
             int danio = (*it)->getDanio(); // Al atacar devuelve el danio que el vikingo puede generar
             dragonAtaque->MostrarCambios(danio);
             (*it)->borrar();
@@ -49,14 +49,12 @@ void cControl::manejarColisiones() {
         for (auto jt = asteroides.begin(); jt != asteroides.end(); ) {
             // Segundo caso: hay una colision entre una bala y un asteroide
             if ((*it)->X() == (*jt)->X() && (*it)->Y() == (*jt)->Y()) {
-                int danio = (*it)->getDanio() - (*jt)->getDanio();
-                if (danio > 0) {
-                    
-                    v->vida(danio); // El vikingo recibe el danio restante
-                   
+                int danio = (*it)->getDanio() - (*jt)->getDanio(); // jt son el ataque del dragon, asi que si es negativo el dragon genera mas danio
+                if (danio < 0) {
+                    v->vida(-danio); // El vikingo recibe el danio restante
                 }
                 else {
-                    dragonAtaque->MostrarCambios(-danio);
+                    dragonAtaque->MostrarCambios(danio);
                 }
 
                 (*it)->borrar();
@@ -102,13 +100,13 @@ void cControl::ejecutar() {
 
         if (_kbhit()) {
             char tecla = _getch();
-            if (tecla == 'c') {
+            if (tecla == 'b') {
                 balas.push_back(new Proyectiles(v->X() + 2, v->Y() - 1, v->atacar()));
             }
         }
         v->mover();
 
-        for (auto it = balas.begin(); it != balas.end(); ) {
+        for (auto it = balas.begin(); it != balas.end(); ) {//el incremento solo lo hago en el else
             (*it)->mover();
             if ((*it)->fuera()) {
                 (*it)->borrar();

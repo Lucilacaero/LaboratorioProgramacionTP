@@ -13,7 +13,7 @@ cJinetes::cJinetes(string tipo, string nombre, string fecha_nac, unsigned int fu
     NombreDragon = nombredragon;
 }
 cJinetes::cJinetes(const cJinetes& otro) {
-    // Copiar cada atributo desde 'otro' al nuevo objeto creado (this)
+    // Copiar cada atributo desde 'otro' al nuevo objeto creado 
     this->Tipo = otro.Tipo;
     this->Nombre = otro.Nombre;
     this->Fecha_nac = otro.Fecha_nac;
@@ -54,16 +54,12 @@ void cJinetes::entrenarDragon() {//agregar en el main que si no aprobo el curso 
     1. La fuerza del dragon y del jinete
     2. la posicion del jinete, si termina en 1 o 2 lugar tiene ventaja, sino es normalito */
     bool juego;
-    juego = entrenar();
-    if (juego == true) {
-
+    juego = entrenar(); //funcion de prueba para que el jinete haga algo y no se asigne puntos porque si
    
+    if (juego == true) {
      cDragones* Dragon = this->getDragon();
      int entrenado;
-     // poner getter y setter para que deje de tirar erroes
-     if (Dragon == nullptr) {
-         throw  ("No hay dragon asignado para entrenar.");
-     } 
+
      cout << "El jinete " << Nombre << " va a entrena al dragon " << Dragon->getnombre() << endl;
      if (Resultado == "desaprobado") {
         cout << "lamentamos informarle que el jinete no aprobo el examen y por lo tanto no puede entrenar dragones"<<endl;
@@ -234,46 +230,47 @@ ostream& operator<<(ostream& out,  cJinetes& jinete) {
 }
 
 
-void cJinetes::displayStatus(int currentClicks, int totalClicks, double remainingTime) {
-    float progress = (static_cast<float>(currentClicks) / totalClicks) * 100;
-    cout << "\rTiempo restante: " << remainingTime << "s \t";
-    cout << "Progreso: " << progress << "%   ";
-    cout.flush();
+void cJinetes::displayStatus(int clicksActuales, int totalClicks, double TiempoRestante) {
+    float progreso = (static_cast<float>(clicksActuales) / totalClicks) * 100; //saco el porcentaje
+    cout << "\rTiempo restante: " << TiempoRestante << "s \t";
+    cout << "Progreso: " << progreso << "%   ";
+    cout.flush(); //evito que se espere a imprimir
 }
 
 bool cJinetes::entrenar(){
-    const int requiredClicks = 25;
-    const int timeLimit = 5; // en segundos
-    int currentClicks = 0;
+    const int clicksRequeridos = 25;
+    const int TiempoLimite = 5; // en segundos
+    int clicksActuales = 0;
 
     cout << "Presiona las teclas de flecha izquierda y derecha 15 veces en menos de 5 segundos\n";
     cout << "Presiona cualquier tecla para comenzar...\n";
     _getch(); 
 
-    clock_t startTime = clock();
-    double remainingTime = timeLimit;
+    clock_t TiempoDeInicio = clock();// clock() mide el tiempo desde la compu desde que comenzó la ejecución del codigo
+    // clock_t representa el tiempo en "ticks de reloj"
+    double TiempoRestante = TiempoLimite;
 
-    while (currentClicks < requiredClicks && remainingTime > 0) {
+    while (clicksActuales < clicksRequeridos && TiempoRestante > 0) {
         if (_kbhit()) {
             int key = _getch();
-            if (key == 224) { // Teclas de flecha devuelven 224 primero
+            if (key == 224) { 
                 key = _getch();
                 if (key == 75 || key == 77) { // 75 es flecha izquierda, 77 es flecha derecha
-                    currentClicks++;
+                    clicksActuales++;
                 }
             }
         }
 
-        clock_t currentTime = clock();
-        remainingTime = timeLimit - double(currentTime - startTime) / CLOCKS_PER_SEC;
-        displayStatus(currentClicks, requiredClicks, remainingTime);
+        clock_t TiempoACtual = clock();
+        TiempoRestante = TiempoLimite - double(TiempoACtual - TiempoDeInicio) / CLOCKS_PER_SEC;
+        displayStatus(clicksActuales, clicksRequeridos, TiempoRestante);
 
-        this_thread::sleep_for(chrono::milliseconds(50)); // Pequenia pausa para evitar sobrecargar la CPU
+        this_thread::sleep_for(chrono::milliseconds(50)); // para que no se sobrecargue la compu
     }
 
     cout << endl;
 
-    if (currentClicks >= requiredClicks) {
+    if (clicksActuales >= clicksRequeridos) {
         
         cout << "¡Felicidades! el entrenamiento se completo con exito\n";
         return true;

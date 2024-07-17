@@ -46,28 +46,15 @@ unsigned int cPersona::getFuerza() const
 }
 
 void cPersona::vida(int danio) {
-	// Limpia la linea antes de imprimir
-	/*situarCursor(78, 2);
-	cout << "                                                                                                                 "; // Espacios para limpiar la linea
-	situarCursor(78, 2);
-	cout << "La vida actual es " << Vida << ", el danio es " << danio << ", su vidadeberia ser " << (Vida - danio) << endl;
-	*/
-	if (Vida > 0) {
-		Vida -= danio;  // Actualizar vida correctamente
+	
+	if (Vida > 0) {//verifico que vida no sea menor que 0 porque no tiene sentido
+		Vida -= danio;  
 
-		/*
-		situarCursor(78, 3);
-		cout << "                                                                                                                 "; // Espacios para limpiar la linea
-		situarCursor(78, 3);
-		cout << "Vida actualizada: " << Vida << endl;
-		*/
-		if (Vida <= 0) {
+		if (Vida <= 0) {//una vez que 
 			Vida = 0;
 			Muerto = true;
-
-			// Limpia la linea antes de imprimir
 			situarCursor(78, 4);
-			cout << "                                   "; // Espacios para limpiar la linea
+			cout << "                                   "; // Espacios para limpiar la linea y evitar sobreescribir
 			situarCursor(78, 4);
 			cout << Nombre << " fue derrotado." << endl;
 			

@@ -12,7 +12,7 @@ class cDragonAtaque : public cDragones{
 public:
     cDragonAtaque( cDragones& otro, int x, int y);
 
-    void pintar();
+    void pintar() const;
     void borrar();
     void MostrarCambios(int danio);
     void mover();

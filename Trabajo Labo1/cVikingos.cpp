@@ -90,7 +90,7 @@ void cVikingos::trabajar()
 		cout << "el vikingo herrero " << Nombre << " fue a soldar" << endl;
 	else if (Trabajo == Posicion::Jinete)
 		cout << "el vikingo Jinete " << Nombre << " fue a entrenar su dragon "<< Dragon->getnombre() << endl;
-	//llamar a la funcion entrenar
+
 }
 
 
@@ -115,7 +115,7 @@ cVikingos* aleatorio(list<cVikingos*> vikingos) {
 
 	list<cVikingos*>::iterator it;
 	int intentos = 0;
-	int maxIntentos = vikingos.size() * 2; // Un limite razonable para evitar un bucle infinito
+	int maxIntentos = vikingos.size(); //para que el bucle no sea infinito hago que se detenga cunado Muerto sea false o llegue al final de la lista
 
 	do {
 		it = vikingos.begin();
@@ -175,7 +175,7 @@ ostream& operator<<(ostream& out,  cVikingos& vikingo) {
 		<< left << setw(10) << setfill(' ') << vikingo.Fuerza
 		<< left << setw(10) << setfill(' ') << vikingo.Vida
 		<< left << setw(10) << setfill(' ') << (vikingo.Muerto ? "si" : "no")
-		<< left << setw(15) << setfill(' ') << TrabajoToString(vikingo.Trabajo) // Assumes you have a function to convert Posicion to string
+		<< left << setw(15) << setfill(' ') << TrabajoToString(vikingo.Trabajo) 
 		<< endl;
 	return out;
 }

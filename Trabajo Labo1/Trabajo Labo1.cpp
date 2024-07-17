@@ -44,9 +44,7 @@ int main() {
 
     for (auto it = dragones.begin(); it != dragones.end(); ++it) {//quiero saber cuantos dragones domados hay antes de iniciar el dia 
         cDragones* dragon = *it;
-        if (dragon->getDomado() == true) {
-            cDragones::Domados++;
-        }
+        dragon->Domado();
 
     }
 
@@ -75,7 +73,7 @@ int main() {
                 VikingoSeleccionado = aleatorio(vikingos);
                 DragonSeleccionado = VikingoSeleccionado->getDragon();
 
-                if (DragonSeleccionado == nullptr) {
+                if (DragonSeleccionado == nullptr || DragonSeleccionado->getMuerto() == true) {
                     DragonSeleccionado = aleatorio(dragones);
                 }
 
@@ -116,7 +114,7 @@ int main() {
                         VikingoSeleccionado = aleatorio(vikingos);
                         DragonSeleccionado = VikingoSeleccionado->getDragon();
 
-                        if (DragonSeleccionado == nullptr) {
+                        if (DragonSeleccionado == nullptr|| DragonSeleccionado->getMuerto() == true) {
                             DragonSeleccionado = aleatorio(dragones);
                         }
 
@@ -160,8 +158,14 @@ int main() {
                         }
 
                         // Verificacion y entrenamiento del dragon
-                        if (JineteSeleccionado->getDragon() != nullptr&& JineteSeleccionado->getResultado() != "desaprobado") {
-                            JineteSeleccionado->entrenarDragon();
+                        if ( (JineteSeleccionado->getResultado() != "desaprobado" || JineteSeleccionado->getResultado() != "no asistio")) {
+                            if (JineteSeleccionado->getDragon() == nullptr && DragonSeleccionado->getMuerto() == true) {
+                                DragonSeleccionado = aleatorio(dragones); 
+                                JineteSeleccionado->entrenarDragon();
+                            }
+                            
+                            else {  JineteSeleccionado->entrenarDragon();}
+                               
                             if (JineteSeleccionado->getMuerto() == true) {
                                 listamodificadaJ += JineteSeleccionado;
                             }
@@ -183,7 +187,7 @@ int main() {
             cout << "Hoy es un lindo dia para entrenar " << endl;
             if (!jinetes.empty()) {
                 cJinetes* JineteSeleccionado = aleatorio(jinetes);
-                if (JineteSeleccionado->getDragon() == nullptr) {
+                if (JineteSeleccionado->getDragon() == nullptr|| JineteSeleccionado->getDragon()->getMuerto() == true) {
                     cDragones* dragon = aleatorio(dragones);
                     JineteSeleccionado->setDragon(dragon);
                 }

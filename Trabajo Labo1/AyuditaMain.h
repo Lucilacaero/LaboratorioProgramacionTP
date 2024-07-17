@@ -27,7 +27,7 @@ cDragones* encontrardragon(unsigned int id, list<cDragones*>& dragones);
 string TrabajoToString(Posicion& Trabajo);
 void imprimirresumen(list <cDragones*>& listamodificadaD, list <cVikingos*>& listamodificadaV, list <cJinetes*>& listamodificadaJ);
 void print();
-
+string buscarJinetePorDragon(list<cJinetes*>& jinetes, cDragones* dragon);
 void situarCursor(int x, int y);
 void pintarLimites();
 void ocultarCursor();

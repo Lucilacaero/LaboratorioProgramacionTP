@@ -21,7 +21,7 @@ public:
 	void setDragon(cDragones* dragon);
 	void setResultado(string resultado);
 
-	void displayStatus(int currentClicks, int totalClicks, double remainingTime);
+	void displayStatus(int clicksActuales, int totalClicks, double TiempoRestante);
 
 	bool entrenar();
 	

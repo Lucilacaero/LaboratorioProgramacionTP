@@ -16,8 +16,8 @@ class cControl {
 private:
     cVikingoAtaque* v;
     cDragonAtaque* dragonAtaque;
-    std::vector<Proyectiles*> balas;
-    std::vector<cDragonAtaque*> asteroides;
+    vector<Proyectiles*> balas;
+    vector<cDragonAtaque*> asteroides;
 
 public:
     cControl(cVikingoAtaque* vikingo, cDragonAtaque* dragon);

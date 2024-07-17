@@ -27,8 +27,8 @@ void cVikingoAtaque::borrar() {
 }
 
 void cVikingoAtaque::mover() {
-    if (_kbhit()) {
-        char tecla = _getch();
+    if (_kbhit()) {  //verifica que se presiono una tecla 
+        char tecla = _getch(); //lee la tecla que se ingreso
         borrar();
         if (tecla == IZQUIERDA && x > 3) { x--; }
         if (tecla == DERECHA && x + 5 < 78) { x++; }
@@ -63,7 +63,7 @@ void cVikingoAtaque::morir() {
         situarCursor(x, y + 2); cout << "   **   ";
         usleep(200000);
         borrar();
-       pintarCorazones();
+        pintarCorazones();
         pintar();
 }
 
