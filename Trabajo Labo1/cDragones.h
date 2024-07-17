@@ -14,10 +14,10 @@ const int MaxEntrenamiento = 3200;
 // Entrenamiento de 800 a 1600 para que adquiera el 5to
 // Entrenamiento de 1600 a 3200 para que adquiera el 6to
 
-// Dependiendo de la FormadeAtaque que tenga el dragon, inflinge mas daño y va a ser mas dificil de domarlo
-// ¿Cómo obtiene su forma de ataque? para empezar puede tenerla o no, pero si se lo esta entrenando va a ir subiendo de nivel y adquiriendo una nueva forma de ataque
+// Dependiendo de la FormadeAtaque que tenga el dragon, inflinge mas danio y va a ser mas dificil de domarlo
+// ¿Como obtiene su forma de ataque? para empezar puede tenerla o no, pero si se lo esta entrenando va a ir subiendo de nivel y adquiriendo una nueva forma de ataque
 // Se considera que esta domado una vez que este en 100 puntos de domado.
-// Que tenga una forma de ataque definida no significa que tenga puntos de entrenamiento, a menos que así sea.
+// Que tenga una forma de ataque definida no significa que tenga puntos de entrenamiento, a menos que asi sea.
 
 
 class cDragones : public cPersona {
@@ -56,7 +56,7 @@ public:
 	//Otras funciones
 	int atacar();
 	void formaDeAtaque();
-	void MostrarVida();
+	
 	
 	string to__string();
 	void Imprimir();

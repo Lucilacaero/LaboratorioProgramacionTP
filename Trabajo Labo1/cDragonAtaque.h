@@ -14,6 +14,7 @@ public:
 
     void pintar();
     void borrar();
+    void MostrarCambios(int danio);
     void mover();
     void PintarVida();
     void choque(cVikingoAtaque& N);

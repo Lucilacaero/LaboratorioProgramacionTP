@@ -25,7 +25,7 @@ void Proyectiles::mover() {
 }
 
 bool Proyectiles::fuera() const {//modificar
-    return x == 3;
+    return x == 3; 
 }
 
 unsigned int Proyectiles::getDanio() {

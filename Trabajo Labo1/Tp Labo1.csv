@@ -13,12 +13,12 @@ dragon,Thornado,03/09/2003,195,1150,no,12,Cargas aereas,si,92
 dragon,Fireworm Queen,14/01/2005,170,1000,no,13,Respirar fuego,si,87
 dragon,Cavern Crasher,07/08/2000,160,950,no,14,Ataques fisicos,si,80
 vikingo,Hiccup,25/04/1990,75,500,no,Entrenador,1,0
-vikingo,Astrid,14/07/1991,80,600,no,Jinete,2,6
-vikingo,Stoick,12/02/1980,90,700,no,Jinete,1,0
-vikingo,Ruffnut,06/06/1992,70,550,no,Jinete,6,3
-vikingo,Tuffnut,06/06/1992,70,550,no,Jinete,7,0
-vikingo,Gobber,15/03/1975,85,650,no,Herrero,8,0
-vikingo,Eret,18/11/1985,80,600,no,Jinete,9,5
+vikingo,Astrid,14/07/1991,50,600,no,Jinete,2,6
+vikingo,Stoick,12/02/1980,80,700,no,Agricultor,1,0
+vikingo,Ruffnut,06/06/1992,60,550,no,Pescador,6,3
+vikingo,Tuffnut,06/06/1992,50,550,no,Guerrero,7,0
+vikingo,Gobber,15/03/1975,70,650,no,Herrero,8,0
+vikingo,Eret,18/11/1985,80,600,no,Guerrero,9,5
 jinete,Valka,31/08/1992,85,600,no,Jinete,3,0,aprobado,Toothless
 jinete,Fishlegs,22/12/1993,65,550,no,Jinete,4,0,aprobado,Meatlug
 jinete,Heather,25/07/1990,78,590,no,Jinete,10,0,aprobado,Windshear

@@ -1,4 +1,4 @@
-// Trabajo Labo1.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
+// Trabajo Labo1.cpp : Este archivo contiene la funcion "main". La ejecucion del programa comienza y termina ahi.
 //  
 #pragma once
 
@@ -26,7 +26,7 @@ class cDragones;
 int main() {
     // Para numeros aleatorios
     srand(time(NULL));
-
+   
     // Listas normales y de cambio
     list<cDragones*> dragones;
     list<cVikingos*> vikingos;
@@ -61,16 +61,17 @@ int main() {
     VikingoSeleccionado = aleatorio(vikingos); 
 
     while (i <= 5) {
-        // Reseteo los seleccionados para cada iteración, me va  a servir para los aleatorios
+        // Reseteo los seleccionados para cada iteracion, me va  a servir para los aleatorios
         VikingoSeleccionado = nullptr;
         DragonSeleccionado = nullptr;
         JineteSeleccionado = nullptr;
 
-        option = rand() % 3;
+        option = rand()%2;
         switch (option) {
         case 0: // Atacar
           
             if (!vikingos.empty() && !dragones.empty()) {
+                
                 VikingoSeleccionado = aleatorio(vikingos);
                 DragonSeleccionado = VikingoSeleccionado->getDragon();
 
@@ -81,11 +82,25 @@ int main() {
                 cout << "Se genera una pelea ente el vikingo " << VikingoSeleccionado->getnombre() << " y el dragon " << DragonSeleccionado->getnombre() << endl;
 
                 cVikingoAtaque v(*VikingoSeleccionado, 38, 30);
-                cControl Juegos(&v);
+                cDragonAtaque d(*DragonSeleccionado, 5,15 );
+                cControl Juegos(&v, &d);
                 Juegos.inicializar();
                 Juegos.ejecutar();
                 Juegos.terminar();
-
+                if (v.getMuerto() == true) {
+                    VikingoSeleccionado->setMuerto(true);
+                    listamodificadaV += VikingoSeleccionado;
+                }
+                else {
+                    DragonSeleccionado->setMuerto(true);
+                    listamodificadaD += DragonSeleccionado;
+                    cDragones::DragonesMuertos++;
+                    cDragones::DragonesVivos--;
+                    if (DragonSeleccionado->Domado() == true) {
+                        cDragones::Domados--;
+                    }
+                }
+                    
             }
             break;
 
@@ -108,10 +123,24 @@ int main() {
                         cout << "Se genera una pelea ente el vikingo " << VikingoSeleccionado->getnombre() << " y el dragon " << DragonSeleccionado->getnombre() << endl;
 
                         cVikingoAtaque v(*VikingoSeleccionado, 38, 30);
-                        cControl Juegos(&v);
+                        cDragonAtaque d(*DragonSeleccionado, 5, 15); 
+                        cControl Juegos(&v,&d);
                         Juegos.inicializar();
                         Juegos.ejecutar();
                         Juegos.terminar();
+                        if (v.getMuerto() == true) {
+                            VikingoSeleccionado->setMuerto(true);
+                            listamodificadaV += VikingoSeleccionado;
+                        }
+                        else {
+                            DragonSeleccionado->setMuerto(true);
+                            listamodificadaD += DragonSeleccionado;
+                            cDragones::DragonesMuertos++;
+                            cDragones::DragonesVivos--;
+                            if (DragonSeleccionado->Domado() == true) {
+                                cDragones::Domados--;
+                            }
+                        }
                     }
                     
                 }
@@ -120,22 +149,25 @@ int main() {
                    
                     
                     if (VikingoSeleccionado != nullptr) {
-                        // Verificación de fuerza
-                        cJinetes* jinete = nullptr;
+                        
 
                         if (VikingoSeleccionado->getFuerza() > 70) {
-                            jinete = new cJinetes(*VikingoSeleccionado, "aprobado", " ");
+                            JineteSeleccionado = new cJinetes(*VikingoSeleccionado, "aprobado", " ");
+                            
                         } 
                         else {
-                            jinete = new cJinetes(*VikingoSeleccionado, "desaprobado", " ");
+                            JineteSeleccionado = new cJinetes(*VikingoSeleccionado, "desaprobado", " ");
                         }
 
-                        // Verificación y entrenamiento del dragón
-                        if (jinete->getDragon() != nullptr) {
-                            jinete->entrenarDragon();
+                        // Verificacion y entrenamiento del dragon
+                        if (JineteSeleccionado->getDragon() != nullptr&& JineteSeleccionado->getResultado() != "desaprobado") {
+                            JineteSeleccionado->entrenarDragon();
+                            if (JineteSeleccionado->getMuerto() == true) {
+                                listamodificadaJ += JineteSeleccionado;
+                            }
                         }
-                        else {
-                            cout << "El vikingo jinete aún no tiene asignado ningún dragón, la próxima le tocará entrenar";
+                        else if(JineteSeleccionado->getResultado() == "desaprobado") {
+                            cout << "El vikingo jinete aun no aprobo el examen, debera entrenar mas"<<endl;
                         }
                     }
                     else {
@@ -150,12 +182,15 @@ int main() {
             case 2: // Entrenar
             cout << "Hoy es un lindo dia para entrenar " << endl;
             if (!jinetes.empty()) {
-                cJinetes* jinete = aleatorio(jinetes);
-                if (jinete->getDragon() == nullptr) {
+                cJinetes* JineteSeleccionado = aleatorio(jinetes);
+                if (JineteSeleccionado->getDragon() == nullptr) {
                     cDragones* dragon = aleatorio(dragones);
-                    jinete->setDragon(dragon);
+                    JineteSeleccionado->setDragon(dragon);
                 }
-                jinete->entrenarDragon();
+                JineteSeleccionado->entrenarDragon();
+                if (JineteSeleccionado->getMuerto() == true) {
+                    listamodificadaJ += JineteSeleccionado;
+                }
             }
             break;
 
@@ -163,46 +198,62 @@ int main() {
         }
         cout << "Iteracion: " << i + 1 << endl;
         i++;
-        system("pause");
-        system("cls");
+        
+
+            system("pause");
+            system("cls");
+       
+      
+          
     }
         imprimirresumen(listamodificadaD, listamodificadaV, listamodificadaJ);
-        system("pause");
-        system("cls");
-
+       
+      
+            system("pause");
+            system("cls");
+        
         //Elimino la memoria que pedi
-        /*
-        auto it_jinete = jinetes.begin();
-        while (it_jinete != jinetes.end()) {
-            jinetes -= *it_jinete;
-            
-        }
-        auto it_vikingo = vikingos.begin();
-        while (it_vikingo != vikingos.end()) {
-            vikingos -= *it_vikingo;
-        }
-        auto it_dragon = dragones.begin();
-        while (it_dragon != dragones.end()) {
-            dragones -= * it_dragon;
-        }
+        
+      auto it_jinete = jinetes.begin();
+while (it_jinete != jinetes.end()) {
+    jinetes -= *it_jinete;
+    it_jinete = jinetes.begin(); // Reiniciar el iterador después de modificar la lista
+}
 
-        it_jinete = jinetes.begin();
-        while (it_jinete != jinetes.end()) {
-            listamodificadaJ -= *it_jinete;
+auto it_vikingo = vikingos.begin();
+while (it_vikingo != vikingos.end()) {
+    vikingos -= *it_vikingo;
+    it_vikingo = vikingos.begin();
+}
 
-        }
-        it_vikingo = vikingos.begin();
-        while (it_vikingo != vikingos.end()) {
-            listamodificadaV -= *it_vikingo;
-        }
-        it_dragon = dragones.begin();
-        while (it_dragon != dragones.end()) {
-            listamodificadaD -= *it_dragon;
-        }
-        delete JineteSeleccionado;
-        delete DragonSeleccionado;
-        delete VikingoSeleccionado;
-        */
+auto it_dragon = dragones.begin();
+while (it_dragon != dragones.end()) {
+    dragones -= *it_dragon;
+    it_dragon = dragones.begin();
+}
+
+it_jinete = listamodificadaJ.begin();
+while (it_jinete != listamodificadaJ.end()) {
+    listamodificadaJ -= *it_jinete;
+    it_jinete = listamodificadaJ.begin();
+}
+
+it_vikingo = listamodificadaV.begin();
+while (it_vikingo != listamodificadaV.end()) {
+    listamodificadaV -= *it_vikingo;
+    it_vikingo = listamodificadaV.begin();
+}
+
+it_dragon = listamodificadaD.begin();
+while (it_dragon != listamodificadaD.end()) {
+    listamodificadaD -= *it_dragon;
+    it_dragon = listamodificadaD.begin();
+}
+
+delete JineteSeleccionado;
+delete DragonSeleccionado;
+delete VikingoSeleccionado;
+
         
     return 0;
 }

@@ -32,3 +32,4 @@ void situarCursor(int x, int y);
 void pintarLimites();
 void ocultarCursor();
 void usleep(unsigned long long tiempo);
+void LimpiarCursor(int x, int y);

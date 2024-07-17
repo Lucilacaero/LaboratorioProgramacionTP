@@ -24,7 +24,7 @@ cVikingos::cVikingos(const cVikingos& otro)  {// ya le encontre un uso
 	this->Trabajo = otro.Trabajo;
 	this->Dragon = otro.Dragon;
 	this->Dragon_Muerto = otro.Dragon_Muerto; 
-	// Aquí se copian los atributos privados del objeto 'otro' al nuevo objeto creado
+	// Aqui se copian los atributos privados del objeto 'otro' al nuevo objeto creado
 }
 
 cVikingos::cVikingos(string tipo, string nombre, string fecha_nac, unsigned int fuerza, int vida, bool muerto, Posicion trabajo, cDragones* dragon, int dragon_muerto)
@@ -107,16 +107,29 @@ cDragones* cVikingos::getDragon() {
 void cVikingos::setDragon(cDragones* dragon) {
 	this->Dragon = dragon;
 }
-cVikingos* aleatorio(list <cVikingos*> vikingos) {
-
+cVikingos* aleatorio(list<cVikingos*> vikingos) {
 	if (vikingos.empty()) {
-		throw out_of_range("La lista está vacía");
+		cout << "La lista está vacia" << endl;
+		return nullptr;
 	}
-	list<cVikingos*>::iterator it = vikingos.begin();
-	advance(it, rand() % vikingos.size());
+
+	list<cVikingos*>::iterator it;
+	int intentos = 0;
+	int maxIntentos = vikingos.size() * 2; // Un limite razonable para evitar un bucle infinito
+
+	do {
+		it = vikingos.begin();
+		advance(it, rand() % vikingos.size());
+		intentos++;
+	} while ((*it)->getMuerto() && intentos < maxIntentos);
+
+	if (intentos >= maxIntentos) {
+		cout << "No se encontro un vikingo vivo después de varios intentos." << endl;
+		return nullptr;
+	}
+
 	return *it;
 }
-
 
 
 

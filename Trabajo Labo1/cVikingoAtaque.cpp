@@ -39,13 +39,19 @@ void cVikingoAtaque::mover() {
 }
 
 void cVikingoAtaque::pintarCorazones() {
-    situarCursor(78, 6);
-    cout << "Vida : " << Vida;
+    LimpiarCursor(78, 10);
+    situarCursor(78, 10);
+    cout << "Vida actualizada: " << Vida;
    
 
 }
+
 void cVikingoAtaque::MostrarDanio(int danio) {
     situarCursor(78, 8); cout << "El dragon  ataca y genera un danio de " << danio << "\n";
+    LimpiarCursor(78, 9);
+    situarCursor(78, 9);
+    cout<< "Vida antes del ataque: " << Vida << endl;
+
 
 }
 
@@ -57,7 +63,7 @@ void cVikingoAtaque::morir() {
         situarCursor(x, y + 2); cout << "   **   ";
         usleep(200000);
         borrar();
-        pintarCorazones();
+       pintarCorazones();
         pintar();
 }
 

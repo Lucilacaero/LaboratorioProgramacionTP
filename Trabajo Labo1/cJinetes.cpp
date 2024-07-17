@@ -53,53 +53,72 @@ void cJinetes::entrenarDragon() {//agregar en el main que si no aprobo el curso 
     /* tomar en consideracion
     1. La fuerza del dragon y del jinete
     2. la posicion del jinete, si termina en 1 o 2 lugar tiene ventaja, sino es normalito */
-    cDragones* Dragon = this->getDragon();
-    int entrenado;
-    // poner getter y setter para que deje de tirar erroes
-    if (Dragon == nullptr) {
-        throw  ("No hay dragon asignado para entrenar.");
-    }
-    cout << "El jinete " << Nombre << " va a entrena al dragon " << Dragon->getnombre() << endl;
-    if (Resultado == "desaprobado") {
+    bool juego;
+    juego = entrenar();
+    if (juego == true) {
+
+   
+     cDragones* Dragon = this->getDragon();
+     int entrenado;
+     // poner getter y setter para que deje de tirar erroes
+     if (Dragon == nullptr) {
+         throw  ("No hay dragon asignado para entrenar.");
+     } 
+     cout << "El jinete " << Nombre << " va a entrena al dragon " << Dragon->getnombre() << endl;
+     if (Resultado == "desaprobado") {
         cout << "lamentamos informarle que el jinete no aprobo el examen y por lo tanto no puede entrenar dragones"<<endl;
-    }
-    else if (Resultado == "primero" || Resultado == "segundo") {
-        this->Fuerza = this->Fuerza + 30;
-    }
+     }
+     else if (Resultado == "primero" || Resultado == "segundo") {
+         this->Fuerza = this->Fuerza + 30;
+     }
         if (Dragon->getfuerza() > this->Fuerza && (Dragon->getfuerza() - this->Fuerza) < 100) {
             this->Vida -= rand() % 10;
-            entrenado = rand() % 5 + Dragon->getEntrenado();
-            Dragon->setEntrenado(entrenado);
+            entrenado = rand() % 5;
             cout << "durante el entrenamiento el dragon obtuvo " << entrenado << " puntos de entrenamiente" << endl;
+            entrenado = entrenado + Dragon->getEntrenado();
+            Dragon->setEntrenado(entrenado);
+            cout << "Sus puntos totales son " << Dragon->getEntrenado() << endl;
+
    }
    else if (Dragon->getfuerza() > this->Fuerza && (Dragon->getfuerza() - this->Fuerza) < 200) {
             this->Vida -= rand() % 20;
-            entrenado = rand() % 3 + Dragon->getEntrenado();
-            Dragon->setEntrenado(entrenado);
+            entrenado = rand() % 3 ;
             cout << "durante el entrenamiento el dragon obtuvo " << entrenado << " puntos de entrenamiente" << endl;
+            entrenado = rand() % 3 +Dragon->getEntrenado();
+            Dragon->setEntrenado(entrenado);
+            cout << "Sus puntos totales son " << Dragon->getEntrenado() << endl;
         }
   else if (Dragon->getfuerza() > this->Fuerza && (Dragon->getfuerza() - this->Fuerza) > 200) {
             this->Vida -= rand() % 30;
+            entrenado = rand() % 2;
+            cout << "durante el entrenamiento el dragon obtuvo " << entrenado << " puntos de entrenamiente" << endl;
             entrenado = rand() % 2 + Dragon->getEntrenado();
             Dragon->setEntrenado(entrenado);
-            cout << "durante el entrenamiento el dragon obtuvo " << entrenado << " puntos de entrenamiente" << endl;
+            cout << "Sus puntos totales son " << Dragon->getEntrenado() << endl;
+
         }
 
   else if (Dragon->getfuerza() < this->Fuerza && (this->Fuerza - Dragon->getfuerza()) < 100) {
 
-            entrenado = rand() % 10 + Dragon->getEntrenado();
-            Dragon->setEntrenado(entrenado);
+            entrenado = rand() % 10;
             cout << "durante el entrenamiento el dragon obtuvo " << entrenado << " puntos de entrenamiente" << endl;
+            entrenado = entrenado + Dragon->getEntrenado();
+            Dragon->setEntrenado(entrenado);
+            cout << "Sus puntos totales son " << Dragon->getEntrenado() << endl;
         }
         else if (Dragon->getfuerza() < this->Fuerza && (this->Fuerza - Dragon->getfuerza()) < 200) {
-            entrenado = rand() % 20 + Dragon->getEntrenado();
-            Dragon->setEntrenado(entrenado);
+            entrenado = rand() % 20;
             cout << "durante el entrenamiento el dragon obtuvo " << entrenado << " puntos de entrenamiente" << endl;
+            entrenado = entrenado + Dragon->getEntrenado();
+            Dragon->setEntrenado(entrenado);
+            cout << "Sus puntos totales son " << Dragon->getEntrenado() << endl;
         }
         else if (Dragon->getfuerza() < this->Fuerza && (this->Fuerza - Dragon->getfuerza()) > 200) {
-            entrenado = rand() % 30 + Dragon->getEntrenado();
-            Dragon->setEntrenado(entrenado);
+            entrenado = rand() % 30;
             cout << "durante el entrenamiento el dragon obtuvo " << entrenado << " puntos de entrenamiente" << endl;
+            entrenado = entrenado + Dragon->getEntrenado();
+            Dragon->setEntrenado(entrenado);
+            cout << "Sus puntos totales son " << Dragon->getEntrenado() << endl;
         }
     
    
@@ -108,23 +127,38 @@ void cJinetes::entrenarDragon() {//agregar en el main que si no aprobo el curso 
     }
 
     if (this->Vida <= 0) {
+
         cout << "El jinete ha muerto durante el entrenamiento." << endl;
+        setMuerto(true);
     }
 
     Dragon->Domado();
+    
 }
-
-cJinetes* aleatorio(list<cJinetes*> jinetes)
-{
+}
+cJinetes* aleatorio(list<cJinetes*> jinetes) {
     if (jinetes.empty()) {
-
-        cout <<"La lista está vacía"<<endl;
+        cout << "La lista está vacia" << endl;
+        return nullptr;
     }
-    list<cJinetes*>::iterator it = jinetes.begin();
-    advance(it, rand() % jinetes.size());
+
+    list<cJinetes*>::iterator it;
+    int intentos = 0;
+    int maxIntentos = jinetes.size() * 2; // Un limite razonable para evitar un bucle infinito
+
+    do {
+        it = jinetes.begin();
+        advance(it, rand() % jinetes.size());
+        intentos++;
+    } while ((*it)->getMuerto() && intentos < maxIntentos);
+
+    if (intentos >= maxIntentos) {
+        cout << "No se encontro un jinete vivo después de varios intentos." << endl;
+        return nullptr;
+    }
+
     return *it;
 }
-
 
 
 string cJinetes::to__string()
@@ -153,6 +187,11 @@ void cJinetes::Imprimir()
 cDragones* cJinetes::getDragon()
 {
     return Dragon;
+}
+
+string cJinetes::getResultado()
+{
+    return Resultado;
 }
 
 void cJinetes::setDragon(cDragones* dragon)
@@ -194,3 +233,55 @@ ostream& operator<<(ostream& out,  cJinetes& jinete) {
     return out;
 }
 
+
+void cJinetes::displayStatus(int currentClicks, int totalClicks, double remainingTime) {
+    float progress = (static_cast<float>(currentClicks) / totalClicks) * 100;
+    cout << "\rTiempo restante: " << remainingTime << "s \t";
+    cout << "Progreso: " << progress << "%   ";
+    cout.flush();
+}
+
+bool cJinetes::entrenar(){
+    const int requiredClicks = 25;
+    const int timeLimit = 5; // en segundos
+    int currentClicks = 0;
+
+    cout << "Presiona las teclas de flecha izquierda y derecha 15 veces en menos de 5 segundos\n";
+    cout << "Presiona cualquier tecla para comenzar...\n";
+    _getch(); 
+
+    clock_t startTime = clock();
+    double remainingTime = timeLimit;
+
+    while (currentClicks < requiredClicks && remainingTime > 0) {
+        if (_kbhit()) {
+            int key = _getch();
+            if (key == 224) { // Teclas de flecha devuelven 224 primero
+                key = _getch();
+                if (key == 75 || key == 77) { // 75 es flecha izquierda, 77 es flecha derecha
+                    currentClicks++;
+                }
+            }
+        }
+
+        clock_t currentTime = clock();
+        remainingTime = timeLimit - double(currentTime - startTime) / CLOCKS_PER_SEC;
+        displayStatus(currentClicks, requiredClicks, remainingTime);
+
+        this_thread::sleep_for(chrono::milliseconds(50)); // Pequenia pausa para evitar sobrecargar la CPU
+    }
+
+    cout << endl;
+
+    if (currentClicks >= requiredClicks) {
+        
+        cout << "¡Felicidades! el entrenamiento se completo con exito\n";
+        return true;
+    }
+    else {
+        cout << "No lograste completar el entrenamiento a tiempo.\n";
+        return false;
+    }
+
+    
+}

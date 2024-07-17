@@ -106,16 +106,30 @@ void cDragones::setNombre(cJinetes*& jinete)
 }
 
 //FRIEND
-cDragones* aleatorio( list<cDragones*> dragones)
-{
-		if (dragones.empty()) {// VER QUE NO HAYA UN TRYCATCH CON EL ALETATORIO
-			throw out_of_range("La lista está vacía");
-		}
-		list<cDragones*>::iterator it = dragones.begin();
+cDragones* aleatorio(list<cDragones*> dragones) {
+	if (dragones.empty()) {
+		cout << "La lista está vacia" << endl;
+		return nullptr;
+	}
+
+	list<cDragones*>::iterator it;
+	int intentos = 0;
+	int maxIntentos = dragones.size() * 2; // Un limite razonable para evitar un bucle infinito
+
+	do {
+		it = dragones.begin();
 		advance(it, rand() % dragones.size());
-		return *it;
-	
+		intentos++;
+	} while ((*it)->getMuerto() && intentos < maxIntentos);
+
+	if (intentos >= maxIntentos) {
+		cout << "No se encontro un dragon vivo después de varios intentos." << endl;
+		return nullptr;
+	}
+
+	return *it;
 }
+
 
 
 
@@ -144,11 +158,7 @@ void cDragones::formaDeAtaque() {
 	
 }
 
-void cDragones::MostrarVida()
-{
-	situarCursor(78, 11);
-	cout << "Vida del Dragon " << Nombre << ": " << Vida << endl;
-}
+
 
 bool cDragones::Domado() {
 	if (Entrenado >= 100) {
@@ -194,7 +204,7 @@ int cDragones::atacar()
 			max = 750;
 		}
 		else {
-			cout << "No se detectó un tipo específico de ataque. Se le asignará un danioo aleatorio.\n";
+			cout << "No se detecto un tipo especifico de ataque. Se le asignará un danioo aleatorio.\n";
 			min = 0;
 			max = 500;
 		}
@@ -204,7 +214,7 @@ int cDragones::atacar()
 			min = 500;
 			max = 750;
 		}
-		else if (Ataque == "Ataques físicos" || Ataque == "Respirar fuego") {
+		else if (Ataque == "Ataques fisicos" || Ataque == "Respirar fuego") {
 			min = 750;
 			max = 900;
 		}
@@ -213,7 +223,7 @@ int cDragones::atacar()
 			max = 1000;
 		}
 		else {
-			cout << "No se detectó un tipo específico de ataque. Se le asignará un danio aleatorio.\n";
+			cout << "No se detecto un tipo especifico de ataque. Se le asignará un danio aleatorio.\n";
 			min = 500;
 			max = 1000;
 		}
@@ -223,7 +233,7 @@ int cDragones::atacar()
 			min = 900;
 			max = 1000;
 		}
-		else if (Ataque == "Ataques físicos" || Ataque == "Respirar fuego") {
+		else if (Ataque == "Ataques fisicos" || Ataque == "Respirar fuego") {
 			min = 1000;
 			max = 1250;
 		}
@@ -232,17 +242,17 @@ int cDragones::atacar()
 			max = 1500;
 		}
 		else {
-			cout << "No se detectó un tipo específico de ataque. Se le asignará un danio aleatorio.\n";
+			cout << "No se detecto un tipo especifico de ataque. Se le asignará un danio aleatorio.\n";
 			min = 1000;
 			max = 1500;
 		}
 	}
 	else {
-		cout << "Error: La fuerza del dragón está fuera de los límites esperados.\n";
+		cout << "Error: La fuerza del dragon está fuera de los limites esperados.\n";
 		return 0;
 	}
 
-	// Generar un número aleatorio en el rango [min, max]
+	// Generar un numero aleatorio en el rango [min, max]
 	daniio = min + rand() % (max - min + 1);
 
 	

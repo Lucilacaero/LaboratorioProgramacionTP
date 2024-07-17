@@ -9,24 +9,23 @@ using namespace std;
 class cVikingoAtaque;
 class cDragonAtaque;
 
+
+#include <vector>
+
 class cControl {
+private:
     cVikingoAtaque* v;
-  
-    list<cDragonAtaque*> asteroides;
-    list<Proyectiles*> balas;
-  
+    cDragonAtaque* dragonAtaque;
+    std::vector<Proyectiles*> balas;
+    std::vector<cDragonAtaque*> asteroides;
+
 public:
-    cControl(cVikingoAtaque* vikingo);
-
-
-   
-    void manejarColisiones(cDragonAtaque& DragonAtaque);
+    cControl(cVikingoAtaque* vikingo, cDragonAtaque* dragon);
     void inicializar();
-    void generarAsteroides(cDragones* otro);
+    void generarAsteroides();
+    void manejarColisiones();
     void ejecutar();
-   
-   // void manejarColisiones(cDragonAtaque& DragonAtaque);
-    void terminar()const;
+    void terminar() const;
 };
 
 

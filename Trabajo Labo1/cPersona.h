@@ -26,8 +26,8 @@ public:
     unsigned int getFuerza()const;
 
     virtual int atacar() = 0;// esta va a ser la funcion con polimorfismo
-   void vida(int danio);// esta tambien porque despues llamo a los destructores 
-   virtual bool getMuerto(); 
+   void vida(int danio);
+ 
    virtual string to__string(); //voy a imprimir todos los atributos de cPErsona y despues le agrego los de la clase correspondiente
    virtual void Imprimir();
    

@@ -18,7 +18,20 @@ void cDragonAtaque::borrar() {
     situarCursor(x, y); 
 cout << " ";
 }
-
+void cDragonAtaque::MostrarCambios(int danio) {
+    LimpiarCursor(78, 12);
+    situarCursor(78, 12);
+    cout << "Vida del dragon antes del danio: " << Vida << endl;
+    vida(danio); // Aplica el danio al dragon
+    LimpiarCursor(78, 13);
+    situarCursor(78, 13);
+    cout << "El vikingo genero un danio de " << danio << " puntos." << endl;
+    LimpiarCursor(78, 14);
+    situarCursor(78, 14);
+    cout << "Vida del dragon despues del danio: " << Vida << endl;
+ 
+    
+}
 void cDragonAtaque::mover() {
     borrar();
     x += dx;
@@ -39,11 +52,11 @@ void cDragonAtaque::choque(cVikingoAtaque& N) {
       int  danio = atacar();
       // si algo falla en panatlla es por esto
    //   situarCursor(77, 4); cout << "se genero un danio de " << danio << "al vikingo"<<endl;
-        N.vida(danio);
+      N.MostrarDanio(danio);
+      N.vida(danio);
         N.morir();
         N.pintar();
         N.pintarCorazones();
-      
         x = rand() % 71 + 4;
     }
 }

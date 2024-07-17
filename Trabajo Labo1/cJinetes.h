@@ -17,8 +17,13 @@ public:
 	cJinetes(const cJinetes& otro);
 	cJinetes(const cVikingos& otro, string resultado, string Nombre );
 	cDragones* getDragon();
+	string getResultado();
 	void setDragon(cDragones* dragon);
 	void setResultado(string resultado);
+
+	void displayStatus(int currentClicks, int totalClicks, double remainingTime);
+
+	bool entrenar();
 	
 	friend void cDragones::setNombre(cJinetes*& jinete); 
 	void entrenarDragon();

@@ -245,22 +245,28 @@ void usleep(unsigned long long tiempo) {
     this_thread::sleep_for(chrono::microseconds(tiempo));
 }
 
-// Función para mover el cursor de la consola a la posición (x, y)
+void LimpiarCursor(int x, int y)
+{
+    situarCursor(x, y);
+    cout << "                                                                   ";
+}
+
+// Funcion para mover el cursor de la consola a la posicion (x, y)
 void situarCursor(int x, int y) {
     cout << "\033[" << y << ";" << x << "H";
 
     //Comentarios para enteder el codigo
 /*
 cout << "\033[" << y << ";" << x << "H";
-Es una secuencia de escape ANSI utilizada para mover el cursor a una posición específica en la consola.
+Es una secuencia de escape ANSI utilizada para mover el cursor a una posicion especifica en la consola.
 
 
 \033[  inicia el comando de control de cursor.
 y es la fila a la que se mueve el cursor.
 ; separa la fila y la columna en la secuencia de escape.
 x es la columna a la que se mueve el cursor.
-H finaliza la secuencia y efectúa el movimiento del cursor.
-Sirve para actualizar partes específicas de la pantalla sin borrar y volver a dibujar todo.
+H finaliza la secuencia y efectua el movimiento del cursor.
+Sirve para actualizar partes especificas de la pantalla sin borrar y volver a dibujar todo.
 */
 
 }
@@ -269,30 +275,30 @@ Sirve para actualizar partes específicas de la pantalla sin borrar y volver a d
 void ocultarCursor() {
     cout << "\033[?25l";
     /*
-    \033[?25l: Es un "código secreto" que le dice a la consola que oculte el cursor.
-    \033 es una señal especial que dice "voy a enviar un comando",
-    y [?25l es el comando específico para ocultar el cursor.
+    \033[?25l: Es un "codigo secreto" que le dice a la consola que oculte el cursor.
+    \033 es una senial especial que dice "voy a enviar un comando",
+    y [?25l es el comando especifico para ocultar el cursor.
 
     */
 }
 
-// Función para dibujar los límites del área de juego y un dragon en el borde izquierdo
+// Funcion para dibujar los limites del área de juego y un dragon en el borde izquierdo
 void pintarLimites() {
-    for (int i = 2; i < 78; i++) { // Dibuja las líneas de arriba y abajo
+    for (int i = 2; i < 78; i++) { // Dibuja las lineas de arriba y abajo
         situarCursor(i, 2); cout << char(205);// caracter ═
         situarCursor(i, 33); cout << char(205);
     }
    
-    for (int i = 3; i < 33; i++) { // Dibuja las líneas de  los costados
+    for (int i = 3; i < 33; i++) { // Dibuja las lineas de  los costados
        // caracter │
         situarCursor(77, i); cout << char(186);
     }
 
-    for (int i = 3; i < 15; i++) { // Dibuja las líneas de  los costados
+    for (int i = 3; i < 15; i++) { // Dibuja las lineas de  los costados
         situarCursor(2, i); cout << char(186); // caracter │
         
     }
-    for (int i = 25; i < 33; i++) { // Dibuja las líneas de  los costados
+    for (int i = 25; i < 33; i++) { // Dibuja las lineas de  los costados
         situarCursor(2, i); cout << char(186); // caracter │
         
     }
@@ -302,7 +308,7 @@ void pintarLimites() {
     situarCursor(77, 2); cout << char(187); // ╝
     situarCursor(77, 33); cout << char(188);// ╒
 
-    // Dibujo un dragón en el lado izquierdo
+    // Dibujo un dragon en el lado izquierdo
     situarCursor(1, 15); cout << "    , |\\/| ,";
     situarCursor(1, 16); cout << "   /| (..) |\\";
     situarCursor(1, 17); cout << " /  \\(oo)/   \\";

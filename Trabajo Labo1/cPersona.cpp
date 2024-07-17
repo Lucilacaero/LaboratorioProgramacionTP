@@ -33,10 +33,7 @@ int cPersona::getvida() const
 	return Vida;
 }
 
-bool cPersona::getMuerto() const
-{
-	return Muerto;
-}
+
 
 string cPersona::getnombre() const
 {
@@ -48,35 +45,38 @@ unsigned int cPersona::getFuerza() const
 	return Fuerza;
 }
 
-void cPersona::vida(int danio)
-{
-	
-	Vida -= danio;
-	if (Vida <= 0) {
-		Vida = 0;
-		Muerto = true;
-		situarCursor(78, 3);
-		cout << Nombre << " fue derrotado." << endl;
-		if (Tipo == "dragon") {
-			cDragones::DragonesMuertos++;
-		}
-	}
-	/*if (Vida < 0 || Vida == 0) {
-
-		Muerto = true;
-		situarCursor(78, 3); cout << Nombre << " fue derrotado." << endl;
-		if (Tipo == "dragon") {
-			cDragones::DragonesMuertos++;
-		}
-		//esto me mato el programa, ponerl en otro lado
-		//system("pause");
-		//system("cls");
-		//cout << "presiones enter para finalizar";
-	}
+void cPersona::vida(int danio) {
+	// Limpia la linea antes de imprimir
+	/*situarCursor(78, 2);
+	cout << "                                                                                                                 "; // Espacios para limpiar la linea
+	situarCursor(78, 2);
+	cout << "La vida actual es " << Vida << ", el danio es " << danio << ", su vidadeberia ser " << (Vida - danio) << endl;
 	*/
+	if (Vida > 0) {
+		Vida -= danio;  // Actualizar vida correctamente
+
+		/*
+		situarCursor(78, 3);
+		cout << "                                                                                                                 "; // Espacios para limpiar la linea
+		situarCursor(78, 3);
+		cout << "Vida actualizada: " << Vida << endl;
+		*/
+		if (Vida <= 0) {
+			Vida = 0;
+			Muerto = true;
+
+			// Limpia la linea antes de imprimir
+			situarCursor(78, 4);
+			cout << "                                   "; // Espacios para limpiar la linea
+			situarCursor(78, 4);
+			cout << Nombre << " fue derrotado." << endl;
+			
+		}
+	}
 }
 
-bool cPersona::getMuerto()
+
+bool cPersona::getMuerto() const
 {
 	return Muerto;
 }
