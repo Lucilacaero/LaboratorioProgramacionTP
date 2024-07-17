@@ -3,7 +3,7 @@
 #include "cVikingoAtaque.h"
 #include "cDragonAtaque.h"
 #include "Proyectiles.h"
-#include "cJuego.h"
+
 #include <list>
 using namespace std;
 class cVikingoAtaque;
@@ -21,6 +21,7 @@ private:
 
 public:
     cControl(cVikingoAtaque* vikingo, cDragonAtaque* dragon);
+    ~cControl();
     void inicializar();
     void generarAsteroides();
     void manejarColisiones();

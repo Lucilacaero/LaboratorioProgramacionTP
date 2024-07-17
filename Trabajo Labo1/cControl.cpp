@@ -12,6 +12,10 @@ using namespace std;
 cControl::cControl(cVikingoAtaque* vikingo, cDragonAtaque* dragon)
     : v(vikingo), dragonAtaque(dragon) {}
 
+cControl::~cControl()
+{
+}
+
 void cControl::inicializar() {
     pintarLimites();
     ocultarCursor();

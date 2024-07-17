@@ -1,7 +1,6 @@
 #include "cVikingoAtaque.h"
 #include "Proyectiles.h"
 #include "AyuditaMain.h"
-#include "cJuego.h"
 #include "cVikingos.h"
 #include <iostream>
 #include <list>
@@ -12,6 +11,10 @@ cVikingoAtaque::cVikingoAtaque(cVikingos& otro, int x, int y): cVikingos(otro)
 {
     this->x = x;
     this->y = y;
+}
+
+cVikingoAtaque::cVikingoAtaque()
+{
 }
 
 void cVikingoAtaque::pintar() {

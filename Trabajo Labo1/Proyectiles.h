@@ -1,12 +1,12 @@
 #pragma once
 
-#include "cJuego.h"
+
 
 class Proyectiles  {
     int x, y, danio;
 public:
     Proyectiles( int x, int y,int danio);
-
+    ~Proyectiles();
     void pintar();
     void borrar() ;
     void mover() ;

@@ -10,6 +10,10 @@ Proyectiles::Proyectiles( int x, int y, int danio )
    this->danio = danio;
 }
 
+Proyectiles::~Proyectiles()
+{
+}
+
 void Proyectiles::pintar() {
     situarCursor(x, y); cout << "*"; 
 }

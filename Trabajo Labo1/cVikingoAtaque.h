@@ -17,7 +17,7 @@ class cVikingoAtaque: public cVikingos {
 
 public:
     cVikingoAtaque(cVikingos& otro, int x, int y);
-
+    cVikingoAtaque();
     void pintar() ;
     void borrar() ;
     void mover() ;

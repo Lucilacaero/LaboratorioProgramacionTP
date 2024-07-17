@@ -58,6 +58,7 @@ int main() {
     system("cls");
     VikingoSeleccionado = aleatorio(vikingos); 
 
+
     while (i <= 5) {
         // Reseteo los seleccionados para cada iteracion, me va  a servir para los aleatorios
         VikingoSeleccionado = nullptr;

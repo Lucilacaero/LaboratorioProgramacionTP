@@ -39,9 +39,7 @@ public:
 	cDragones(const cDragones& otro);
 	cDragones();
 	~cDragones(); 
-	
-	//friend void asignarnombre(cJinetes& jinete, cDragones& dragon);
-	
+
 	
 	//GETTERS Y SETTERS
 	

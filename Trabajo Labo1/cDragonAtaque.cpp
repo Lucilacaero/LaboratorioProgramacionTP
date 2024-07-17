@@ -9,6 +9,10 @@ cDragonAtaque::cDragonAtaque( cDragones& otro, int x, int y): cDragones(otro) {
     this->danio = otro.atacar();// de esta forma los ataques del dragon tienen un danio predefinido
 }
 
+cDragonAtaque::~cDragonAtaque()
+{
+}
+
 void cDragonAtaque::pintar()const {
     situarCursor(x, y);
     cout << "*";
